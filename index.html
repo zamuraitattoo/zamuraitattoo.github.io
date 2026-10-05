@@ -1,10 +1,257 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Welcome</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zamurai Tattoo & Piercing | Fort Kochi</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0d0d0d;
+            --card-bg: #161616;
+            --accent-color: #e6e6e6;
+            --text-muted: #a0a0a0;
+            --border-color: #262626;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: #ffffff;
+            line-height: 1.6;
+        }
+
+        /* Header & Nav */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 5%;
+            border-bottom: 1px solid var(--border-color);
+            background-color: rgba(13, 13, 13, 0.95);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 1.4rem;
+            font-weight: 800;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            margin-left: 1.5rem;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #fff;
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 6rem 1rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 2.8rem;
+            font-weight: 800;
+            letter-spacing: 2px;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+        }
+
+        .hero p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            background-color: #ffffff;
+            color: #000000;
+            text-decoration: none;
+            font-weight: 600;
+            letter-spacing: 1px;
+            border-radius: 2px;
+            transition: opacity 0.3s;
+        }
+
+        .btn:hover {
+            opacity: 0.85;
+        }
+
+        /* Services Section */
+        .section-title {
+            text-align: center;
+            font-size: 1.8rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin: 4rem 0 2rem;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        .service-card {
+            background-color: var(--card-bg);
+            padding: 2rem;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+        }
+
+        .service-card h3 {
+            margin-bottom: 0.8rem;
+            font-size: 1.2rem;
+        }
+
+        .service-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* Booking / Contact Form */
+        .contact-container {
+            max-width: 600px;
+            margin: 0 auto 5rem;
+            padding: 0 1.5rem;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+            background-color: var(--card-bg);
+            padding: 2.5rem;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+        }
+
+        input, textarea, select {
+            width: 100%;
+            padding: 0.9rem;
+            background-color: #0d0d0d;
+            border: 1px solid var(--border-color);
+            color: #fff;
+            border-radius: 2px;
+            font-size: 0.95rem;
+        }
+
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: #ffffff;
+        }
+
+        button[type="submit"] {
+            border: none;
+            cursor: pointer;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 3rem 1rem;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        footer a {
+            color: #fff;
+            text-decoration: none;
+        }
+    </style>
 </head>
-<body style="font-family: sans-serif; text-align: center; padding: 50px;">
-    <h1>My Website is Live!</h1>
-    <p>Site under construction.</p>
+<body>
+
+    <header>
+        <div class="logo">Zamurai</div>
+        <nav>
+            <a href="#services">Services</a>
+            <a href="#booking">Book Appointment</a>
+            <a href="#contact">Studio Info</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <h1>Zamurai Tattoo & Piercing</h1>
+        <p>Fine Line • Custom Design • Black & Grey • Stipple Dotwork • Body Piercing</p>
+        <a href="#booking" class="btn">Book a Consultation</a>
+    </section>
+
+    <h2 class="section-title" id="services">Specialties</h2>
+    <section class="services-grid">
+        <div class="service-card">
+            <h3>Fine Line & Cyber-Sigilism</h3>
+            <p>Precise needle craft specializing in intricate linework, futuristic ornamentals, and custom cyber-sigilism aesthetics.</p>
+        </div>
+        <div class="service-card">
+            <h3>Black & Grey Realism</h3>
+            <p>High-contrast shading, portraiture, micro-realism, and smooth stipple dotwork tailored to your skin tone and flow.</p>
+        </div>
+        <div class="service-card">
+            <h3>Body Piercing & Hygiene</h3>
+            <p>Hospital-grade electric autoclave sterilization, implant-grade titanium jewelry, and precise placement.</p>
+        </div>
+    </section>
+
+    <h2 class="section-title" id="booking">Book Your Session</h2>
+    <div class="contact-container">
+        <form action="https://formspree.io/f/your_form_id" method="POST">
+            <div>
+                <label style="display:block; margin-bottom: 0.4rem; font-size: 0.85rem; color: var(--text-muted);">Full Name</label>
+                <input type="text" name="name" placeholder="Your Name" required>
+            </div>
+            <div>
+                <label style="display:block; margin-bottom: 0.4rem; font-size: 0.85rem; color: var(--text-muted);">Phone / WhatsApp</label>
+                <input type="tel" name="phone" placeholder="+91 00000 00000" required>
+            </div>
+            <div>
+                <label style="display:block; margin-bottom: 0.4rem; font-size: 0.85rem; color: var(--text-muted);">Service Requested</label>
+                <select name="service">
+                    <option value="Custom Tattoo">Custom Tattoo Design</option>
+                    <option value="Fine Line / Dotwork">Fine Line / Dotwork</option>
+                    <option value="Cover-up">Cover-up / Rework</option>
+                    <option value="Body Piercing">Body Piercing</option>
+                </select>
+            </div>
+            <div>
+                <label style="display:block; margin-bottom: 0.4rem; font-size: 0.85rem; color: var(--text-muted);">Idea / Placement / Size</label>
+                <textarea name="message" rows="4" placeholder="Describe your tattoo idea, desired size, and body placement..." required></textarea>
+            </div>
+            <button type="submit" class="btn">Send Inquiry</button>
+        </form>
+    </div>
+
+    <footer id="contact">
+        <p><strong>Zamurai Tattoo & Piercing Studio</strong></p>
+        <p>Fort Kochi, Kerala, India</p>
+        <p style="margin-top: 1rem;">Instagram: <a href="https://instagram.com/zamurai_tattoo" target="_blank">@zamurai_tattoo</a></p>
+        <p style="margin-top: 2rem;">© 2026 Zamurai Tattoo. All rights reserved.</p>
+    </footer>
+
 </body>
 </html>
