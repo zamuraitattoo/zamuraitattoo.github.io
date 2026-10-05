@@ -1,3 +1,5 @@
+Here is the complete, corrected code with the cleaned <header> section incorporated.
+The orphan </span> and </a> tags right above the desktop navigation have been removed and replaced with the clean logo wrapper structure:
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 <head>
@@ -76,14 +78,13 @@
     </style>
 </head>
 <body class="font-sans antialiased text-charcoal bg-sand-50 selection:bg-emerald-800 selection:text-sand-50">
-<a href="#" class="flex items-center">
-    <img src="logo.png" alt="Zamurai Tattoo & Piercing" class="h-12 w-auto object-contain">
-</a>
 
-                <span class="font-serif text-2xl md:text-3xl tracking-widest uppercase font-light text-emerald-900 group-hover:text-gold-600 transition-colors">
-                    Zamurai
-                </span>
-                <span class="text-[9px] tracking-[0.3em] uppercase text-gold-600 font-semibold">Tattoo & Piercing</span>
+    <header class="sticky top-0 z-50 bg-sand-50/90 backdrop-blur-md border-b border-sand-200">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+            
+            <!-- Brand Logo -->
+            <a href="#" class="flex items-center">
+                <img src="logo.png" alt="Zamurai Tattoo & Piercing" class="h-12 w-auto object-contain">
             </a>
 
             <!-- Desktop Navigation -->
@@ -500,3 +501,4 @@
     </script>
 </body>
 </html>
+
