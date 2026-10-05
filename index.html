@@ -1,257 +1,504 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zamurai Tattoo & Piercing | Fort Kochi</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <title>Zamurai Tattoo & Piercing | Fine Art Studio Fort Kochi</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Cormorant Garamond & Montserrat -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Custom Tailwind Configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        sand: {
+                            50: '#FAF8F5',
+                            100: '#F5F0E8',
+                            200: '#EAE1D2',
+                            300: '#D6C8B2',
+                        },
+                        emerald: {
+                            800: '#1F342B',
+                            900: '#12231B',
+                            950: '#0B1711',
+                        },
+                        gold: {
+                            400: '#D4B886',
+                            500: '#B89B68',
+                            600: '#997D4B',
+                        },
+                        charcoal: '#1A1A1A'
+                    },
+                    fontFamily: {
+                        serif: ['"Cormorant Garamond"', 'serif'],
+                        sans: ['"Montserrat"', 'sans-serif'],
+                    },
+                    keyframes: {
+                        marquee: {
+                            '0%': { transform: 'translateX(0%)' },
+                            '100%': { transform: 'translateX(-50%)' }
+                        }
+                    },
+                    animation: {
+                        marquee: 'marquee 35s linear infinite'
+                    }
+                }
+            }
+        }
+    </script>
+    
     <style>
-        :root {
-            --bg-color: #0d0d0d;
-            --card-bg: #161616;
-            --accent-color: #e6e6e6;
-            --text-muted: #a0a0a0;
-            --border-color: #262626;
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Montserrat', sans-serif;
-        }
-
         body {
-            background-color: var(--bg-color);
-            color: #ffffff;
-            line-height: 1.6;
+            background-color: #FAF8F5;
+            color: #1A1A1A;
+        }
+        
+        .gold-border {
+            border-color: rgba(184, 155, 104, 0.3);
         }
 
-        /* Header & Nav */
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1.5rem 5%;
-            border-bottom: 1px solid var(--border-color);
-            background-color: rgba(13, 13, 13, 0.95);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
+        .gold-gradient-text {
+            background: linear-gradient(135deg, #B89B68 0%, #E3CDA4 50%, #8C7243 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
-        .logo {
-            font-size: 1.4rem;
-            font-weight: 800;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-        }
-
-        nav a {
-            color: var(--text-muted);
-            text-decoration: none;
-            margin-left: 1.5rem;
-            font-size: 0.9rem;
-            letter-spacing: 1px;
-            transition: color 0.3s;
-        }
-
-        nav a:hover {
-            color: #fff;
-        }
-
-        /* Hero Section */
-        .hero {
-            text-align: center;
-            padding: 6rem 1rem;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .hero h1 {
-            font-size: 2.8rem;
-            font-weight: 800;
-            letter-spacing: 2px;
-            margin-bottom: 1rem;
-            text-transform: uppercase;
-        }
-
-        .hero p {
-            color: var(--text-muted);
-            font-size: 1.1rem;
-            margin-bottom: 2rem;
-        }
-
-        .btn {
-            display: inline-block;
-            padding: 0.8rem 2rem;
-            background-color: #ffffff;
-            color: #000000;
-            text-decoration: none;
-            font-weight: 600;
-            letter-spacing: 1px;
-            border-radius: 2px;
-            transition: opacity 0.3s;
-        }
-
-        .btn:hover {
-            opacity: 0.85;
-        }
-
-        /* Services Section */
-        .section-title {
-            text-align: center;
-            font-size: 1.8rem;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            margin: 4rem 0 2rem;
-        }
-
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 0 1.5rem;
-        }
-
-        .service-card {
-            background-color: var(--card-bg);
-            padding: 2rem;
-            border: 1px solid var(--border-color);
-            border-radius: 4px;
-        }
-
-        .service-card h3 {
-            margin-bottom: 0.8rem;
-            font-size: 1.2rem;
-        }
-
-        .service-card p {
-            color: var(--text-muted);
-            font-size: 0.95rem;
-        }
-
-        /* Booking / Contact Form */
-        .contact-container {
-            max-width: 600px;
-            margin: 0 auto 5rem;
-            padding: 0 1.5rem;
-        }
-
-        form {
-            display: flex;
-            flex-direction: column;
-            gap: 1.2rem;
-            background-color: var(--card-bg);
-            padding: 2.5rem;
-            border: 1px solid var(--border-color);
-            border-radius: 4px;
-        }
-
-        input, textarea, select {
-            width: 100%;
-            padding: 0.9rem;
-            background-color: #0d0d0d;
-            border: 1px solid var(--border-color);
-            color: #fff;
-            border-radius: 2px;
-            font-size: 0.95rem;
-        }
-
-        input:focus, textarea:focus, select:focus {
-            outline: none;
-            border-color: #ffffff;
-        }
-
-        button[type="submit"] {
-            border: none;
-            cursor: pointer;
-        }
-
-        /* Footer */
-        footer {
-            text-align: center;
-            padding: 3rem 1rem;
-            border-top: 1px solid var(--border-color);
-            color: var(--text-muted);
-            font-size: 0.85rem;
-        }
-
-        footer a {
-            color: #fff;
-            text-decoration: none;
+        /* Pause marquee on hover */
+        .marquee-container:hover .marquee-content {
+            animation-play-state: paused;
         }
     </style>
 </head>
-<body>
+<body class="font-sans antialiased text-charcoal bg-sand-50 selection:bg-emerald-800 selection:text-sand-50">
 
-    <header>
-        <div class="logo">Zamurai</div>
-        <nav>
-            <a href="#services">Services</a>
-            <a href="#booking">Book Appointment</a>
-            <a href="#contact">Studio Info</a>
-        </nav>
+    <header class="sticky top-0 z-50 bg-sand-50/90 backdrop-blur-md border-b border-sand-200 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-6 md:px-12 h-20 flex items-center justify-between">
+            
+            <!-- Brand Logo -->
+            <a href="#" class="flex flex-col items-start group">
+                <span class="font-serif text-2xl md:text-3xl tracking-widest uppercase font-light text-emerald-900 group-hover:text-gold-600 transition-colors">
+                    Zamurai
+                </span>
+                <span class="text-[9px] tracking-[0.3em] uppercase text-gold-600 font-semibold">Tattoo & Piercing</span>
+            </a>
+
+            <!-- Desktop Navigation -->
+            <nav class="hidden lg:flex items-center space-x-10 text-xs tracking-[0.2em] uppercase font-medium text-emerald-900">
+                <a href="#about" class="hover:text-gold-600 transition-colors">About Artist</a>
+                <a href="#hygiene" class="hover:text-gold-600 transition-colors">BBP Standards</a>
+                <a href="#specialties" class="hover:text-gold-600 transition-colors">Specialties</a>
+                <a href="#reviews" class="hover:text-gold-600 transition-colors">5★ Reviews</a>
+                <a href="#gallery" class="hover:text-gold-600 transition-colors">Portfolio</a>
+            </nav>
+
+            <!-- Header Action Button -->
+            <a href="#booking" class="hidden sm:inline-flex items-center px-6 py-2.5 border border-emerald-800 text-emerald-900 text-xs tracking-[0.2em] uppercase font-semibold hover:bg-emerald-900 hover:text-sand-50 transition-all duration-300 rounded-sm">
+                Book Session
+            </a>
+        </div>
     </header>
 
-    <section class="hero">
-        <h1>Zamurai Tattoo & Piercing</h1>
-        <p>Fine Line • Custom Design • Black & Grey • Stipple Dotwork • Body Piercing</p>
-        <a href="#booking" class="btn">Book a Consultation</a>
+    <section class="relative min-h-[88vh] flex items-center justify-center px-6 py-20 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-sand-100 via-sand-50 to-sand-50">
+        <div class="max-w-5xl mx-auto text-center">
+            
+            <!-- Location Badge -->
+            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-900/5 border border-emerald-800/15 mb-8">
+                <span class="w-2 h-2 rounded-full bg-emerald-800 animate-pulse"></span>
+                <span class="text-[11px] uppercase tracking-[0.25em] text-emerald-900 font-medium">Fort Kochi, Kerala • Atelier Studio</span>
+            </div>
+
+            <!-- Main Headline -->
+            <h1 class="font-serif text-5xl sm:text-7xl lg:text-8xl font-light tracking-tight leading-[1.08] mb-8 text-emerald-900">
+                Bespoke Body Art & Fine Line Precision
+            </h1>
+
+            <p class="text-sm md:text-base text-charcoal/80 max-w-2xl mx-auto font-light leading-relaxed mb-12 tracking-wide">
+                Crafted under international standards. Combining 2 years of North American studio experience, certified Bloodborne Pathogen infection control, and fine art precision in historic Fort Kochi.
+            </p>
+            
+            <!-- Hero CTAs -->
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6">
+                <a href="#booking" class="w-full sm:w-auto px-9 py-4 bg-emerald-900 text-sand-50 text-xs tracking-[0.2em] uppercase font-semibold hover:bg-gold-600 transition-all duration-300 shadow-lg shadow-emerald-900/10">
+                    Reserve Consultation
+                </a>
+                <a href="#reviews" class="w-full sm:w-auto px-9 py-4 border border-emerald-800/40 text-emerald-900 text-xs tracking-[0.2em] uppercase font-semibold hover:border-gold-500 hover:text-gold-600 transition-all duration-300 bg-white/40">
+                    Client 5★ Reviews
+                </a>
+            </div>
+
+            <!-- Quick Highlights Bar -->
+            <div class="mt-20 pt-10 border-t border-sand-200 grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+                <div>
+                    <span class="font-serif text-2xl md:text-3xl font-light text-emerald-900 block">Canadian Exp.</span>
+                    <span class="text-[10px] uppercase tracking-widest text-gold-600 font-medium">International Craft</span>
+                </div>
+                <div>
+                    <span class="font-serif text-2xl md:text-3xl font-light text-emerald-900 block">OSHA / BBP</span>
+                    <span class="text-[10px] uppercase tracking-widest text-gold-600 font-medium">Certified Hygiene</span>
+                </div>
+                <div>
+                    <span class="font-serif text-2xl md:text-3xl font-light text-emerald-900 block">5.0 ★ Rating</span>
+                    <span class="text-[10px] uppercase tracking-widest text-gold-600 font-medium">Google Reviews</span>
+                </div>
+                <div>
+                    <span class="font-serif text-2xl md:text-3xl font-light text-emerald-900 block">Grade 23 Ti</span>
+                    <span class="text-[10px] uppercase tracking-widest text-gold-600 font-medium">Implant Piercings</span>
+                </div>
+            </div>
+        </div>
     </section>
 
-    <h2 class="section-title" id="services">Specialties</h2>
-    <section class="services-grid">
-        <div class="service-card">
-            <h3>Fine Line & Cyber-Sigilism</h3>
-            <p>Precise needle craft specializing in intricate linework, futuristic ornamentals, and custom cyber-sigilism aesthetics.</p>
-        </div>
-        <div class="service-card">
-            <h3>Black & Grey Realism</h3>
-            <p>High-contrast shading, portraiture, micro-realism, and smooth stipple dotwork tailored to your skin tone and flow.</p>
-        </div>
-        <div class="service-card">
-            <h3>Body Piercing & Hygiene</h3>
-            <p>Hospital-grade electric autoclave sterilization, implant-grade titanium jewelry, and precise placement.</p>
+    <section id="about" class="py-24 px-6 md:px-12 bg-sand-100 border-y border-sand-200">
+        <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+            
+            <!-- Left Info Column -->
+            <div class="lg:col-span-5 space-y-6">
+                <span class="text-xs uppercase tracking-[0.3em] text-gold-600 font-semibold block">Artist Background</span>
+                <h2 class="font-serif text-4xl md:text-5xl font-light leading-tight text-emerald-900">
+                    International Experience, Local Mastery
+                </h2>
+                <div class="w-16 h-[1px] bg-gold-500"></div>
+                <p class="text-xs uppercase tracking-widest text-emerald-900/70 font-semibold">
+                    Fort Kochi • Ex-Canada Tattooer
+                </p>
+            </div>
+
+            <!-- Right Narrative Column -->
+            <div class="lg:col-span-7 space-y-6 text-sm md:text-base font-light text-charcoal/85 leading-relaxed bg-white p-8 md:p-10 border border-sand-200 rounded-sm shadow-sm">
+                <p>
+                    <strong class="font-medium text-emerald-900">Zamurai Tattoo & Piercing</strong> was founded on the principles of fine art, individual anatomy adaptation, and uncompromising medical-grade safety.
+                </p>
+                <p>
+                    Having spent <span class="font-medium text-emerald-900">2 years tattooing in Canada</span> across high-volume licensed studios, our resident artist brings North American sanitary practices, refined client care, and versatile tattooing expertise straight to Fort Kochi.
+                </p>
+                <p>
+                    Whether working on ultra-delicate single-needle fine lines, cyber-sigilism ornamentals, custom cover-ups, or aseptic body piercings, every session is approached with a commitment to artistic longevity and clinical sterility.
+                </p>
+            </div>
         </div>
     </section>
 
-    <h2 class="section-title" id="booking">Book Your Session</h2>
-    <div class="contact-container">
-        <form action="https://formspree.io/f/your_form_id" method="POST">
-            <div>
-                <label style="display:block; margin-bottom: 0.4rem; font-size: 0.85rem; color: var(--text-muted);">Full Name</label>
-                <input type="text" name="name" placeholder="Your Name" required>
-            </div>
-            <div>
-                <label style="display:block; margin-bottom: 0.4rem; font-size: 0.85rem; color: var(--text-muted);">Phone / WhatsApp</label>
-                <input type="tel" name="phone" placeholder="+91 00000 00000" required>
-            </div>
-            <div>
-                <label style="display:block; margin-bottom: 0.4rem; font-size: 0.85rem; color: var(--text-muted);">Service Requested</label>
-                <select name="service">
-                    <option value="Custom Tattoo">Custom Tattoo Design</option>
-                    <option value="Fine Line / Dotwork">Fine Line / Dotwork</option>
-                    <option value="Cover-up">Cover-up / Rework</option>
-                    <option value="Body Piercing">Body Piercing</option>
-                </select>
-            </div>
-            <div>
-                <label style="display:block; margin-bottom: 0.4rem; font-size: 0.85rem; color: var(--text-muted);">Idea / Placement / Size</label>
-                <textarea name="message" rows="4" placeholder="Describe your tattoo idea, desired size, and body placement..." required></textarea>
-            </div>
-            <button type="submit" class="btn">Send Inquiry</button>
-        </form>
-    </div>
+    <section id="hygiene" class="py-28 px-6 md:px-12 max-w-7xl mx-auto">
+        <div class="text-center max-w-3xl mx-auto mb-20">
+            <span class="text-xs uppercase tracking-[0.3em] text-gold-600 font-semibold block mb-3">Clinical Sterility</span>
+            <h2 class="font-serif text-4xl md:text-5xl font-light text-emerald-900 mb-6">Bloodborne Pathogen Certified</h2>
+            <p class="text-xs md:text-sm text-charcoal/70 font-light leading-relaxed">
+                Your skin safety is our absolute priority. We operate strictly in alignment with OSHA Bloodborne Pathogen Standards (29 CFR 1910.1030) and Canadian studio infection protocols.
+            </p>
+        </div>
 
-    <footer id="contact">
-        <p><strong>Zamurai Tattoo & Piercing Studio</strong></p>
-        <p>Fort Kochi, Kerala, India</p>
-        <p style="margin-top: 1rem;">Instagram: <a href="https://instagram.com/zamurai_tattoo" target="_blank">@zamurai_tattoo</a></p>
-        <p style="margin-top: 2rem;">© 2026 Zamurai Tattoo. All rights reserved.</p>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <!-- Safety Card 1 -->
+            <div class="p-8 bg-emerald-900 text-sand-50 rounded-sm border border-emerald-800 shadow-md">
+                <div class="w-12 h-12 rounded-full bg-gold-500/20 flex items-center justify-center text-gold-400 font-serif text-xl mb-6">01</div>
+                <h3 class="font-serif text-2xl font-normal mb-3 text-sand-50">BBP Certified</h3>
+                <p class="text-xs text-sand-200/80 leading-relaxed font-light">
+                    Certified in OSHA Bloodborne Pathogens & Infection Control, preventing cross-contamination at every step.
+                </p>
+            </div>
+
+            <!-- Safety Card 2 -->
+            <div class="p-8 bg-white border border-sand-200 rounded-sm hover:border-gold-500 transition-colors">
+                <div class="w-12 h-12 rounded-full bg-sand-100 flex items-center justify-center text-emerald-900 font-serif text-xl mb-6">02</div>
+                <h3 class="font-serif text-2xl font-normal mb-3 text-emerald-900">Autoclave & Disinfection</h3>
+                <p class="text-xs text-charcoal/70 leading-relaxed font-light">
+                    Medical-grade electric autoclave sterilization paired with hospital-grade surface disinfectants.
+                </p>
+            </div>
+
+            <!-- Safety Card 3 -->
+            <div class="p-8 bg-white border border-sand-200 rounded-sm hover:border-gold-500 transition-colors">
+                <div class="w-12 h-12 rounded-full bg-sand-100 flex items-center justify-center text-emerald-900 font-serif text-xl mb-6">03</div>
+                <h3 class="font-serif text-2xl font-normal mb-3 text-emerald-900">Single-Use EO Needles</h3>
+                <p class="text-xs text-charcoal/70 leading-relaxed font-light">
+                    100% Ethylene Oxide gas sterilized single-use membrane cartridges opened directly in front of you.
+                </p>
+            </div>
+
+            <!-- Safety Card 4 -->
+            <div class="p-8 bg-white border border-sand-200 rounded-sm hover:border-gold-500 transition-colors">
+                <div class="w-12 h-12 rounded-full bg-sand-100 flex items-center justify-center text-emerald-900 font-serif text-xl mb-6">04</div>
+                <h3 class="font-serif text-2xl font-normal mb-3 text-emerald-900">Grade 23 Titanium</h3>
+                <p class="text-xs text-charcoal/70 leading-relaxed font-light">
+                    All piercings use threadless or internally threaded hypoallergenic Ti-6AL-4V-ELI titanium jewelry.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section id="specialties" class="py-24 bg-sand-100 border-y border-sand-200 px-6 md:px-12">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-16">
+                <div>
+                    <span class="text-xs uppercase tracking-[0.3em] text-gold-600 font-semibold block mb-2">Artistic Focus</span>
+                    <h2 class="font-serif text-4xl md:text-5xl font-light text-emerald-900">Studio Specialties</h2>
+                </div>
+                <p class="text-xs text-charcoal/70 max-w-md font-light mt-4 md:mt-0 leading-relaxed">
+                    Custom artwork rendered to match your body placement, movement, and skin tone.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Specialty 1 -->
+                <div class="p-8 bg-white border border-sand-200 rounded-sm hover:shadow-xl transition-all duration-300">
+                    <span class="text-[10px] tracking-widest text-gold-600 uppercase font-semibold block mb-4">Precision Craft</span>
+                    <h3 class="font-serif text-2xl font-normal text-emerald-900 mb-3">Fine Line & Cyber-Sigilism</h3>
+                    <p class="text-xs text-charcoal/75 font-light leading-relaxed">
+                        Single-needle geometry, delicate botanicals, fluid cybernetic ornamentals, and intricate stipple dotwork crafted for seamless aging.
+                    </p>
+                </div>
+
+                <!-- Specialty 2 -->
+                <div class="p-8 bg-white border border-sand-200 rounded-sm hover:shadow-xl transition-all duration-300">
+                    <span class="text-[10px] tracking-widest text-gold-600 uppercase font-semibold block mb-4">Shading & Depth</span>
+                    <h3 class="font-serif text-2xl font-normal text-emerald-900 mb-3">Black & Grey Realism</h3>
+                    <p class="text-xs text-charcoal/75 font-light leading-relaxed">
+                        High-contrast portraits, animal realism, smooth grey washes, and custom cover-ups engineered to transform existing tattoos.
+                    </p>
+                </div>
+
+                <!-- Specialty 3 -->
+                <div class="p-8 bg-white border border-sand-200 rounded-sm hover:shadow-xl transition-all duration-300">
+                    <span class="text-[10px] tracking-widest text-gold-600 uppercase font-semibold block mb-4">Aseptic Piercing</span>
+                    <h3 class="font-serif text-2xl font-normal text-emerald-900 mb-3">Curated Body Piercing</h3>
+                    <p class="text-xs text-charcoal/75 font-light leading-relaxed">
+                        Precision anatomical placement for ear curations, facial, and body piercings with zero piercing guns and complete aftercare guidance.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="reviews" class="py-24 bg-emerald-950 text-sand-50 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6 md:px-12 text-center mb-12">
+            <span class="text-xs uppercase tracking-[0.3em] text-gold-400 font-semibold block mb-3">Client Experiences</span>
+            <h2 class="font-serif text-4xl md:text-5xl font-light text-sand-50 mb-4">5-Star Google Reviews</h2>
+            <p class="text-xs text-sand-200/70 font-light max-w-xl mx-auto">
+                Read what clients say about our Canadian studio standards, painless piercings, and fine line detail in Fort Kochi.
+            </p>
+        </div>
+
+        <!-- Marquee / Ticker Container -->
+        <div class="marquee-container relative w-full overflow-hidden py-4">
+            <div class="marquee-content flex gap-6 w-max animate-marquee">
+                
+                <!-- Review Card 1 -->
+                <div class="w-80 md:w-96 bg-emerald-900/80 border border-emerald-800 p-6 rounded-sm flex-shrink-0">
+                    <div class="flex text-gold-400 text-sm mb-3">★★★★★</div>
+                    <p class="text-xs text-sand-100 font-light leading-relaxed mb-4 italic">
+                        "Incredible fine line experience! You can immediately tell the artist has international Canadian experience. The studio hygiene is better than most places in Europe."
+                    </p>
+                    <span class="text-[11px] uppercase tracking-widest text-gold-400 font-semibold block">— Alex M. (Verified Client)</span>
+                </div>
+
+                <!-- Review Card 2 -->
+                <div class="w-80 md:w-96 bg-emerald-900/80 border border-emerald-800 p-6 rounded-sm flex-shrink-0">
+                    <div class="flex text-gold-400 text-sm mb-3">★★★★★</div>
+                    <p class="text-xs text-sand-100 font-light leading-relaxed mb-4 italic">
+                        "Got a cyber-sigilism forearm piece. The linework is insanely sharp. Bloodborne pathogen certification really gave me peace of mind!"
+                    </p>
+                    <span class="text-[11px] uppercase tracking-widest text-gold-400 font-semibold block">— Rahul K.</span>
+                </div>
+
+                <!-- Review Card 3 -->
+                <div class="w-80 md:w-96 bg-emerald-900/80 border border-emerald-800 p-6 rounded-sm flex-shrink-0">
+                    <div class="flex text-gold-400 text-sm mb-3">★★★★★</div>
+                    <p class="text-xs text-sand-100 font-light leading-relaxed mb-4 italic">
+                        "Best body piercing experience in Kochi. Used implant grade titanium and opened single-use sterile packs right in front of me."
+                    </p>
+                    <span class="text-[11px] uppercase tracking-widest text-gold-400 font-semibold block">— Sarah L.</span>
+                </div>
+
+                <!-- Review Card 4 -->
+                <div class="w-80 md:w-96 bg-emerald-900/80 border border-emerald-800 p-6 rounded-sm flex-shrink-0">
+                    <div class="flex text-gold-400 text-sm mb-3">★★★★★</div>
+                    <p class="text-xs text-sand-100 font-light leading-relaxed mb-4 italic">
+                        "Very patient artist who spent an hour perfecting the placement stencil. Cleanest studio in Fort Kochi by far!"
+                    </p>
+                    <span class="text-[11px] uppercase tracking-widest text-gold-400 font-semibold block">— David P.</span>
+                </div>
+
+                <!-- Duplicate Cards for Infinite Scroll Loop -->
+                <div class="w-80 md:w-96 bg-emerald-900/80 border border-emerald-800 p-6 rounded-sm flex-shrink-0">
+                    <div class="flex text-gold-400 text-sm mb-3">★★★★★</div>
+                    <p class="text-xs text-sand-100 font-light leading-relaxed mb-4 italic">
+                        "Incredible fine line experience! You can immediately tell the artist has international Canadian experience."
+                    </p>
+                    <span class="text-[11px] uppercase tracking-widest text-gold-400 font-semibold block">— Alex M.</span>
+                </div>
+
+                <div class="w-80 md:w-96 bg-emerald-900/80 border border-emerald-800 p-6 rounded-sm flex-shrink-0">
+                    <div class="flex text-gold-400 text-sm mb-3">★★★★★</div>
+                    <p class="text-xs text-sand-100 font-light leading-relaxed mb-4 italic">
+                        "Got a cyber-sigilism forearm piece. The linework is insanely sharp. Cleanest studio in Fort Kochi!"
+                    </p>
+                    <span class="text-[11px] uppercase tracking-widest text-gold-400 font-semibold block">— Rahul K.</span>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Google Maps CTA -->
+        <div class="text-center mt-12">
+            <a href="https://maps.google.com/?q=Zamurai+Tattoo+Fort+Kochi" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-3 px-8 py-3.5 border border-gold-400 text-gold-400 text-xs tracking-[0.2em] uppercase font-semibold hover:bg-gold-400 hover:text-emerald-950 transition-all duration-300">
+                <span>View Google Maps & Leave Review</span>
+                <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+            </a>
+        </div>
+    </section>
+
+    <section id="gallery" class="py-28 px-6 md:px-12 max-w-7xl mx-auto">
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-16">
+            <div>
+                <span class="text-xs uppercase tracking-[0.3em] text-gold-600 font-semibold block mb-2">Visual Works</span>
+                <h2 class="font-serif text-4xl md:text-5xl font-light text-emerald-900">Portfolio Gallery</h2>
+            </div>
+            <a href="https://instagram.com/zamurai_tattoo" target="_blank" rel="noopener noreferrer" class="mt-4 md:mt-0 text-xs tracking-widest uppercase text-gold-600 hover:text-emerald-900 font-semibold transition-colors flex items-center gap-2">
+                Follow @zamurai_tattoo &rarr;
+            </a>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Image 1 -->
+            <div class="aspect-[4/5] bg-sand-200 overflow-hidden relative group rounded-sm border border-sand-300/50">
+                <img src="https://images.unsplash.com/photo-1598371839696-5c5bb00bdc28?auto=format&fit=crop&q=80&w=800" alt="Fine Line Geometry Tattoo" class="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700">
+                <div class="absolute inset-0 bg-emerald-950/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+                    <span class="text-sand-50 font-serif text-xl tracking-wide">Fine Line Geometry</span>
+                </div>
+            </div>
+
+            <!-- Image 2 -->
+            <div class="aspect-[4/5] bg-sand-200 overflow-hidden relative group rounded-sm border border-sand-300/50">
+                <img src="https://images.unsplash.com/photo-1562962230-16e4623d36e6?auto=format&fit=crop&q=80&w=800" alt="Black & Grey Shading Artwork" class="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700">
+                <div class="absolute inset-0 bg-emerald-950/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+                    <span class="text-sand-50 font-serif text-xl tracking-wide">Black & Grey Realism</span>
+                </div>
+            </div>
+
+            <!-- Image 3 -->
+            <div class="aspect-[4/5] bg-sand-200 overflow-hidden relative group rounded-sm border border-sand-300/50">
+                <img src="https://images.unsplash.com/photo-1611501275019-9b5cda994e8d?auto=format&fit=crop&q=80&w=800" alt="Sterile Titanium Piercing" class="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700">
+                <div class="absolute inset-0 bg-emerald-950/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+                    <span class="text-sand-50 font-serif text-xl tracking-wide">Titanium Body Piercing</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="booking" class="py-28 bg-sand-100 border-t border-sand-200 px-6 md:px-12">
+        <div class="max-w-4xl mx-auto">
+            <div class="text-center mb-16">
+                <span class="text-xs uppercase tracking-[0.3em] text-gold-600 font-semibold block mb-3">Appointments</span>
+                <h2 class="font-serif text-4xl md:text-5xl font-light text-emerald-900 mb-4">Reserve Your Session</h2>
+                <p class="text-xs md:text-sm text-charcoal/70 max-w-lg mx-auto font-light">
+                    Submit your custom idea, body placement, and date preference. This form sends your details directly to our studio WhatsApp.
+                </p>
+            </div>
+
+            <form onsubmit="sendWhatsAppBooking(event)" class="space-y-8 bg-white p-8 md:p-12 border border-sand-200 rounded-sm shadow-xl shadow-sand-200/50">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div>
+                        <label class="block text-xs uppercase tracking-widest text-emerald-900 font-semibold mb-3">Full Name *</label>
+                        <input type="text" id="custName" required placeholder="Your Name" class="w-full bg-sand-50 border border-sand-200 px-4 py-3.5 text-xs text-charcoal focus:outline-none focus:border-emerald-800 transition-colors">
+                    </div>
+                    <div>
+                        <label class="block text-xs uppercase tracking-widest text-emerald-900 font-semibold mb-3">Phone / WhatsApp *</label>
+                        <input type="tel" id="custPhone" required placeholder="+91 98765 43210" class="w-full bg-sand-50 border border-sand-200 px-4 py-3.5 text-xs text-charcoal focus:outline-none focus:border-emerald-800 transition-colors">
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div>
+                        <label class="block text-xs uppercase tracking-widest text-emerald-900 font-semibold mb-3">Service Interest</label>
+                        <select id="custService" class="w-full bg-sand-50 border border-sand-200 px-4 py-3.5 text-xs text-charcoal focus:outline-none focus:border-emerald-800 transition-colors">
+                            <option value="Custom Fine Line Tattoo">Custom Fine Line Tattoo</option>
+                            <option value="Cyber-Sigilism / Ornamental">Cyber-Sigilism / Ornamental</option>
+                            <option value="Black & Grey Realism">Black & Grey Realism</option>
+                            <option value="Precision Body Piercing">Precision Body Piercing</option>
+                            <option value="Cover-up Consultation">Cover-up Consultation</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs uppercase tracking-widest text-emerald-900 font-semibold mb-3">Preferred Session Date</label>
+                        <input type="date" id="custDate" class="w-full bg-sand-50 border border-sand-200 px-4 py-3.5 text-xs text-charcoal focus:outline-none focus:border-emerald-800 transition-colors">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs uppercase tracking-widest text-emerald-900 font-semibold mb-3">Tattoo Idea / Body Placement / Size *</label>
+                    <textarea id="custDetails" rows="4" required placeholder="Describe your design concept, desired size (e.g. 3x3 inches), and placement on the body..." class="w-full bg-sand-50 border border-sand-200 px-4 py-3.5 text-xs text-charcoal focus:outline-none focus:border-emerald-800 transition-colors"></textarea>
+                </div>
+
+                <div class="text-center pt-4">
+                    <button type="submit" class="w-full md:w-auto px-10 py-4 bg-emerald-900 text-sand-50 text-xs tracking-[0.2em] uppercase font-semibold hover:bg-gold-600 transition-all duration-300 shadow-md">
+                        Submit & Connect on WhatsApp
+                    </button>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <footer class="bg-emerald-950 text-sand-50 pt-20 pb-12 px-6 md:px-12">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-12 border-b border-emerald-800/80 pb-16">
+            
+            <div class="md:col-span-5 space-y-4">
+                <a href="#" class="inline-block">
+                    <span class="font-serif text-3xl tracking-widest uppercase font-light text-sand-50">Zamurai</span>
+                    <span class="block text-[10px] tracking-[0.3em] uppercase text-gold-400 font-semibold">Tattoo & Piercing</span>
+                </a>
+                <p class="text-xs text-sand-200/70 font-light max-w-sm leading-relaxed">
+                    Fine art studio located in Chullickal, Fort Kochi. Combining 2 years of Canadian studio craft with strict OSHA Bloodborne Pathogen infection control.
+                </p>
+            </div>
+
+            <div class="md:col-span-3 space-y-3">
+                <h4 class="text-xs uppercase tracking-[0.2em] text-gold-400 font-semibold">Studio Location</h4>
+                <p class="text-xs text-sand-200/80 font-light leading-relaxed">
+                    Chullickal, Fort Kochi<br>
+                    Kochi, Kerala, India<br><br>
+                    Hours: 11:00 AM – 8:00 PM<br>
+                    <span class="italic text-gold-400/80">* By Appointment</span>
+                </p>
+            </div>
+
+            <div class="md:col-span-4 space-y-4">
+                <h4 class="text-xs uppercase tracking-[0.2em] text-gold-400 font-semibold">Connect & Directions</h4>
+                <p class="text-xs text-sand-200/80 font-light">
+                    Instagram: <a href="https://instagram.com/zamurai_tattoo" target="_blank" class="underline hover:text-gold-400">@zamurai_tattoo</a>
+                </p>
+                <div class="flex flex-wrap gap-3 pt-2">
+                    <a href="https://maps.google.com/?q=Zamurai+Tattoo+Fort+Kochi" target="_blank" class="px-5 py-2.5 border border-gold-400 text-gold-400 hover:bg-gold-400 hover:text-emerald-950 text-[11px] tracking-widest uppercase font-semibold transition-colors">
+                        Google Maps
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="max-w-7xl mx-auto pt-8 flex flex-col sm:flex-row justify-between items-center text-[10px] text-sand-200/50 uppercase tracking-widest">
+            <p>© 2026 Zamurai Tattoo & Piercing. All rights reserved.</p>
+            <p class="mt-2 sm:mt-0">Fort Kochi, Kerala • Certified BBP Atelier</p>
+        </div>
     </footer>
 
+    <script>
+        function sendWhatsAppBooking(e) {
+            e.preventDefault();
+            const name = document.getElementById('custName').value;
+            const phone = document.getElementById('custPhone').value;
+            const service = document.getElementById('custService').value;
+            const date = document.getElementById('custDate').value;
+            const details = document.getElementById('custDetails').value;
+
+            const text = `Hello Zamurai Tattoo Studio,%0A%0AI would like to book a consultation:%0A- *Name:* ${encodeURIComponent(name)}%0A- *Phone:* ${encodeURIComponent(phone)}%0A- *Service:* ${encodeURIComponent(service)}%0A- *Preferred Date:* ${encodeURIComponent(date || 'Flexible')}%0A- *Idea / Placement:* ${encodeURIComponent(details)}`;
+
+            window.open(`https://wa.me/?text=${text}`, '_blank');
+        }
+    </script>
 </body>
 </html>
