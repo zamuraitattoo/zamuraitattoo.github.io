@@ -53,20 +53,20 @@
             color: #18251F;
         }
 
-        /* Fixed Background Studio Image */
+        /* Fixed Background Studio Photo */
         #studio-bg {
             position: fixed;
             top: 0;
             left: 0;
             width: 100vw;
             height: 100vh;
-            background-image: url('images/studio.jpeg');
+            background-image: url('images/studio.jpg');
             background-size: cover;
             background-position: center;
             pointer-events: none;
             z-index: 0;
             opacity: 0.2;
-            transition: opacity 0.2s ease-out;
+            transition: opacity 0.3s ease-out;
         }
 
         /* Content sections rendering above fixed background */
@@ -227,17 +227,14 @@
     <header class="sticky top-0 z-40 bg-sand-50/90 backdrop-blur-md border-b border-sand-200">
         <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
             <a href="#" class="flex items-center gap-3 group">
-                <div class="w-10 h-10 bg-emerald-900 rounded-sm flex items-center justify-center border border-gold-500/40 group-hover:border-gold-500 transition-colors">
-                    <svg class="w-6 h-6 text-gold-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                </div>
+                <img src="images/logo.png" alt="Zamurai Tattoo Logo" class="h-10 w-auto object-contain">
                 <div class="flex flex-col">
                     <span class="font-serif text-xl tracking-wider text-emerald-900 font-semibold uppercase leading-none">Zamurai</span>
                     <span class="text-[9px] tracking-[0.25em] text-gold-600 uppercase font-medium mt-1">Tattoo & Piercing</span>
                 </div>
             </a>
 
+            <!-- Desktop Navigation -->
             <nav class="hidden lg:flex items-center space-x-10 text-xs tracking-[0.2em] uppercase font-medium text-emerald-900">
                 <a href="#about" class="hover:text-gold-600 transition-colors">About Atelier</a>
                 <a href="#specialties" class="hover:text-gold-600 transition-colors">Specialties</a>
@@ -245,14 +242,31 @@
                 <a href="#booking" class="hover:text-gold-600 transition-colors">Consultation</a>
             </nav>
 
-            <a href="#booking" class="hidden sm:inline-flex items-center px-6 py-2.5 border border-emerald-800 text-emerald-900 text-xs tracking-[0.2em] uppercase font-semibold hover:bg-emerald-900 hover:text-sand-50 transition-all duration-300 rounded-sm">
-                Book Session
-            </a>
+            <div class="flex items-center gap-4">
+                <a href="#booking" class="hidden sm:inline-flex items-center px-6 py-2.5 border border-emerald-800 text-emerald-900 text-xs tracking-[0.2em] uppercase font-semibold hover:bg-emerald-900 hover:text-sand-50 transition-all duration-300 rounded-sm">
+                    Book Session
+                </a>
+
+                <!-- Mobile Hamburger Button -->
+                <button id="mobileMenuBtn" onclick="toggleMobileMenu()" class="lg:hidden text-emerald-900 p-2 focus:outline-none" aria-label="Toggle navigation menu">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation Drawer -->
+        <div id="mobileMenu" class="hidden lg:hidden bg-sand-50 border-b border-sand-200 px-6 py-6 space-y-4 text-xs tracking-[0.2em] uppercase font-medium text-emerald-900">
+            <a href="#about" onclick="toggleMobileMenu()" class="block hover:text-gold-600 py-1">About Atelier</a>
+            <a href="#specialties" onclick="toggleMobileMenu()" class="block hover:text-gold-600 py-1">Specialties</a>
+            <a href="#gallery" onclick="toggleMobileMenu()" class="block hover:text-gold-600 py-1">Portfolio</a>
+            <a href="#booking" onclick="toggleMobileMenu()" class="block hover:text-gold-600 py-1">Consultation</a>
         </div>
     </header>
 
     <!-- HERO SECTION -->
-    <section class="relative min-h-[88vh] flex items-center justify-center px-6 py-20 bg-sand-50/80 backdrop-blur-xs">
+    <section class="relative min-h-[88vh] flex items-center justify-center px-6 py-20 bg-sand-50/80 backdrop-blur-sm">
         <div class="max-w-5xl mx-auto text-center">
             <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-900/5 border border-emerald-800/15 mb-8">
                 <span class="w-2 h-2 rounded-full bg-emerald-800 animate-pulse"></span>
@@ -458,22 +472,22 @@
                 </div>
             </div>
 
-            <!-- Right Consultation Form (Direct WhatsApp Submission) -->
+            <!-- Right Consultation Form -->
             <div class="bg-white p-8 md:p-10 border border-sand-200 rounded-sm shadow-sm">
                 <form id="consultationForm" onsubmit="sendToWhatsApp(event)" class="space-y-6">
                     <div>
-                        <label class="block text-xs uppercase tracking-widest text-emerald-900 font-semibold mb-2">Full Name</label>
-                        <input type="text" id="custName" required placeholder="Your Name" class="w-full px-4 py-3 bg-sand-50 border border-sand-200 text-xs text-charcoal focus:outline-none focus:border-gold-500 rounded-sm">
+                        <label for="custName" class="block text-xs uppercase tracking-widest text-emerald-900 font-semibold mb-2">Full Name</label>
+                        <input type="text" id="custName" name="custName" required placeholder="Your Name" class="w-full px-4 py-3 bg-sand-50 border border-sand-200 text-xs text-charcoal focus:outline-none focus:border-gold-500 rounded-sm">
                     </div>
 
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                         <div>
-                            <label class="block text-xs uppercase tracking-widest text-emerald-900 font-semibold mb-2">Phone / WhatsApp</label>
-                            <input type="tel" id="custPhone" required placeholder="+91 00000 00000" class="w-full px-4 py-3 bg-sand-50 border border-sand-200 text-xs text-charcoal focus:outline-none focus:border-gold-500 rounded-sm">
+                            <label for="custPhone" class="block text-xs uppercase tracking-widest text-emerald-900 font-semibold mb-2">Phone / WhatsApp</label>
+                            <input type="tel" id="custPhone" name="custPhone" required placeholder="+91 00000 00000" class="w-full px-4 py-3 bg-sand-50 border border-sand-200 text-xs text-charcoal focus:outline-none focus:border-gold-500 rounded-sm">
                         </div>
                         <div>
-                            <label class="block text-xs uppercase tracking-widest text-emerald-900 font-semibold mb-2">Service</label>
-                            <select id="custService" class="w-full px-4 py-3 bg-sand-50 border border-sand-200 text-xs text-charcoal focus:outline-none focus:border-gold-500 rounded-sm">
+                            <label for="custService" class="block text-xs uppercase tracking-widest text-emerald-900 font-semibold mb-2">Service</label>
+                            <select id="custService" name="custService" class="w-full px-4 py-3 bg-sand-50 border border-sand-200 text-xs text-charcoal focus:outline-none focus:border-gold-500 rounded-sm">
                                 <option>Fine Line & Dotwork</option>
                                 <option>Black & Grey Realism</option>
                                 <option>Custom Tattoo Concept</option>
@@ -483,8 +497,8 @@
                     </div>
 
                     <div>
-                        <label class="block text-xs uppercase tracking-widest text-emerald-900 font-semibold mb-2">Placement & Design Concept</label>
-                        <textarea id="custConcept" rows="4" placeholder="Describe your placement preference, approximate size (inches), and concept details..." class="w-full px-4 py-3 bg-sand-50 border border-sand-200 text-xs text-charcoal focus:outline-none focus:border-gold-500 rounded-sm resize-none"></textarea>
+                        <label for="custConcept" class="block text-xs uppercase tracking-widest text-emerald-900 font-semibold mb-2">Placement & Design Concept</label>
+                        <textarea id="custConcept" name="custConcept" rows="4" placeholder="Describe your placement preference, approximate size (inches), and concept details..." class="w-full px-4 py-3 bg-sand-50 border border-sand-200 text-xs text-charcoal focus:outline-none focus:border-gold-500 rounded-sm resize-none"></textarea>
                     </div>
 
                     <button type="submit" class="w-full py-4 bg-emerald-900 text-sand-50 text-xs tracking-[0.2em] uppercase font-semibold hover:bg-gold-600 transition-all duration-300 flex items-center justify-center gap-2">
@@ -504,25 +518,31 @@
 
     <!-- JAVASCRIPT -->
     <script>
-        // FUNCTION TO HANDLE WHATSAPP DIRECT SUBMISSION
+        // MOBILE MENU TOGGLE
+        function toggleMobileMenu() {
+            const mobileMenu = document.getElementById('mobileMenu');
+            mobileMenu.classList.toggle('hidden');
+        }
+
+        // WHATSAPP SUBMISSION HANDLER
         function sendToWhatsApp(event) {
             event.preventDefault();
 
-            // Updated WhatsApp target phone number
             const studioWhatsAppNumber = "919048169666";
 
-            const name = document.getElementById('custName').value;
-            const phone = document.getElementById('custPhone').value;
+            const name = document.getElementById('custName').value.trim();
+            const phone = document.getElementById('custPhone').value.trim();
             const service = document.getElementById('custService').value;
-            const concept = document.getElementById('custConcept').value;
+            const concept = document.getElementById('custConcept').value.trim();
 
-            const textMessage = `*New Consultation Request*%0A%0A` +
-                `*Name:* ${encodeURIComponent(name)}%0A` +
-                `*Phone:* ${encodeURIComponent(phone)}%0A` +
-                `*Service:* ${encodeURIComponent(service)}%0A` +
-                `*Concept/Details:* ${encodeURIComponent(concept)}`;
+            const rawMessage = `*New Consultation Request*\n\n` +
+                `*Name:* ${name}\n` +
+                `*Phone:* ${phone}\n` +
+                `*Service:* ${service}\n` +
+                `*Concept/Details:* ${concept}`;
 
-            window.open(`https://wa.me/${studioWhatsAppNumber}?text=${textMessage}`, '_blank');
+            const encodedMessage = encodeURIComponent(rawMessage);
+            window.open(`https://api.whatsapp.com/send?phone=${studioWhatsAppNumber}&text=${encodedMessage}`, '_blank');
         }
 
         // SCROLL OPACITY CONTROL FOR STUDIO BACKGROUND
@@ -531,9 +551,9 @@
         window.addEventListener('scroll', () => {
             const scrollY = window.scrollY;
 
-            const peakStart = 400;   // Reaches 80% visibility by 400px
-            const peakEnd = 900;     // Stays 80% visible until 900px
-            const fadeEnd = 1600;    // Completely fades out (0%) by 1600px
+            const peakStart = 400;   // Reaches peak visibility by 400px
+            const peakEnd = 900;     // Stays visible until 900px
+            const fadeEnd = 1600;    // Fades out completely by 1600px
 
             let opacity = 0.2;
 
