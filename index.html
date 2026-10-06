@@ -4,15 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Zamurai Tattoo & Piercing | Fine Art Studio Fort Kochi</title>
-    
+
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Zamurai Tattoo & Piercing is a premier fine art tattoo studio in Fort Kochi, Kerala, specializing in single-needle fine line, stipple dotwork, black & grey realism, and aseptic body piercing.">
+    <meta name="keywords" content="Tattoo Studio Fort Kochi, Fine Line Tattoo Kochi, Dotwork Tattoo Kerala, Body Piercing Fort Kochi, Stevin PJ Tattoo">
+
+    <!-- Open Graph / Social Media Meta Tags -->
+    <meta property="og:title" content="Zamurai Tattoo & Piercing | Fine Art Studio Fort Kochi">
+    <meta property="og:description" content="Custom fine line, stipple dotwork, black & grey realism, and aseptic body piercing in Fort Kochi, Kerala.">
+    <meta property="og:image" content="images/studio.jpg">
+    <meta property="og:type" content="website">
+
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    
+
     <!-- Google Fonts: Cormorant Garamond & Montserrat -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
+
     <!-- Tailwind Configuration -->
     <script>
         tailwind.config = {
@@ -45,7 +55,7 @@
             }
         }
     </script>
-    
+
     <!-- Custom Editorial Styles -->
     <style>
         body {
@@ -226,7 +236,7 @@
     <!-- NAVIGATION HEADER -->
     <header class="sticky top-0 z-40 bg-sand-50/90 backdrop-blur-md border-b border-sand-200">
         <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-            <a href="#" class="flex items-center gap-3 group">
+            <a href="#" class="flex items-center gap-3 group" aria-label="Zamurai Tattoo Home">
                 <img src="images/logo.png" alt="Zamurai Tattoo Logo" class="h-10 w-auto object-contain">
                 <div class="flex flex-col">
                     <span class="font-serif text-xl tracking-wider text-emerald-900 font-semibold uppercase leading-none">Zamurai</span>
@@ -248,7 +258,7 @@
                 </a>
 
                 <!-- Mobile Hamburger Button -->
-                <button id="mobileMenuBtn" onclick="toggleMobileMenu()" class="lg:hidden text-emerald-900 p-2 focus:outline-none" aria-label="Toggle navigation menu">
+                <button id="mobileMenuBtn" onclick="toggleMobileMenu()" class="lg:hidden text-emerald-900 p-2 focus:outline-none" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="mobileMenu">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16"/>
                     </svg>
@@ -416,16 +426,16 @@
 
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             <div class="overflow-hidden rounded-sm border border-sand-200 group bg-white">
-                <img src="images/tattoo.JPG" alt="Tattoo Artwork 1" class="w-full h-80 object-cover group-hover:scale-105 transition-transform duration-500">
+                <img src="images/tattoo.JPG" alt="Custom Fine Line Tattoo Artwork" loading="lazy" class="w-full h-80 object-cover group-hover:scale-105 transition-transform duration-500">
             </div>
             <div class="overflow-hidden rounded-sm border border-sand-200 group bg-white">
-                <img src="images/tattoo2.jpeg" alt="Tattoo Artwork 2" class="w-full h-80 object-cover group-hover:scale-105 transition-transform duration-500">
+                <img src="images/tattoo2.jpeg" alt="Stipple Dotwork Tattoo Artwork" loading="lazy" class="w-full h-80 object-cover group-hover:scale-105 transition-transform duration-500">
             </div>
             <div class="overflow-hidden rounded-sm border border-sand-200 group bg-white">
-                <img src="images/tattoo3.JPG" alt="Tattoo Artwork 3" class="w-full h-80 object-cover group-hover:scale-105 transition-transform duration-500">
+                <img src="images/tattoo3.JPG" alt="Black and Grey Realism Tattoo Artwork" loading="lazy" class="w-full h-80 object-cover group-hover:scale-105 transition-transform duration-500">
             </div>
             <div class="overflow-hidden rounded-sm border border-sand-200 group bg-white">
-                <img src="images/tattoo4.JPG" alt="Tattoo Artwork 4" class="w-full h-80 object-cover group-hover:scale-105 transition-transform duration-500">
+                <img src="images/tattoo4.JPG" alt="Custom Tattoo Design Artwork" loading="lazy" class="w-full h-80 object-cover group-hover:scale-105 transition-transform duration-500">
             </div>
         </div>
     </section>
@@ -513,15 +523,20 @@
 
     <!-- FOOTER -->
     <footer class="py-8 border-t border-sand-200 text-center text-xs text-charcoal/60 font-light bg-sand-50/90 backdrop-blur-sm">
-        &copy; Zamurai Tattoo & Piercing. All Rights Reserved. Fort Kochi, Kerala.
+        &copy; <span id="currentYear"></span> Zamurai Tattoo & Piercing. All Rights Reserved. Fort Kochi, Kerala.
     </footer>
 
     <!-- JAVASCRIPT -->
     <script>
-        // MOBILE MENU TOGGLE
+        // SET CURRENT YEAR IN FOOTER
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+        // MOBILE MENU TOGGLE WITH ACCESSIBILITY SUPPORTS
         function toggleMobileMenu() {
             const mobileMenu = document.getElementById('mobileMenu');
-            mobileMenu.classList.toggle('hidden');
+            const mobileBtn = document.getElementById('mobileMenuBtn');
+            const isHidden = mobileMenu.classList.toggle('hidden');
+            mobileBtn.setAttribute('aria-expanded', !isHidden);
         }
 
         // WHATSAPP SUBMISSION HANDLER
@@ -542,7 +557,7 @@
                 `*Concept/Details:* ${concept}`;
 
             const encodedMessage = encodeURIComponent(rawMessage);
-            window.open(`https://api.whatsapp.com/send?phone=${studioWhatsAppNumber}&text=${encodedMessage}`, '_blank');
+            window.open(`https://api.whatsapp.com/send?phone=${studioWhatsAppNumber}&text=${encodedMessage}`, '_blank', 'noopener,noreferrer');
         }
 
         // SCROLL OPACITY CONTROL FOR STUDIO BACKGROUND
