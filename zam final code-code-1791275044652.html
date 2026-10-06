@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zamurai Tattoo & Piercing | Fine Art Studio Fort Kochi</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Cormorant Garamond & Montserrat -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind Configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        sand: {
+                            50: '#FAF8F5',
+                            100: '#F2EADC',
+                            200: '#EAE1D2',
+                            300: '#D6C8B2',
+                        },
+                        emerald: {
+                            800: '#315F4B',
+                            900: '#18251F',
+                            950: '#0B1711',
+                        },
+                        gold: {
+                            400: '#D2AD68',
+                            500: '#B18A48',
+                            600: '#997D4B',
+                        },
+                        charcoal: '#1A1A1A'
+                    },
+                    fontFamily: {
+                        serif: ['"Cormorant Garamond"', 'Georgia', 'serif'],
+                        sans: ['"Montserrat"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Custom Editorial Styles -->
+    <style>
+        body {
+            background-color: #FAF8F5;
+            color: #18251F;
+        }
+
+        /* ================================
+           ZAMURAI — EDITORIAL ABOUT
+        ================================ */
+        .about-section {
+            background: #F2EADC;
+            color: #18251F;
+            padding: 130px 7vw;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .about-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 10;
+        }
+
+        .about-label {
+            font-size: 10px;
+            letter-spacing: 0.32em;
+            font-weight: 600;
+            color: #B18A48;
+            margin-bottom: 75px;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 0.85fr 1.15fr;
+            gap: 9vw;
+            align-items: start;
+        }
+
+        .about-heading {
+            font-family: "Cormorant Garamond", Georgia, serif;
+            font-size: clamp(58px, 6.5vw, 100px);
+            line-height: 0.9;
+            letter-spacing: -0.045em;
+            position: sticky;
+            top: 110px;
+            font-weight: 300;
+        }
+
+        .about-heading span {
+            display: block;
+        }
+
+        .about-heading span:last-child {
+            color: #315F4B;
+            margin-left: 0.25em;
+            margin-top: 8px;
+        }
+
+        .about-content {
+            max-width: 720px;
+        }
+
+        .about-content p {
+            font-family: "Montserrat", sans-serif;
+            font-size: 15px;
+            line-height: 1.95;
+            color: #46524C;
+            margin: 0 0 28px;
+            font-weight: 300;
+        }
+
+        .about-content .about-intro {
+            font-family: "Cormorant Garamond", Georgia, serif;
+            font-size: 25px;
+            line-height: 1.5;
+            color: #26352E;
+            margin-bottom: 42px;
+            font-weight: 400;
+        }
+
+        .about-content strong {
+            color: #18251F;
+            font-weight: 600;
+        }
+
+        .about-statement {
+            border-top: 1px solid rgba(177, 138, 72, 0.55);
+            border-bottom: 1px solid rgba(177, 138, 72, 0.55);
+            padding: 30px 0;
+            margin: 55px 0;
+            font-family: "Cormorant Garamond", Georgia, serif;
+            font-size: 30px;
+            line-height: 1.35;
+            color: #315F4B;
+            letter-spacing: -0.01em;
+        }
+
+        .about-statement span,
+        .about-statement strong {
+            display: inline;
+        }
+
+        .about-statement strong {
+            color: #18251F;
+            font-weight: 500;
+        }
+
+        .about-statement span:not(:last-child)::after {
+            content: " ";
+        }
+
+        .about-cta {
+            margin-top: 70px;
+            padding-top: 42px;
+            border-top: 1px solid rgba(24, 37, 31, 0.18);
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            gap: 40px;
+        }
+
+        .about-cta h3 {
+            font-family: "Cormorant Garamond", Georgia, serif;
+            font-size: 34px;
+            line-height: 1;
+            font-weight: 400;
+            margin: 0 0 14px;
+            color: #18251F;
+        }
+
+        .about-cta p {
+            max-width: 500px;
+            margin: 0;
+            font-size: 13px;
+            line-height: 1.8;
+        }
+
+        .about-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 25px;
+            white-space: nowrap;
+            background: #315F4B;
+            color: #FAF8F5;
+            padding: 18px 26px;
+            text-decoration: none;
+            font-family: "Montserrat", sans-serif;
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: 0.18em;
+            border: 1px solid #315F4B;
+            transition: background 0.35s ease, color 0.35s ease, transform 0.35s ease, box-shadow 0.35s ease;
+        }
+
+        .about-button span {
+            color: #D2AD68;
+            font-size: 18px;
+            line-height: 1;
+        }
+
+        .about-button:hover {
+            background: #18251F;
+            border-color: #18251F;
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(24, 37, 31, 0.16);
+        }
+
+        @media (max-width: 800px) {
+            .about-section {
+                padding: 85px 24px;
+            }
+            .about-label {
+                margin-bottom: 48px;
+            }
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 50px;
+            }
+            .about-heading {
+                position: static;
+                font-size: clamp(55px, 15vw, 78px);
+            }
+            .about-heading span:last-child {
+                margin-left: 0.12em;
+            }
+            .about-content .about-intro {
+                font-size: 22px;
+                line-height: 1.5;
+            }
+            .about-content p {
+                font-size: 14px;
+                line-height: 1.85;
+            }
+            .about-statement {
+                font-size: 26px;
+                line-height: 1.4;
+                margin: 42px 0;
+            }
+            .about-cta {
+                display: block;
+                margin-top: 55px;
+                padding-top: 35px;
+            }
+            .about-cta h3 {
+                font-size: 31px;
+            }
+            .about-button {
+                margin-top: 28px;
+                width: 100%;
+                box-sizing: border-box;
+            }
+        }
+    </style>
+</head>
+<body class="font-sans antialiased text-charcoal bg-sand-50 selection:bg-emerald-800 selection:text-sand-50">
+
+    <!-- NAVIGATION HEADER -->
+    <header class="sticky top-0 z-40 bg-sand-50/90 backdrop-blur-md border-b border-sand-200">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+            <a href="#" class="flex items-center gap-3 group">
+                <div class="w-10 h-10 bg-emerald-900 rounded-sm flex items-center justify-center border border-gold-500/40 group-hover:border-gold-500 transition-colors">
+                    <svg class="w-6 h-6 text-gold-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+                <div class="flex flex-col">
+                    <span class="font-serif text-xl tracking-wider text-emerald-900 font-semibold uppercase leading-none">Zamurai</span>
+                    <span class="text-[9px] tracking-[0.25em] text-gold-600 uppercase font-medium mt-1">Tattoo & Piercing</span>
+                </div>
+            </a>
+
+            <nav class="hidden lg:flex items-center space-x-10 text-xs tracking-[0.2em] uppercase font-medium text-emerald-900">
+                <a href="#about" class="hover:text-gold-600 transition-colors">About Atelier</a>
+                <a href="#specialties" class="hover:text-gold-600 transition-colors">Specialties</a>
+                <a href="#gallery" class="hover:text-gold-600 transition-colors">Portfolio</a>
+                <a href="#booking" class="hover:text-gold-600 transition-colors">Consultation</a>
+            </nav>
+
+            <a href="#booking" class="hidden sm:inline-flex items-center px-6 py-2.5 border border-emerald-800 text-emerald-900 text-xs tracking-[0.2em] uppercase font-semibold hover:bg-emerald-900 hover:text-sand-50 transition-all duration-300 rounded-sm">
+                Book Session
+            </a>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="relative min-h-[88vh] flex items-center justify-center px-6 py-20 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-sand-100 via-sand-50 to-sand-50">
+        <div class="max-w-5xl mx-auto text-center">
+            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-900/5 border border-emerald-800/15 mb-8">
+                <span class="w-2 h-2 rounded-full bg-emerald-800 animate-pulse"></span>
+                <span class="text-[11px] uppercase tracking-[0.25em] text-emerald-900 font-medium">Fort Kochi, Kerala • Fine Art Atelier</span>
+            </div>
+
+            <h1 class="font-serif text-5xl sm:text-7xl lg:text-8xl font-light tracking-tight leading-[1.05] mb-8 text-emerald-900">
+                Precision Fine Line, Dotwork & Custom Realism
+            </h1>
+
+            <p class="text-sm md:text-base text-charcoal/80 max-w-2xl mx-auto font-light leading-relaxed mb-12 tracking-wide">
+                Crafted by Stevin PJ under strict medical-grade hygiene standards. Blending experience across Canada and India with custom single-needle fine line, stipple dotwork, and bespoke realism.
+            </p>
+            
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6">
+                <a href="#booking" class="w-full sm:w-auto px-9 py-4 bg-emerald-900 text-sand-50 text-xs tracking-[0.2em] uppercase font-semibold hover:bg-gold-600 transition-all duration-300 shadow-lg shadow-emerald-900/10">
+                    Request Consultation
+                </a>
+                <a href="#gallery" class="w-full sm:w-auto px-9 py-4 border border-emerald-800/40 text-emerald-900 text-xs tracking-[0.2em] uppercase font-semibold hover:border-gold-500 hover:text-gold-600 transition-all duration-300 bg-white/40">
+                    Explore Gallery
+                </a>
+            </div>
+
+            <div class="mt-20 pt-10 border-t border-sand-200 grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+                <div>
+                    <span class="font-serif text-2xl md:text-3xl font-light text-emerald-900 block">Fine Line & Stipple</span>
+                    <span class="text-[10px] uppercase tracking-widest text-gold-600 font-medium">Needle Precision</span>
+                </div>
+                <div>
+                    <span class="font-serif text-2xl md:text-3xl font-light text-emerald-900 block">Global Craft</span>
+                    <span class="text-[10px] uppercase tracking-widest text-gold-600 font-medium">India & Canada</span>
+                </div>
+                <div>
+                    <span class="font-serif text-2xl md:text-3xl font-light text-emerald-900 block">Medical Hygiene</span>
+                    <span class="text-[10px] uppercase tracking-widest text-gold-600 font-medium">Autoclave Sterilization</span>
+                </div>
+                <div>
+                    <span class="font-serif text-2xl md:text-3xl font-light text-emerald-900 block">Body Piercing</span>
+                    <span class="text-[10px] uppercase tracking-widest text-gold-600 font-medium">Implant-Grade Titanium</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT ZAMURAI SECTION -->
+    <section id="about" class="about-section">
+        <div class="about-container">
+            <div class="about-label">
+                ABOUT ZAMURAI
+            </div>
+
+            <div class="about-grid">
+                <!-- LEFT -->
+                <div class="about-heading">
+                    <span>Art,</span>
+                    <span>Made Personal.</span>
+                </div>
+
+                <!-- RIGHT -->
+                <div class="about-content">
+                    <p class="about-intro">
+                        Zamurai Tattoo & Piercing is an independent fine art studio in <strong>Fort Kochi, Kerala</strong>, founded by <strong>Stevin PJ</strong> and built on a devotion to technical perfection.
+                    </p>
+
+                    <p>
+                        Having honed the craft across <strong>India and Canada</strong>, Stevin brings an international standard of tattooing to Fort Kochi — blending delicate needlework, custom artistry, and stringent aseptic studio protocols.
+                    </p>
+
+                    <p>
+                        We specialize in <strong>Single-Needle Fine Line, Stipple Dotwork, Black & Grey Realism, Cyber-Sigilism</strong>, and professional <strong>Aseptic Body Piercing</strong> using titanium jewelry.
+                    </p>
+
+                    <p>
+                        We believe a tattoo is a permanent extension of your identity. Every custom piece is thoughtfully designed around body flow, anatomical placement, and individual narrative — avoiding cookie-cutter templates.
+                    </p>
+
+                    <div class="about-statement">
+                        <span>Fine lines.</span>
+                        <span>Flawless shading.</span>
+                        <strong>Zero compromises.</strong>
+                    </div>
+
+                    <p>
+                        Our studio employs multi-enzymatic ultrasonic cleaning, electric autoclave sterilization, and hospital-grade surface disinfection to ensure the highest safety standard for every single client.
+                    </p>
+
+                    <!-- CTA -->
+                    <div class="about-cta">
+                        <div>
+                            <h3>Have a custom concept?</h3>
+                            <p>
+                                Book a free direct consultation. Share your ideas, reference images, or placement ideas — and let's craft a bespoke piece together.
+                            </p>
+                        </div>
+
+                        <a href="#booking" class="about-button">
+                            BOOK FREE CONSULTATION
+                            <span>→</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SPECIALTIES SHOWCASE -->
+    <section id="specialties" class="py-24 px-6 md:px-12 max-w-7xl mx-auto border-t border-sand-200">
+        <div class="text-center max-w-3xl mx-auto mb-16">
+            <span class="text-xs uppercase tracking-[0.3em] text-gold-600 font-semibold block mb-3">Our Core Mastery</span>
+            <h2 class="font-serif text-4xl md:text-5xl font-light text-emerald-900">Artistic Specialties</h2>
+            <p class="text-xs md:text-sm text-charcoal/70 font-light mt-4 leading-relaxed">
+                Focused mastery over intricate styles that demand meticulous hand control and long-term durability.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="p-8 bg-white border border-sand-200 rounded-sm hover:border-gold-500/50 transition-all duration-300">
+                <span class="text-gold-600 text-xs font-serif font-semibold tracking-widest uppercase block mb-3">01 / Fine Line & Stipple</span>
+                <h3 class="font-serif text-2xl text-emerald-900 mb-3">Micro Fine Line & Dotwork</h3>
+                <p class="text-xs text-charcoal/70 font-light leading-relaxed">
+                    Ultra-delicate linework and soft stipple dotwork shading. Designed to age gracefully while maintaining crisp detail.
+                </p>
+            </div>
+
+            <div class="p-8 bg-white border border-sand-200 rounded-sm hover:border-gold-500/50 transition-all duration-300">
+                <span class="text-gold-600 text-xs font-serif font-semibold tracking-widest uppercase block mb-3">02 / Realism & Portraits</span>
+                <h3 class="font-serif text-2xl text-emerald-900 mb-3">Black & Grey Realism</h3>
+                <p class="text-xs text-charcoal/70 font-light leading-relaxed">
+                    Smooth tonal transitions, rich depth, and lifelike textures in custom portraits, biological motifs, and dark surrealism.
+                </p>
+            </div>
+
+            <div class="p-8 bg-white border border-sand-200 rounded-sm hover:border-gold-500/50 transition-all duration-300">
+                <span class="text-gold-600 text-xs font-serif font-semibold tracking-widest uppercase block mb-3">03 / Cyber-Sigilism & Piercing</span>
+                <h3 class="font-serif text-2xl text-emerald-900 mb-3">Cyber-Sigilism & Piercing</h3>
+                <p class="text-xs text-charcoal/70 font-light leading-relaxed">
+                    Avant-garde abstract linework alongside certified body piercings performed with sterilised titanium jewelry.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- PORTFOLIO GALLERY SECTION -->
+    <section id="gallery" class="py-24 px-6 md:px-12 max-w-7xl mx-auto border-t border-sand-200">
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-16">
+            <div>
+                <span class="text-xs uppercase tracking-[0.3em] text-gold-600 font-semibold block mb-2">Visual Archive</span>
+                <h2 class="font-serif text-4xl md:text-5xl font-light text-emerald-900">Studio Portfolio</h2>
+            </div>
+            <a href="https://instagram.com/zamurai_tattoo" target="_blank" rel="noopener noreferrer" class="mt-4 md:mt-0 text-xs tracking-widest uppercase text-gold-600 hover:text-emerald-900 font-semibold transition-colors flex items-center gap-2">
+                Follow @zamurai_tattoo &rarr;
+            </a>
