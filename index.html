@@ -23,6 +23,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
+    <!-- Elfsight Google Reviews Platform Script -->
+    <script src="https://elfsightcdn.com/platform.js" async></script>
+
     <!-- Tailwind Configuration -->
     <script>
         tailwind.config = {
@@ -63,7 +66,7 @@
             color: #18251F;
         }
 
-        /* Fixed Background Studio Photo */
+        /* Fixed Background Studio Photo (Increased Default Visibility) */
         #studio-bg {
             position: fixed;
             top: 0;
@@ -75,8 +78,8 @@
             background-position: center;
             pointer-events: none;
             z-index: 0;
-            opacity: 0.2;
-            transition: opacity 0.3s ease-out;
+            opacity: 0.45; /* Raised base opacity from 0.2 to 0.45 */
+            transition: opacity 0.35s ease-out;
         }
 
         /* Content sections rendering above fixed background */
@@ -87,7 +90,7 @@
 
         /* ZAMURAI — EDITORIAL ABOUT */
         .about-section {
-            background: rgba(242, 234, 220, 0.92);
+            background: rgba(242, 234, 220, 0.90);
             backdrop-filter: blur(4px);
             color: #18251F;
             padding: 130px 7vw;
@@ -249,6 +252,7 @@
                 <a href="#about" class="hover:text-gold-600 transition-colors">About Atelier</a>
                 <a href="#specialties" class="hover:text-gold-600 transition-colors">Specialties</a>
                 <a href="#gallery" class="hover:text-gold-600 transition-colors">Portfolio</a>
+                <a href="#reviews" class="hover:text-gold-600 transition-colors">Reviews</a>
                 <a href="#booking" class="hover:text-gold-600 transition-colors">Consultation</a>
             </nav>
 
@@ -271,12 +275,13 @@
             <a href="#about" onclick="toggleMobileMenu()" class="block hover:text-gold-600 py-1">About Atelier</a>
             <a href="#specialties" onclick="toggleMobileMenu()" class="block hover:text-gold-600 py-1">Specialties</a>
             <a href="#gallery" onclick="toggleMobileMenu()" class="block hover:text-gold-600 py-1">Portfolio</a>
+            <a href="#reviews" onclick="toggleMobileMenu()" class="block hover:text-gold-600 py-1">Reviews</a>
             <a href="#booking" onclick="toggleMobileMenu()" class="block hover:text-gold-600 py-1">Consultation</a>
         </div>
     </header>
 
     <!-- HERO SECTION -->
-    <section class="relative min-h-[88vh] flex items-center justify-center px-6 py-20 bg-sand-50/80 backdrop-blur-sm">
+    <section class="relative min-h-[88vh] flex items-center justify-center px-6 py-20 bg-sand-50/75 backdrop-blur-sm">
         <div class="max-w-5xl mx-auto text-center">
             <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-900/5 border border-emerald-800/15 mb-8">
                 <span class="w-2 h-2 rounded-full bg-emerald-800 animate-pulse"></span>
@@ -295,7 +300,7 @@
                 <a href="#booking" class="w-full sm:w-auto px-9 py-4 bg-emerald-900 text-sand-50 text-xs tracking-[0.2em] uppercase font-semibold hover:bg-gold-600 transition-all duration-300 shadow-lg shadow-emerald-900/10">
                     Request Consultation
                 </a>
-                <a href="#gallery" class="w-full sm:w-auto px-9 py-4 border border-emerald-800/40 text-emerald-900 text-xs tracking-[0.2em] uppercase font-semibold hover:border-gold-500 hover:text-gold-600 transition-all duration-300 bg-white/60">
+                <a href="#gallery" class="w-full sm:w-auto px-9 py-4 border border-emerald-800/40 text-emerald-900 text-xs tracking-[0.2em] uppercase font-semibold hover:border-gold-500 hover:text-gold-600 transition-all duration-300 bg-white/70">
                     Explore Gallery
                 </a>
             </div>
@@ -376,7 +381,7 @@
     </section>
 
     <!-- SPECIALTIES SHOWCASE -->
-    <section id="specialties" class="py-24 px-6 md:px-12 max-w-7xl mx-auto border-t border-sand-200 bg-sand-50/90 backdrop-blur-sm my-12 rounded-sm">
+    <section id="specialties" class="py-24 px-6 md:px-12 max-w-7xl mx-auto border-t border-sand-200 bg-sand-50/85 backdrop-blur-sm my-12 rounded-sm">
         <div class="text-center max-w-3xl mx-auto mb-16">
             <span class="text-xs uppercase tracking-[0.3em] text-gold-600 font-semibold block mb-3">Our Core Focus</span>
             <h2 class="font-serif text-4xl md:text-5xl font-light text-emerald-900">Artistic Specialties</h2>
@@ -413,7 +418,7 @@
     </section>
 
     <!-- PORTFOLIO GALLERY SECTION -->
-    <section id="gallery" class="py-24 px-6 md:px-12 max-w-7xl mx-auto border-t border-sand-200 bg-sand-50/90 backdrop-blur-sm my-12 rounded-sm">
+    <section id="gallery" class="py-24 px-6 md:px-12 max-w-7xl mx-auto border-t border-sand-200 bg-sand-50/85 backdrop-blur-sm my-12 rounded-sm">
         <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
             <div>
                 <span class="text-xs uppercase tracking-[0.3em] text-gold-600 font-semibold block mb-2">Visual Archive</span>
@@ -440,8 +445,19 @@
         </div>
     </section>
 
+    <!-- GOOGLE REVIEWS SECTION (ELFSIGHT INTEGRATION) -->
+    <section id="reviews" class="py-24 px-6 md:px-12 max-w-7xl mx-auto border-t border-sand-200 bg-sand-50/85 backdrop-blur-sm my-12 rounded-sm">
+        <div class="text-center max-w-3xl mx-auto mb-12">
+            <span class="text-xs uppercase tracking-[0.3em] text-gold-600 font-semibold block mb-2">Verified Client Experiences</span>
+            <h2 class="font-serif text-4xl md:text-5xl font-light text-emerald-900">Google Reviews</h2>
+        </div>
+
+        <!-- Elfsight Google Reviews Embed -->
+        <div class="elfsight-app-a835241e-e7f8-485c-add8-76a2b6ff4257" data-elfsight-app-lazy></div>
+    </section>
+
     <!-- CONSULTATION & BOOKING SECTION -->
-    <section id="booking" class="py-24 px-6 md:px-12 max-w-7xl mx-auto border-t border-sand-200 bg-sand-50/95 backdrop-blur-sm my-12 rounded-sm">
+    <section id="booking" class="py-24 px-6 md:px-12 max-w-7xl mx-auto border-t border-sand-200 bg-sand-50/90 backdrop-blur-sm my-12 rounded-sm">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
             
             <!-- Left Contact Info -->
@@ -560,26 +576,26 @@
             window.open(`https://api.whatsapp.com/send?phone=${studioWhatsAppNumber}&text=${encodedMessage}`, '_blank', 'noopener,noreferrer');
         }
 
-        // SCROLL OPACITY CONTROL FOR STUDIO BACKGROUND
+        // SCROLL OPACITY CONTROL FOR STUDIO BACKGROUND (Enhanced Visibility)
         const studioBg = document.getElementById('studio-bg');
 
         window.addEventListener('scroll', () => {
             const scrollY = window.scrollY;
 
-            const peakStart = 400;   // Reaches peak visibility by 400px
-            const peakEnd = 900;     // Stays visible until 900px
-            const fadeEnd = 1600;    // Fades out completely by 1600px
+            const peakStart = 350;   // Reaches peak visibility early on scroll
+            const peakEnd = 1200;    // Holds peak visibility through content section
+            const fadeEnd = 2400;    // Gradual taper towards footer
 
-            let opacity = 0.2;
+            let opacity = 0.45; // Enhanced starting opacity
 
             if (scrollY <= peakStart) {
-                opacity = 0.2 + (0.6 * (scrollY / peakStart));
+                opacity = 0.45 + (0.45 * (scrollY / peakStart)); // Rises smoothly from 0.45 up to 0.90
             } else if (scrollY > peakStart && scrollY <= peakEnd) {
-                opacity = 0.8;
+                opacity = 0.90; // Rich peak opacity
             } else if (scrollY > peakEnd && scrollY <= fadeEnd) {
-                opacity = 0.8 * (1 - ((scrollY - peakEnd) / (fadeEnd - peakEnd)));
+                opacity = 0.90 - (0.50 * ((scrollY - peakEnd) / (fadeEnd - peakEnd))); // Gently settles to 0.40
             } else {
-                opacity = 0;
+                opacity = 0.40; // Retains background presence without dropping to zero
             }
 
             studioBg.style.opacity = opacity.toFixed(2);
