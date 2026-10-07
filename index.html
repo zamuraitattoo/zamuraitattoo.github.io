@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 <head>
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-5GJKTCF7');</script>
+    <!-- End Google Tag Manager -->
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Zamurai Tattoo & Piercing | Fine Art Studio Fort Kochi</title>
@@ -66,7 +74,7 @@
             color: #18251F;
         }
 
-        /* Fixed Background Studio Photo (Increased Default Visibility) */
+        /* Fixed Background Studio Photo */
         #studio-bg {
             position: fixed;
             top: 0;
@@ -78,7 +86,7 @@
             background-position: center;
             pointer-events: none;
             z-index: 0;
-            opacity: 0.45; /* Raised base opacity from 0.2 to 0.45 */
+            opacity: 0.45;
             transition: opacity 0.35s ease-out;
         }
 
@@ -232,6 +240,11 @@
     </style>
 </head>
 <body class="font-sans antialiased text-charcoal bg-sand-50 selection:bg-emerald-800 selection:text-sand-50">
+
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5GJKTCF7"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
 
     <!-- FIXED BACKGROUND STUDIO PHOTO -->
     <div id="studio-bg"></div>
@@ -573,34 +586,8 @@
                 `*Concept/Details:* ${concept}`;
 
             const encodedMessage = encodeURIComponent(rawMessage);
-            window.open(`https://api.whatsapp.com/send?phone=${studioWhatsAppNumber}&text=${encodedMessage}`, '_blank', 'noopener,noreferrer');
+            window.open(`https://api.whatsapp.com/send?phone=${studioWhatsAppNumber}&text=${encodedMessage}`, '_blank');
         }
-
-        // SCROLL OPACITY CONTROL FOR STUDIO BACKGROUND (Enhanced Visibility)
-        const studioBg = document.getElementById('studio-bg');
-
-        window.addEventListener('scroll', () => {
-            const scrollY = window.scrollY;
-
-            const peakStart = 350;   // Reaches peak visibility early on scroll
-            const peakEnd = 1200;    // Holds peak visibility through content section
-            const fadeEnd = 2400;    // Gradual taper towards footer
-
-            let opacity = 0.45; // Enhanced starting opacity
-
-            if (scrollY <= peakStart) {
-                opacity = 0.45 + (0.45 * (scrollY / peakStart)); // Rises smoothly from 0.45 up to 0.90
-            } else if (scrollY > peakStart && scrollY <= peakEnd) {
-                opacity = 0.90; // Rich peak opacity
-            } else if (scrollY > peakEnd && scrollY <= fadeEnd) {
-                opacity = 0.90 - (0.50 * ((scrollY - peakEnd) / (fadeEnd - peakEnd))); // Gently settles to 0.40
-            } else {
-                opacity = 0.40; // Retains background presence without dropping to zero
-            }
-
-            studioBg.style.opacity = opacity.toFixed(2);
-        });
     </script>
-
 </body>
 </html>
