@@ -38,7 +38,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-    <!-- Elfsight Google Reviews Platform Script -->
+    <!-- Elfsight Platform Script -->
     <script src="https://elfsightcdn.com/platform.js" async></script>
 
     <!-- Schema.org Structured Data (Google Maps & Local Search Engine Indexing) -->
@@ -317,6 +317,7 @@
                 <a href="#about" class="hover:text-gold-600 transition-colors">About Atelier</a>
                 <a href="#specialties" class="hover:text-gold-600 transition-colors">Specialties</a>
                 <a href="#gallery" class="hover:text-gold-600 transition-colors">Portfolio</a>
+                <a href="#instagram-feed" class="hover:text-gold-600 transition-colors">Reels</a>
                 <a href="#reviews" class="hover:text-gold-600 transition-colors">Reviews</a>
                 <a href="#booking" class="hover:text-gold-600 transition-colors">Consultation</a>
             </nav>
@@ -340,6 +341,7 @@
             <a href="#about" onclick="toggleMobileMenu()" class="block hover:text-gold-600 py-1">About Atelier</a>
             <a href="#specialties" onclick="toggleMobileMenu()" class="block hover:text-gold-600 py-1">Specialties</a>
             <a href="#gallery" onclick="toggleMobileMenu()" class="block hover:text-gold-600 py-1">Portfolio</a>
+            <a href="#instagram-feed" onclick="toggleMobileMenu()" class="block hover:text-gold-600 py-1">Reels</a>
             <a href="#reviews" onclick="toggleMobileMenu()" class="block hover:text-gold-600 py-1">Reviews</a>
             <a href="#booking" onclick="toggleMobileMenu()" class="block hover:text-gold-600 py-1">Consultation</a>
         </div>
@@ -510,6 +512,22 @@
         </div>
     </section>
 
+    <!-- INSTAGRAM LIVE REELS & FEED SECTION -->
+    <section id="instagram-feed" class="py-24 px-6 md:px-12 max-w-7xl mx-auto border-t border-sand-200 bg-sand-50/85 backdrop-blur-sm my-12 rounded-sm">
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
+            <div>
+                <span class="text-xs uppercase tracking-[0.3em] text-gold-600 font-semibold block mb-2">Live Studio Feed</span>
+                <h2 class="font-serif text-4xl md:text-5xl font-light text-emerald-900">Latest Reels & Artwork</h2>
+            </div>
+            <a href="https://instagram.com/zamurai_tattoo" target="_blank" rel="noopener noreferrer" class="mt-4 md:mt-0 text-xs tracking-widest uppercase text-gold-600 hover:text-emerald-900 font-semibold transition-colors flex items-center gap-2">
+                Follow @zamurai_tattoo &rarr;
+            </a>
+        </div>
+
+        <!-- Elfsight Instagram Feed Widget -->
+        <div class="elfsight-app-c1c6a256-9f53-43b9-8d0e-66d147c93c5a" data-elfsight-app-lazy></div>
+    </section>
+
     <!-- GOOGLE REVIEWS SECTION (ELFSIGHT INTEGRATION) -->
     <section id="reviews" class="py-24 px-6 md:px-12 max-w-7xl mx-auto border-t border-sand-200 bg-sand-50/85 backdrop-blur-sm my-12 rounded-sm">
         <div class="text-center max-w-3xl mx-auto mb-12">
@@ -594,51 +612,52 @@
 
                     <button type="submit" class="w-full py-4 bg-emerald-900 text-sand-50 text-xs tracking-[0.2em] uppercase font-semibold hover:bg-gold-600 transition-all duration-300 flex items-center justify-center gap-2">
                         <span>Send via WhatsApp</span>
-                        <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+                        <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.2 8.413 3.188 2.245 1.989 3.485 4.585 3.482 7.371-.005 6.556-5.342 11.892-11.894 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.124-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
                     </button>
                 </form>
             </div>
-
         </div>
     </section>
 
     <!-- FOOTER -->
-    <footer class="py-8 border-t border-sand-200 text-center text-xs text-charcoal/60 font-light bg-sand-50/90 backdrop-blur-sm">
-        &copy; <span id="currentYear"></span> Zamurai Tattoo & Piercing. All Rights Reserved. Fort Kochi, Kerala.
+    <footer class="bg-emerald-950 text-sand-50 py-16 px-6 md:px-12 border-t border-emerald-900">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-8 text-center md:text-left">
+            <div>
+                <span class="font-serif text-2xl tracking-wider uppercase font-light">Zamurai</span>
+                <span class="text-[10px] tracking-[0.3em] text-gold-400 uppercase block mt-1">Tattoo & Piercing • Fort Kochi</span>
+            </div>
+            <p class="text-xs text-sand-300 font-light">
+                &copy; 2026 Zamurai Tattoo & Piercing. All rights reserved. Built with precision & high-end hygiene.
+            </p>
+        </div>
     </footer>
 
-    <!-- JAVASCRIPT -->
+    <!-- JAVASCRIPT FUNCTIONS -->
     <script>
-        // SET CURRENT YEAR IN FOOTER
-        document.getElementById('currentYear').textContent = new Date().getFullYear();
-
-        // MOBILE MENU TOGGLE WITH ACCESSIBILITY SUPPORTS
         function toggleMobileMenu() {
-            const mobileMenu = document.getElementById('mobileMenu');
-            const mobileBtn = document.getElementById('mobileMenuBtn');
-            const isHidden = mobileMenu.classList.toggle('hidden');
-            mobileBtn.setAttribute('aria-expanded', !isHidden);
+            const menu = document.getElementById('mobileMenu');
+            const btn = document.getElementById('mobileMenuBtn');
+            const isHidden = menu.classList.contains('hidden');
+            if (isHidden) {
+                menu.classList.remove('hidden');
+                btn.setAttribute('aria-expanded', 'true');
+            } else {
+                menu.classList.add('hidden');
+                btn.setAttribute('aria-expanded', 'false');
+            }
         }
 
-        // WHATSAPP SUBMISSION HANDLER
         function sendToWhatsApp(event) {
             event.preventDefault();
-
-            const studioWhatsAppNumber = "919048169666";
-
-            const name = document.getElementById('custName').value.trim();
-            const phone = document.getElementById('custPhone').value.trim();
+            const name = document.getElementById('custName').value;
+            const phone = document.getElementById('custPhone').value;
             const service = document.getElementById('custService').value;
-            const concept = document.getElementById('custConcept').value.trim();
+            const concept = document.getElementById('custConcept').value;
 
-            const rawMessage = `*New Consultation Request*\n\n` +
-                `*Name:* ${name}\n` +
-                `*Phone:* ${phone}\n` +
-                `*Service:* ${service}\n` +
-                `*Concept/Details:* ${concept}`;
-
-            const encodedMessage = encodeURIComponent(rawMessage);
-            window.open(`https://wa.me/${studioWhatsAppNumber}?text=${encodedMessage}`, '_blank');
+            const text = `Hi Zamurai Tattoo,%0A%0AMy name is *${encodeURIComponent(name)}*.%0APhone: *${encodeURIComponent(phone)}*%0AService: *${encodeURIComponent(service)}*%0A%0AConcept / Details:%0A${encodeURIComponent(concept)}`;
+            
+            const whatsappUrl = `https://wa.me/919048169666?text=${text}`;
+            window.open(whatsappUrl, '_blank');
         }
     </script>
 </body>
