@@ -646,7 +646,7 @@
         </div>
     </footer>
 
-    <!-- JavaScript for Mobile Menu & WhatsApp Form Submission -->
+    <!-- JavaScript for Mobile Menu & WhatsApp Form Submission + Conversion Tracking -->
     <script>
         function toggleMobileMenu() {
             const menu = document.getElementById('mobileMenu');
@@ -655,6 +655,14 @@
 
         function sendToWhatsApp(event) {
             event.preventDefault();
+
+            // Trigger Google Ads "Book appointment" conversion event
+            if (typeof gtag === 'function') {
+                gtag('event', 'conversion', {
+                    'send_to': 'AW-18496446534/0J6vCIG0iZsdEMbA5fNE'
+                });
+            }
+
             const name = document.getElementById('custName').value;
             const phone = document.getElementById('custPhone').value;
             const service = document.getElementById('custService').value;
