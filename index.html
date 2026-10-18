@@ -297,6 +297,35 @@
             .about-cta { display: block; margin-top: 55px; padding-top: 35px; }
             .about-button { margin-top: 28px; width: 100%; box-sizing: border-box; }
         }
+        
+/* Instagram thumbnail zoom — desktop and mobile */
+#instagram-feed .group img {
+    transition: transform 0.45s ease;
+    transform-origin: center;
+    will-change: transform;
+}
+
+#instagram-feed .group:hover img {
+    transform: scale(1.08);
+}
+
+/* Mobile touch interaction */
+@media (hover: none) and (pointer: coarse) {
+    #instagram-feed .group:active img {
+        transform: scale(1.08);
+    }
+
+    #instagram-feed .group img {
+        transition: transform 0.25s ease;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    #instagram-feed .group img {
+        transition: none;
+    }
+}
+
     </style>
 </head>
 <body class="font-sans antialiased text-charcoal bg-sand-50 selection:bg-emerald-800 selection:text-sand-50">
