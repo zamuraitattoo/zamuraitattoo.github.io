@@ -443,13 +443,30 @@
             alt="Tattoo artist creating detailed custom tattoo artwork at Zamurai Tattoo, Fort Kochi"
             fetchpriority="high"
             decoding="async"
-            class="zamurai-hero-photo h-full w-full object-cover object-center">
+            class="zamurai-hero-photo h-full w-full object-cover object-center md:[transform:scaleX(-1)]"
 
     </picture>
 
     <!-- Desktop: preserve the white writing area on the left.
          Mobile: keep the photo above the text. -->
-    <div class="pointer-events-none absolute inset-0 hidden md:block"
+   
+<!-- Responsive white blend -->
+<div class="pointer-events-none absolute inset-0"
+     style="background: linear-gradient(90deg, rgba(255,255,255,0.96) 0%, rgba(255,255,255,0.72) 18%, rgba(255,255,255,0.20) 43%, rgba(255,255,255,0) 65%);">
+</div>
+
+<!-- Vertical artist signature — mobile only -->
+<div class="pointer-events-none absolute left-3 top-0 z-20 flex h-[42vh] min-h-[300px] max-h-[500px] items-center sm:left-5 md:hidden">
+    <div class="flex flex-col items-center gap-1.5 font-serif text-xs tracking-[0.2em] text-emerald-900/80">
+        <span>S</span>
+        <span>T</span>
+        <span>E</span>
+        <span>V</span>
+        <span>I</span>
+        <span>N</span>
+    </div>
+</div>
+
          style="background: linear-gradient(90deg, rgba(250,248,242,0.97) 0%, rgba(250,248,242,0.88) 32%, rgba(250,248,242,0.32) 53%, rgba(250,248,242,0) 72%);">
     </div>
 
