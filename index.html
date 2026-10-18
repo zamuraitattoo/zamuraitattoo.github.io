@@ -390,17 +390,18 @@
     </header>
 
    
-<!-- ZAMURAI HERO ANIMATIONS -->
+
+<!-- ZAMURAI HERO ANIMATION -->
 <style>
-    @keyframes zamurai-image-zoom {
+    @keyframes zamurai-hero-zoom {
         from { transform: scale(1); }
-        to   { transform: scale(1.07); }
+        to { transform: scale(1.045); }
     }
 
-    @keyframes zamurai-content-reveal {
+    @keyframes zamurai-hero-fade {
         from {
             opacity: 0;
-            transform: translateY(18px);
+            transform: translateY(16px);
         }
         to {
             opacity: 1;
@@ -409,66 +410,98 @@
     }
 
     .zamurai-hero-photo {
-        animation: zamurai-image-zoom 9s ease-out both;
+        animation: zamurai-hero-zoom 9s ease-out both;
+        filter: blur(0.6px);
         transform-origin: center;
     }
 
-    .zamurai-hero-copy {
-        animation: zamurai-content-reveal 1s ease-out both;
+    .zamurai-hero-content {
+        animation: zamurai-hero-fade 1s ease-out both;
         animation-delay: 0.2s;
     }
 
     @media (prefers-reduced-motion: reduce) {
         .zamurai-hero-photo,
-        .zamurai-hero-copy {
+        .zamurai-hero-content {
             animation: none;
         }
     }
 </style>
 
 <!-- HERO SECTION -->
-<section class="relative overflow-hidden bg-sand-50 md:min-h-[88vh]">
+<section class="relative isolate overflow-hidden bg-sand-50">
 
-    <!-- Responsive hero photography -->
-    <picture class="relative block h-[42vh] min-h-[300px] max-h-[500px] overflow-hidden md:absolute md:inset-0 md:h-full md:max-h-none">
+    <!-- Responsive tattoo photography -->
+    <picture class="absolute inset-0 block h-full w-full overflow-hidden">
 
-        <!-- Mobile portrait -->
+        <!-- Mobile portrait photo -->
         <source
             media="(max-width: 767px)"
-            srcset="/images/artistp.jpeg">
+            srcset="/images/artistp2.jpg">
 
-        <!-- Desktop landscape -->
+        <!-- Desktop landscape photo -->
         <img
-            src="/images/artistl.jpg"
-            alt="Tattoo artist creating detailed custom tattoo artwork at Zamurai Tattoo, Fort Kochi"
+            src="/images/artistl2.jpg"
+            alt="Stevin creating custom tattoo artwork at Zamurai Tattoo, Fort Kochi"
             fetchpriority="high"
             decoding="async"
-            class="zamurai-hero-photo h-full w-full object-cover object-center md:[transform:scaleX(-1)]"
+            class="zamurai-hero-photo h-full w-full object-cover object-center">
 
     </picture>
 
-    <!-- Desktop: preserve the white writing area on the left.
-         Mobile: keep the photo above the text. -->
-   
-<!-- Responsive white blend -->
-<div class="pointer-events-none absolute inset-0"
-     style="background: linear-gradient(90deg, rgba(255,255,255,0.96) 0%, rgba(255,255,255,0.72) 18%, rgba(255,255,255,0.20) 43%, rgba(255,255,255,0) 65%);">
-</div>
-
-<!-- Vertical artist signature — mobile only -->
-<div class="pointer-events-none absolute left-3 top-0 z-20 flex h-[42vh] min-h-[300px] max-h-[500px] items-center sm:left-5 md:hidden">
-    <div class="flex flex-col items-center gap-1.5 font-serif text-xs tracking-[0.2em] text-emerald-900/80">
-        <span>S</span>
-        <span>T</span>
-        <span>E</span>
-        <span>V</span>
-        <span>I</span>
-        <span>N</span>
+    <!-- Desktop white blend: text left, tattoo artist right -->
+    <div class="absolute inset-0 hidden md:block"
+         style="background: linear-gradient(90deg, rgba(255,255,255,0.97) 0%, rgba(255,255,255,0.93) 28%, rgba(255,255,255,0.72) 43%, rgba(255,255,255,0.16) 62%, rgba(255,255,255,0) 78%);">
     </div>
-</div>
 
-         style="background: linear-gradient(90deg, rgba(250,248,242,0.97) 0%, rgba(250,248,242,0.88) 32%, rgba(250,248,242,0.32) 53%, rgba(250,248,242,0) 72%);">
+    <!-- Mobile overlay for readable text -->
+    <div class="absolute inset-0 md:hidden"
+         style="background: linear-gradient(180deg, rgba(255,255,255,0.94) 0%, rgba(255,255,255,0.83) 23%, rgba(255,255,255,0.30) 48%, rgba(255,255,255,0.04) 100%);">
     </div>
+
+    <!-- Hero content -->
+    <div class="zamurai-hero-content relative z-10 mx-auto flex min-h-[88vh] max-w-7xl items-start px-6 py-14 md:items-center md:px-12 md:py-20">
+
+        <div class="w-full text-center md:max-w-[54%] md:text-left">
+
+            <div class="mb-6 inline-flex items-center gap-2 rounded-full border border-emerald-800/15 bg-white/50 px-4 py-2 backdrop-blur-sm">
+                <span class="h-2 w-2 animate-pulse rounded-full bg-emerald-800"></span>
+                <span class="text-[10px] font-medium uppercase tracking-[0.2em] text-emerald-900">
+                    Fort Kochi, Kerala · Zamurai Tattoo
+                </span>
+            </div>
+
+            <h1 class="mb-6 font-serif text-5xl font-light leading-[1.05] tracking-tight text-emerald-950 sm:text-6xl md:text-6xl lg:text-7xl">
+                Art Made<br>
+                <span class="italic">Personal.</span>
+            </h1>
+
+            <p class="mx-auto mb-9 max-w-lg text-sm font-light leading-relaxed tracking-wide text-charcoal md:mx-0 md:text-base">
+                Thoughtfully crafted tattoos, shaped around your story. Discover black &amp; grey realism, portraits, fine line, stipple dotwork and professional body piercing.
+            </p>
+
+            <div class="flex flex-col items-center justify-center gap-4 sm:flex-row md:justify-start">
+
+                <a href="#booking"
+                   class="w-full bg-emerald-900 px-8 py-4 text-xs font-semibold uppercase tracking-[0.16em] text-white shadow-lg transition-all duration-300 hover:bg-gold-600 sm:w-auto">
+                    Request Consultation
+                </a>
+
+                <a href="#gallery"
+                   class="w-full border border-emerald-900/40 bg-white/60 px-8 py-4 text-xs font-semibold uppercase tracking-[0.16em] text-emerald-950 backdrop-blur-sm transition-all duration-300 hover:border-gold-500 hover:text-gold-600 sm:w-auto">
+                    Explore Gallery
+                </a>
+
+            </div>
+
+            <p class="mt-8 text-[10px] uppercase tracking-[0.22em] text-emerald-950/75">
+                Custom Art · Thoughtful Detail · Professional Care
+            </p>
+
+        </div>
+    </div>
+</section>
+
 
     <!-- Hero content -->
     <div class="zamurai-hero-copy relative z-10 mx-auto max-w-7xl px-6 py-12 md:flex md:min-h-[88vh] md:items-center md:px-12 md:py-16">
