@@ -792,6 +792,33 @@
             scroll-behavior: auto;
         }
     }
+    
+/* Smooth Google Reviews carousel */
+#reviews-carousel {
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+}
+
+#reviews-carousel::-webkit-scrollbar {
+    display: none;
+}
+
+#reviews-carousel .review-card {
+    transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+#reviews-carousel .review-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    #reviews-carousel .review-card {
+        transition: none;
+    }
+}
+
 </style>
 
 <script>
