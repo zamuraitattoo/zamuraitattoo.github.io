@@ -389,51 +389,148 @@
 </div>
     </header>
 
-    <!-- HERO SECTION -->
-    <section class="relative min-h-[88vh] flex items-center justify-center px-6 py-20 bg-sand-50/75 backdrop-blur-sm">
-        <div class="max-w-5xl mx-auto text-center">
-            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-900/5 border border-emerald-800/15 mb-8">
-                <span class="w-2 h-2 rounded-full bg-emerald-800 animate-pulse"></span>
-                <span class="text-[11px] uppercase tracking-[0.25em] text-emerald-900 font-medium">Fort Kochi, Kerala • Fine Art Atelier</span>
+   
+<!-- ZAMURAI HERO ANIMATIONS -->
+<style>
+    @keyframes zamurai-image-zoom {
+        from { transform: scale(1); }
+        to   { transform: scale(1.07); }
+    }
+
+    @keyframes zamurai-content-reveal {
+        from {
+            opacity: 0;
+            transform: translateY(18px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .zamurai-hero-photo {
+        animation: zamurai-image-zoom 9s ease-out both;
+        transform-origin: center;
+    }
+
+    .zamurai-hero-copy {
+        animation: zamurai-content-reveal 1s ease-out both;
+        animation-delay: 0.2s;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .zamurai-hero-photo,
+        .zamurai-hero-copy {
+            animation: none;
+        }
+    }
+</style>
+
+<!-- HERO SECTION -->
+<section class="relative overflow-hidden bg-sand-50 md:min-h-[88vh]">
+
+    <!-- Responsive hero photography -->
+    <picture class="relative block h-[42vh] min-h-[300px] max-h-[500px] overflow-hidden md:absolute md:inset-0 md:h-full md:max-h-none">
+
+        <!-- Mobile portrait -->
+        <source
+            media="(max-width: 767px)"
+            srcset="/images/artistp.jpeg">
+
+        <!-- Desktop landscape -->
+        <img
+            src="/images/artistl.jpg"
+            alt="Tattoo artist creating detailed custom tattoo artwork at Zamurai Tattoo, Fort Kochi"
+            fetchpriority="high"
+            decoding="async"
+            class="zamurai-hero-photo h-full w-full object-cover object-center">
+
+    </picture>
+
+    <!-- Desktop: preserve the white writing area on the left.
+         Mobile: keep the photo above the text. -->
+    <div class="pointer-events-none absolute inset-0 hidden md:block"
+         style="background: linear-gradient(90deg, rgba(250,248,242,0.97) 0%, rgba(250,248,242,0.88) 32%, rgba(250,248,242,0.32) 53%, rgba(250,248,242,0) 72%);">
+    </div>
+
+    <!-- Hero content -->
+    <div class="zamurai-hero-copy relative z-10 mx-auto max-w-7xl px-6 py-12 md:flex md:min-h-[88vh] md:items-center md:px-12 md:py-16">
+
+        <div class="w-full text-center md:max-w-[55%] md:text-left">
+
+            <div class="mb-7 inline-flex items-center gap-2 rounded-full border border-emerald-800/15 bg-emerald-900/5 px-4 py-1.5">
+                <span class="h-2 w-2 animate-pulse rounded-full bg-emerald-800"></span>
+                <span class="text-[10px] font-medium uppercase tracking-[0.2em] text-emerald-900">
+                    Fort Kochi, Kerala · Fine Art Atelier
+                </span>
             </div>
 
-            <h1 class="font-serif text-5xl sm:text-7xl lg:text-8xl font-light tracking-tight leading-[1.05] mb-8 text-emerald-900">
-                Realism, Portraits, Fine Line & Piercing
+            <h1 class="mb-6 font-serif text-4xl font-light leading-[1.1] tracking-tight text-emerald-900 sm:text-5xl md:text-6xl lg:text-7xl">
+                More Than Ink.<br>
+                <span class="italic">A Work of Art.</span>
             </h1>
 
-            <p class="text-sm md:text-base text-charcoal/80 max-w-2xl mx-auto font-light leading-relaxed mb-12 tracking-wide">
-                Crafted by Stevin PJ under strict medical-grade hygiene standards. Blending studio experience across Canada and India with custom black & grey realism, portrait work, single-needle fine line, stipple dotwork, and all types of body piercing.
+            <p class="mx-auto mb-9 max-w-xl text-sm font-light leading-relaxed tracking-wide text-charcoal/85 md:mx-0 md:text-base">
+                Crafted by Stevin PJ, combining tattooing experience across Canada and India with custom black &amp; grey realism, portraits, fine line, stipple dotwork and body piercing.
             </p>
-            
-            <div class="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6">
-                <a href="#booking" class="w-full sm:w-auto px-9 py-4 bg-emerald-900 text-sand-50 text-xs tracking-[0.2em] uppercase font-semibold hover:bg-gold-600 transition-all duration-300 shadow-lg shadow-emerald-900/10">
+
+            <div class="flex flex-col items-center justify-center gap-4 sm:flex-row md:justify-start">
+
+                <a href="#booking"
+                   class="w-full bg-emerald-900 px-8 py-4 text-xs font-semibold uppercase tracking-[0.16em] text-sand-50 shadow-lg transition-all duration-300 hover:bg-gold-600 sm:w-auto">
                     Request Consultation
                 </a>
-                <a href="#gallery" class="w-full sm:w-auto px-9 py-4 border border-emerald-800/40 text-emerald-900 text-xs tracking-[0.2em] uppercase font-semibold hover:border-gold-500 hover:text-gold-600 transition-all duration-300 bg-white/70">
+
+                <a href="#gallery"
+                   class="w-full border border-emerald-800/35 bg-white/70 px-8 py-4 text-xs font-semibold uppercase tracking-[0.16em] text-emerald-900 transition-all duration-300 hover:border-gold-500 hover:text-gold-600 sm:w-auto">
                     Explore Gallery
                 </a>
+
             </div>
 
-            <div class="mt-20 pt-10 border-t border-sand-200 grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+            <!-- Studio highlights -->
+            <div class="mt-12 grid grid-cols-2 gap-x-4 gap-y-6 border-t border-sand-200 pt-8 text-center md:mt-14 md:text-left">
+
                 <div>
-                    <span class="font-serif text-2xl md:text-3xl font-light text-emerald-900 block">Realism & Portraits</span>
-                    <span class="text-[10px] uppercase tracking-widest text-gold-600 font-medium">Lifelike Detail</span>
+                    <span class="block font-serif text-xl font-light text-emerald-900 md:text-2xl">
+                        Realism &amp; Portraits
+                    </span>
+                    <span class="text-[9px] font-medium uppercase tracking-widest text-gold-600">
+                        Lifelike Detail
+                    </span>
                 </div>
+
                 <div>
-                    <span class="font-serif text-2xl md:text-3xl font-light text-emerald-900 block">Fine Line & Dotwork</span>
-                    <span class="text-[10px] uppercase tracking-widest text-gold-600 font-medium">Needle Precision</span>
+                    <span class="block font-serif text-xl font-light text-emerald-900 md:text-2xl">
+                        Fine Line &amp; Dotwork
+                    </span>
+                    <span class="text-[9px] font-medium uppercase tracking-widest text-gold-600">
+                        Needle Precision
+                    </span>
                 </div>
+
                 <div>
-                    <span class="font-serif text-2xl md:text-3xl font-light text-emerald-900 block">Medical Hygiene</span>
-                    <span class="text-[10px] uppercase tracking-widest text-gold-600 font-medium">Autoclave Sterilization</span>
+                    <span class="block font-serif text-xl font-light text-emerald-900 md:text-2xl">
+                        Hygiene First
+                    </span>
+                    <span class="text-[9px] font-medium uppercase tracking-widest text-gold-600">
+                        Professional Care
+                    </span>
                 </div>
+
                 <div>
-                    <span class="font-serif text-2xl md:text-3xl font-light text-emerald-900 block">All Body Piercings</span>
-                    <span class="text-[10px] uppercase tracking-widest text-gold-600 font-medium">Implant-Grade Titanium</span>
+                    <span class="block font-serif text-xl font-light text-emerald-900 md:text-2xl">
+                        Body Piercing
+                    </span>
+                    <span class="text-[9px] font-medium uppercase tracking-widest text-gold-600">
+                        Custom Jewellery
+                    </span>
                 </div>
+
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
     <!-- ABOUT ZAMURAI SECTION -->
     <section id="about" class="about-section">
