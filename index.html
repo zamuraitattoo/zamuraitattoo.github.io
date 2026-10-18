@@ -501,87 +501,6 @@
     </div>
 </section>
 
-
-    <!-- Hero content -->
-    <div class="zamurai-hero-copy relative z-10 mx-auto max-w-7xl px-6 py-12 md:flex md:min-h-[88vh] md:items-center md:px-12 md:py-16">
-
-        <div class="w-full text-center md:max-w-[55%] md:text-left">
-
-            <div class="mb-7 inline-flex items-center gap-2 rounded-full border border-emerald-800/15 bg-emerald-900/5 px-4 py-1.5">
-                <span class="h-2 w-2 animate-pulse rounded-full bg-emerald-800"></span>
-                <span class="text-[10px] font-medium uppercase tracking-[0.2em] text-emerald-900">
-                    Fort Kochi, Kerala · Fine Art Atelier
-                </span>
-            </div>
-
-            <h1 class="mb-6 font-serif text-4xl font-light leading-[1.1] tracking-tight text-emerald-900 sm:text-5xl md:text-6xl lg:text-7xl">
-                More Than Ink.<br>
-                <span class="italic">A Work of Art.</span>
-            </h1>
-
-            <p class="mx-auto mb-9 max-w-xl text-sm font-light leading-relaxed tracking-wide text-charcoal/85 md:mx-0 md:text-base">
-                Crafted by Stevin PJ, combining tattooing experience across Canada and India with custom black &amp; grey realism, portraits, fine line, stipple dotwork and body piercing.
-            </p>
-
-            <div class="flex flex-col items-center justify-center gap-4 sm:flex-row md:justify-start">
-
-                <a href="#booking"
-                   class="w-full bg-emerald-900 px-8 py-4 text-xs font-semibold uppercase tracking-[0.16em] text-sand-50 shadow-lg transition-all duration-300 hover:bg-gold-600 sm:w-auto">
-                    Request Consultation
-                </a>
-
-                <a href="#gallery"
-                   class="w-full border border-emerald-800/35 bg-white/70 px-8 py-4 text-xs font-semibold uppercase tracking-[0.16em] text-emerald-900 transition-all duration-300 hover:border-gold-500 hover:text-gold-600 sm:w-auto">
-                    Explore Gallery
-                </a>
-
-            </div>
-
-            <!-- Studio highlights -->
-            <div class="mt-12 grid grid-cols-2 gap-x-4 gap-y-6 border-t border-sand-200 pt-8 text-center md:mt-14 md:text-left">
-
-                <div>
-                    <span class="block font-serif text-xl font-light text-emerald-900 md:text-2xl">
-                        Realism &amp; Portraits
-                    </span>
-                    <span class="text-[9px] font-medium uppercase tracking-widest text-gold-600">
-                        Lifelike Detail
-                    </span>
-                </div>
-
-                <div>
-                    <span class="block font-serif text-xl font-light text-emerald-900 md:text-2xl">
-                        Fine Line &amp; Dotwork
-                    </span>
-                    <span class="text-[9px] font-medium uppercase tracking-widest text-gold-600">
-                        Needle Precision
-                    </span>
-                </div>
-
-                <div>
-                    <span class="block font-serif text-xl font-light text-emerald-900 md:text-2xl">
-                        Hygiene First
-                    </span>
-                    <span class="text-[9px] font-medium uppercase tracking-widest text-gold-600">
-                        Professional Care
-                    </span>
-                </div>
-
-                <div>
-                    <span class="block font-serif text-xl font-light text-emerald-900 md:text-2xl">
-                        Body Piercing
-                    </span>
-                    <span class="text-[9px] font-medium uppercase tracking-widest text-gold-600">
-                        Custom Jewellery
-                    </span>
-                </div>
-
-            </div>
-        </div>
-    </div>
-</section>
-
-  
 <!-- ABOUT ZAMURAI SECTION -->
 <section id="about" class="about-section">
     <div class="about-container">
@@ -725,10 +644,9 @@
            class="inline-flex items-center gap-2 mt-5 text-sm font-semibold text-emerald-900 hover:text-gold-600 transition-colors">
             Follow @zamurai_tattoo ↗
         </a>
-    </div>
-</section>
-    
-<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
 
     <a href="https://www.instagram.com/reel/DC8stXfxy3b/"
        target="_blank" rel="noopener noreferrer"
@@ -1121,6 +1039,9 @@
 
             
             <!-- Left Contact Info -->
+    <!-- BOOKING & CONTACT SECTION -->
+<section id="booking" class="py-24 px-6 md:px-12 bg-sand-100">
+    <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
             <div>
                 <span class="text-xs uppercase tracking-[0.3em] text-gold-600 font-semibold block mb-2">Direct Booking</span>
                 <h2 class="font-serif text-4xl md:text-5xl font-light text-emerald-900 mb-6">Start Your Custom Piece</h2>
@@ -1227,34 +1148,50 @@
         </div>
     </footer>
 
-    <!-- JavaScript for Mobile Menu & WhatsApp Form Submission + Conversion Tracking -->
-    <script>
-        function toggleMobileMenu() {
-            const menu = document.getElementById('mobileMenu');
-            menu.classList.toggle('hidden');
+  
+<!-- JavaScript for Mobile Menu & WhatsApp Form Submission + Conversion Tracking -->
+<script>
+    function toggleMobileMenu() {
+        const menu = document.getElementById('mobileMenu');
+        const button = document.getElementById('mobileMenuBtn');
+
+        if (!menu || !button) return;
+
+        menu.classList.toggle('hidden');
+
+        const isExpanded = !menu.classList.contains('hidden');
+        button.setAttribute('aria-expanded', String(isExpanded));
+    }
+
+    function sendToWhatsApp(event) {
+        event.preventDefault();
+
+        // Trigger Google Ads conversion tracking
+        if (typeof gtag === 'function') {
+            gtag('event', 'conversion', {
+                'send_to': 'AW-18496446534/0J6vCIG0iZsdEMbA5fNE'
+            });
         }
 
-        function sendToWhatsApp(event) {
-            event.preventDefault();
+        const name = document.getElementById('custName').value.trim();
+        const phone = document.getElementById('custPhone').value.trim();
+        const service = document.getElementById('custService').value;
+        const message = document.getElementById('custMessage').value.trim();
 
-            // Trigger Google Ads "Book appointment" conversion event
-            if (typeof gtag === 'function') {
-                gtag('event', 'conversion', {
-                    'send_to': 'AW-18496446534/0J6vCIG0iZsdEMbA5fNE'
-                });
-            }
+        const whatsappMessage =
+            `Hi Zamurai Tattoo, I would like to book a consultation.\n\n` +
+            `Name: ${name}\n` +
+            `Phone: ${phone}\n` +
+            `Service: ${service}\n` +
+            `Details: ${message}`;
 
-            const name = document.getElementById('custName').value;
-            const phone = document.getElementById('custPhone').value;
-            const service = document.getElementById('custService').value;
-            const message = document.getElementById('custMessage').value;
+        const whatsappUrl =
+            'https://wa.me/919048169666?text=' +
+            encodeURIComponent(whatsappMessage);
 
-            const whatsappUrl = `https://wa.me/919048169666?text=` + encodeURIComponent(
-                `Hi Zamurai Tattoo, I would like to book a consultation.\n\nName: ${name}\nPhone: ${phone}\nService: ${service}\nDetails: ${message}`
-            );
+        window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
+    }
+</script>
 
-            window.open(whatsappUrl, '_blank');
-        }
-    </script>
 </body>
 </html>
