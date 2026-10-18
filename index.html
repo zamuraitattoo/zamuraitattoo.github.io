@@ -134,22 +134,7 @@
             color: #18251F;
         }
 
-        /* Fixed Background Studio Photo */
-        #studio-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background-image: url('images/studio.jpg');
-            background-size: cover;
-            background-position: center;
-            pointer-events: none;
-            z-index: 0;
-            opacity: 0.45;
-            transition: opacity 0.35s ease-out;
-        }
-
+       
         /* Content sections rendering above fixed background */
         header, section, footer {
             position: relative;
@@ -157,14 +142,19 @@
         }
 
         /* ZAMURAI — EDITORIAL ABOUT */
-        .about-section {
-            background: rgba(242, 234, 220, 0.90);
-            backdrop-filter: blur(4px);
-            color: #18251F;
-            padding: 130px 7vw;
-            position: relative;
-            overflow: hidden;
-        }
+       .about-section {
+    background:
+        linear-gradient(
+            rgba(242, 234, 220, 0.90),
+            rgba(242, 234, 220, 0.90)
+        ),
+        url('/images/studio.jpg') center / cover no-repeat;
+    background-attachment: scroll;
+    color: #18251F;
+    padding: 130px 7vw;
+    position: relative;
+    overflow: hidden;
+}
 
         .about-container {
             max-width: 1400px;
@@ -335,8 +325,6 @@
     height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
 
-    <!-- FIXED BACKGROUND STUDIO PHOTO -->
-    <div id="studio-bg"></div>
 
     <!-- NAVIGATION HEADER -->
     <header class="sticky top-0 z-40 bg-sand-50/90 backdrop-blur-md border-b border-sand-200">
@@ -391,6 +379,7 @@
 
    
 
+
 <!-- ZAMURAI HERO ANIMATION -->
 <style>
     @keyframes zamurai-hero-zoom {
@@ -411,8 +400,9 @@
 
     .zamurai-hero-photo {
         animation: zamurai-hero-zoom 9s ease-out both;
-        filter: blur(0.6px);
+        filter: none;
         transform-origin: center;
+        will-change: transform;
     }
 
     .zamurai-hero-content {
@@ -420,16 +410,25 @@
         animation-delay: 0.2s;
     }
 
+    @media (max-width: 767px) {
+        .zamurai-hero-photo {
+            animation-duration: 12s;
+            animation-name: zamurai-hero-zoom;
+        }
+    }
+
     @media (prefers-reduced-motion: reduce) {
         .zamurai-hero-photo,
         .zamurai-hero-content {
             animation: none;
+            will-change: auto;
         }
     }
 </style>
 
 <!-- HERO SECTION -->
 <section class="relative isolate overflow-hidden bg-sand-50">
+
 
     <!-- Responsive tattoo photography -->
     <picture class="absolute inset-0 block h-full w-full overflow-hidden">
@@ -582,62 +581,64 @@
     </div>
 </section>
 
-    <!-- ABOUT ZAMURAI SECTION -->
-    <section id="about" class="about-section">
-        <div class="about-container">
-            <div class="about-label">
-                ABOUT ZAMURAI
+  
+<!-- ABOUT ZAMURAI SECTION -->
+<section id="about" class="about-section">
+    <div class="about-container">
+        <div class="about-label">
+            ABOUT ZAMURAI
+        </div>
+
+        <div class="about-grid">
+            <div class="about-heading">
+                <span>Art,</span>
+                <span>Made Personal.</span>
             </div>
 
-            <div class="about-grid">
-                <div class="about-heading">
-                    <span>Art,</span>
-                    <span>Made Personal.</span>
+            <div class="about-content">
+                <p class="about-intro">
+                    Zamurai Tattoo & Piercing is an independent fine-art studio in <strong>Fort Kochi, Kerala</strong>, founded by <strong>Stevin PJ</strong>. Every piece begins with an idea and becomes a personal work of art through thoughtful design, precision, and attention to detail.
+                </p>
+
+                <p>
+                    With tattooing experience across <strong>India and Canada</strong>, Stevin brings an international perspective to the art of tattooing — combining technical precision with a distinctive artistic approach to create work that feels personal, timeless, and uniquely yours.
+                </p>
+
+                <p>
+                    Our specialities include <strong>Black & Grey Realism, Portrait Tattoos, Fine Line, and Stipple Dotwork</strong>. We also offer professional body piercing, with carefully selected jewellery and a focus on safe, hygienic practices.
+                </p>
+
+                <div class="about-statement">
+                    <span>Lifelike portraits.</span>
+                    <span>Delicate fine lines.</span>
+                    <strong>Art with intention.</strong>
                 </div>
 
-                <div class="about-content">
-                    <p class="about-intro">
-                        Zamurai Tattoo & Piercing is an independent fine art studio in <strong>Fort Kochi, Kerala</strong>, founded by <strong>Stevin PJ</strong> and built on a devotion to technical perfection and lifelike detail.
-                    </p>
+                <p>
+                    Every tattoo deserves care, from the first consultation to the final details. We take the time to understand your vision, refine your concept, and create a design that complements both your idea and your body.
+                </p>
 
-                    <p>
-                        Having honed the craft across <strong>India and Canada</strong>, Stevin brings an international standard of tattooing to Fort Kochi — blending delicate needlework, custom artistic design, and stringent aseptic studio protocols.
-                    </p>
-
-                    <p>
-                        We specialize exclusively in <strong>Black & Grey Realism, Portrait Tattoos, Single-Needle Fine Line, Stipple Dotwork</strong>, and professional <strong>Aseptic Body Piercing</strong> (ear, nose, and all custom body placements) using hypoallergenic titanium jewelry.
-                    </p>
-
-                    <div class="about-statement">
-                        <span>Lifelike portraits.</span>
-                        <span>Delicate fine lines.</span>
-                        <strong>Zero compromises.</strong>
+                <div class="about-cta">
+                    <div>
+                        <h3>Have a custom concept?</h3>
+                        <p>
+                            Book a free consultation to discuss your ideas, reference images, placement, and design possibilities. Let's create something that means more than ink.
+                        </p>
                     </div>
 
-                    <p>
-                        Our studio employs multi-enzymatic ultrasonic cleaning, electric autoclave sterilization, and hospital-grade surface disinfection to ensure the highest safety standard for every single client.
-                    </p>
-
-                    <div class="about-cta">
-                        <div>
-                            <h3>Have a custom concept?</h3>
-                            <p>
-                                Book a free direct consultation. Share your ideas, reference images, or placement preferences — and let's craft a bespoke piece together.
-                            </p>
-                        </div>
-
-                        <a href="#booking" class="about-button">
-                            BOOK FREE CONSULTATION
-                            <span class="text-gold-400 text-lg">&rarr;</span>
-                        </a>
-                    </div>
+                    <a href="#booking" class="about-button">
+                        BOOK FREE CONSULTATION
+                        <span class="text-gold-400 text-lg">&rarr;</span>
+                    </a>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
+
 
     <!-- SPECIALTIES SHOWCASE -->
-    <section id="specialties" class="py-24 px-6 md:px-12 max-w-7xl mx-auto border-t border-sand-200 bg-sand-50/85 backdrop-blur-sm my-12 rounded-sm">
+    <section id="specialties" class="py-24 px-6 md:px-12 max-w-7xl mx-auto border-t border-sand-200 bg-sand-50/95 backdrop-blur-sm my-12 rounded-sm">
         <div class="text-center max-w-3xl mx-auto mb-16">
             <span class="text-xs uppercase tracking-[0.3em] text-gold-600 font-semibold block mb-3">Our Core Focus</span>
             <h2 class="font-serif text-4xl md:text-5xl font-light text-emerald-900">Artistic Specialties</h2>
@@ -674,7 +675,7 @@
     </section>
 
     <!-- PORTFOLIO GALLERY SECTION -->
-    <section id="gallery" class="py-24 px-6 md:px-12 max-w-7xl mx-auto border-t border-sand-200 bg-sand-50/85 backdrop-blur-sm my-12 rounded-sm">
+    <section id="gallery" class="py-24 px-6 md:px-12 max-w-7xl mx-auto border-t border-sand-200 bg-sand-50/95 backdrop-blur-sm">
         <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
             <div>
                 <span class="text-xs uppercase tracking-[0.3em] text-gold-600 font-semibold block mb-2">Visual Archive</span>
