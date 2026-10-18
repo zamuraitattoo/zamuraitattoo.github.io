@@ -588,50 +588,309 @@
 
     </section>
 
-    <!-- GOOGLE REVIEWS SECTION (ELFSIGHT INTEGRATION) -->
-    <section id="reviews" class="py-24 px-6 md:px-12 max-w-7xl mx-auto border-t border-sand-200 bg-sand-50/85 backdrop-blur-sm my-12 rounded-sm">
-        <div class="text-center max-w-3xl mx-auto mb-12">
-            <span class="text-xs uppercase tracking-[0.3em] text-gold-600 font-semibold block mb-2">Verified Client Experiences</span>
-            <h2 class="font-serif text-4xl md:text-5xl font-light text-emerald-900">Google Reviews</h2>
-        </div>
+  
+<!-- GOOGLE REVIEWS SECTION — ZAMURAI -->
+<section id="reviews" class="py-24 px-6 md:px-12 max-w-7xl mx-auto border-t border-sand-200 bg-sand-50/85 my-12 rounded-sm">
 
-        <!-- Elfsight Google Reviews Embed -->
-       
-
-<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-    <div class="p-8 border border-sand-200 bg-white rounded-sm text-center">
-        <div class="text-gold-600 text-xl tracking-widest">★★★★★</div>
-        <h3 class="mt-4 font-serif text-xl text-emerald-900">Trusted by Our Clients</h3>
-        <p class="mt-3 text-sm text-charcoal leading-relaxed">Explore feedback from people who have experienced our tattoo and piercing services.</p>
+    <div class="text-center max-w-3xl mx-auto mb-12">
+        <span class="text-xs uppercase tracking-[0.3em] text-gold-600 font-semibold block mb-3">
+            Trusted by Our Clients
+        </span>
+        <h2 class="font-serif text-4xl md:text-5xl font-light text-emerald-900">
+            Words That Mean Everything
+        </h2>
+        <p class="mt-5 text-sm md:text-base text-charcoal leading-relaxed">
+            Real experiences. Genuine connections. Artwork our clients remember.
+        </p>
+        <a href="https://www.google.com/maps/place/Zamurai+Tattoo+and+Piercing/@9.9446321,76.253699,17z/data=!4m8!3m7!1s0x3b086d02359d7407:0x8aa919757cf0ec78!8m2!3d9.9446321!4d76.2562739!9m1!1b1!16s%2Fg%2F11lg2xh4cl?hl=en&amp;entry=ttu"
+           target="_blank" rel="noopener noreferrer"
+           class="inline-flex items-center gap-2 mt-4 text-sm text-emerald-900 hover:text-gold-600 transition-colors">
+            <span class="font-semibold">Google Reviews</span>
+            <span class="text-gold-600" aria-label="5 stars">★★★★★</span>
+            <span aria-hidden="true">↗</span>
+        </a>
     </div>
 
-    <div class="p-8 border border-sand-200 bg-white rounded-sm text-center">
-        <div class="text-gold-600 text-xl tracking-widest">★★★★★</div>
-        <h3 class="mt-4 font-serif text-xl text-emerald-900">Real Client Experiences</h3>
-        <p class="mt-3 text-sm text-charcoal leading-relaxed">Read our clients’ reviews on Google before planning your next piece.</p>
+    <!-- Carousel controls -->
+    <div class="flex justify-end gap-3 mb-5">
+        <button type="button" id="reviews-prev"
+                aria-label="Previous reviews"
+                class="w-11 h-11 border border-sand-200 text-emerald-900 hover:bg-emerald-900 hover:text-white transition-colors rounded-full">
+            &#8592;
+        </button>
+        <button type="button" id="reviews-next"
+                aria-label="Next reviews"
+                class="w-11 h-11 border border-sand-200 text-emerald-900 hover:bg-emerald-900 hover:text-white transition-colors rounded-full">
+            &#8594;
+        </button>
     </div>
 
-    <div class="p-8 border border-sand-200 bg-white rounded-sm text-center">
-        <div class="text-gold-600 text-xl tracking-widest">★★★★★</div>
-        <h3 class="mt-4 font-serif text-xl text-emerald-900">Your Turn to Share</h3>
-        <p class="mt-3 text-sm text-charcoal leading-relaxed">Visited Zamurai? Share your experience and help others discover our studio.</p>
+    <!-- Review carousel -->
+    <div id="reviews-carousel"
+         class="flex gap-6 overflow-x-auto snap-x snap-mandatory pb-4"
+         style="scrollbar-width:none;"
+         aria-label="Customer reviews">
+
+        <!-- Maria Antony -->
+        <a href="https://www.google.com/maps/place/Zamurai+Tattoo+and+Piercing/@9.9446321,76.253699,17z/data=!4m8!3m7!1s0x3b086d02359d7407:0x8aa919757cf0ec78!8m2!3d9.9446321!4d76.2562739!9m1!1b1!16s%2Fg%2F11lg2xh4cl?hl=en&amp;entry=ttu"
+           target="_blank" rel="noopener noreferrer"
+           class="review-card group flex-none w-full md:w-[calc((100%-3rem)/3)] snap-start p-7 md:p-8 bg-white border border-sand-200 hover:border-gold-600 transition-colors rounded-sm flex flex-col">
+            <div class="flex items-center justify-between gap-3">
+                <div class="flex items-center gap-3">
+                    <div class="w-11 h-11 rounded-full bg-emerald-900 text-white flex items-center justify-center font-serif text-xl">M</div>
+                    <div>
+                        <p class="font-semibold text-emerald-900">Maria Antony</p>
+                        <p class="text-xs text-charcoal/70">Google reviewer · 4 days ago</p>
+                    </div>
+                </div>
+                <span class="text-lg font-bold text-[#4285F4]" aria-label="Google">G</span>
+            </div>
+            <div class="mt-5 text-gold-600 tracking-widest" aria-label="5 stars">★★★★★</div>
+            <p class="mt-4 text-sm leading-7 text-charcoal">
+                “One of the Best Tattoo Studios in Kochi. The studio has a great atmosphere, and the artists are talented, professional, and friendly. The tattoo work is beautiful, precise, and well-detailed. Highly recommended for anyone looking to get a tattoo in Kochi!”
+            </p>
+            <span class="mt-auto pt-6 text-xs uppercase tracking-widest text-emerald-900 group-hover:text-gold-600">Read on Google ↗</span>
+        </a>
+
+        <!-- Kailas U -->
+        <a href="https://www.google.com/maps/place/Zamurai+Tattoo+and+Piercing/@9.9446321,76.253699,17z/data=!4m8!3m7!1s0x3b086d02359d7407:0x8aa919757cf0ec78!8m2!3d9.9446321!4d76.2562739!9m1!1b1!16s%2Fg%2F11lg2xh4cl?hl=en&amp;entry=ttu"
+           target="_blank" rel="noopener noreferrer"
+           class="review-card group flex-none w-full md:w-[calc((100%-3rem)/3)] snap-start p-7 md:p-8 bg-white border border-sand-200 hover:border-gold-600 transition-colors rounded-sm flex flex-col">
+            <div class="flex items-center justify-between gap-3">
+                <div class="flex items-center gap-3">
+                    <div class="w-11 h-11 rounded-full bg-emerald-900 text-white flex items-center justify-center font-serif text-xl">K</div>
+                    <div>
+                        <p class="font-semibold text-emerald-900">Kailas U</p>
+                        <p class="text-xs text-charcoal/70">Google reviewer · 3 years ago</p>
+                    </div>
+                </div>
+                <span class="text-lg font-bold text-[#4285F4]" aria-label="Google">G</span>
+            </div>
+            <div class="mt-5 text-gold-600 tracking-widest" aria-label="5 stars">★★★★★</div>
+            <p class="mt-4 text-sm leading-7 text-charcoal">
+                “This is the best tattoo studio in Kochi, which I can say without any doubt. I just really really loved the Work from Zamurai Tattoo Kochi 😍”
+            </p>
+            <p class="mt-3 text-sm leading-7 text-charcoal">
+                The reviewer also praised the full-sleeve artwork and the hospitality that made the two-day experience comfortable.
+            </p>
+            <span class="mt-auto pt-6 text-xs uppercase tracking-widest text-emerald-900 group-hover:text-gold-600">Read on Google ↗</span>
+        </a>
+
+        <!-- Aimy Maria -->
+        <a href="https://www.google.com/maps/place/Zamurai+Tattoo+and+Piercing/@9.9446321,76.253699,17z/data=!4m8!3m7!1s0x3b086d02359d7407:0x8aa919757cf0ec78!8m2!3d9.9446321!4d76.2562739!9m1!1b1!16s%2Fg%2F11lg2xh4cl?hl=en&amp;entry=ttu"
+           target="_blank" rel="noopener noreferrer"
+           class="review-card group flex-none w-full md:w-[calc((100%-3rem)/3)] snap-start p-7 md:p-8 bg-white border border-sand-200 hover:border-gold-600 transition-colors rounded-sm flex flex-col">
+            <div class="flex items-center justify-between gap-3">
+                <div class="w-11 h-11 rounded-full bg-emerald-900 text-white flex items-center justify-center font-serif text-xl">A</div>
+                <span class="text-lg font-bold text-[#4285F4]" aria-label="Google">G</span>
+            </div>
+            <p class="mt-3 font-semibold text-emerald-900">Aimy Maria</p>
+            <p class="text-xs text-charcoal/70">Google reviewer · 4 years ago</p>
+            <div class="mt-5 text-gold-600 tracking-widest" aria-label="5 stars">★★★★★</div>
+            <p class="mt-4 text-sm leading-7 text-charcoal">
+                “stevin is a very nice guy. I have wanted to get a tattoo for a long time. One night I asked him if i could get my tattoo done and he agreed without hesitation He told me everything properly about how to take care of the tattoo.”
+            </p>
+            <span class="mt-auto pt-6 text-xs uppercase tracking-widest text-emerald-900 group-hover:text-gold-600">Read on Google ↗</span>
+        </a>
+
+        <!-- Vivek Venu -->
+        <a href="https://www.google.com/maps/place/Zamurai+Tattoo+and+Piercing/@9.9446321,76.253699,17z/data=!4m8!3m7!1s0x3b086d02359d7407:0x8aa919757cf0ec78!8m2!3d9.9446321!4d76.2562739!9m1!1b1!16s%2Fg%2F11lg2xh4cl?hl=en&amp;entry=ttu"
+           target="_blank" rel="noopener noreferrer"
+           class="review-card group flex-none w-full md:w-[calc((100%-3rem)/3)] snap-start p-7 md:p-8 bg-white border border-sand-200 hover:border-gold-600 transition-colors rounded-sm flex flex-col">
+            <div class="flex items-center justify-between gap-3">
+                <div class="w-11 h-11 rounded-full bg-emerald-900 text-white flex items-center justify-center font-serif text-xl">V</div>
+                <span class="text-lg font-bold text-[#4285F4]" aria-label="Google">G</span>
+            </div>
+            <p class="mt-3 font-semibold text-emerald-900">Vivek Venu</p>
+            <p class="text-xs text-charcoal/70">Google reviewer · 3 years ago</p>
+            <div class="mt-5 text-gold-600 tracking-widest" aria-label="5 stars">★★★★★</div>
+            <p class="mt-4 text-sm leading-7 text-charcoal">
+                “My first tattoo was done from here. As I expected, it was just awesome. I've done a mandala on my right forearm. Now, I've done a next tattoo, Like an extension for my first mandala.”
+            </p>
+            <p class="mt-3 text-sm leading-7 text-charcoal">
+                “I strongly recommend this place and Zamurai Tattoo is the best in Kochi.”
+            </p>
+            <span class="mt-auto pt-6 text-xs uppercase tracking-widest text-emerald-900 group-hover:text-gold-600">Read on Google ↗</span>
+        </a>
+
+        <!-- Mattéo FALZONE -->
+        <a href="https://www.google.com/maps/place/Zamurai+Tattoo+and+Piercing/@9.9446321,76.253699,17z/data=!4m8!3m7!1s0x3b086d02359d7407:0x8aa919757cf0ec78!8m2!3d9.9446321!4d76.2562739!9m1!1b1!16s%2Fg%2F11lg2xh4cl?hl=en&amp;entry=ttu"
+           target="_blank" rel="noopener noreferrer"
+           class="review-card group flex-none w-full md:w-[calc((100%-3rem)/3)] snap-start p-7 md:p-8 bg-white border border-sand-200 hover:border-gold-600 transition-colors rounded-sm flex flex-col">
+            <div class="flex items-center justify-between gap-3">
+                <div class="w-11 h-11 rounded-full bg-emerald-900 text-white flex items-center justify-center font-serif text-xl">M</div>
+                <div class="text-lg font-bold text-[#4285F4]" aria-label="Google">G</div>
+            </div>
+            <p class="mt-3 font-semibold text-emerald-900">Mattéo FALZONE</p>
+            <p class="text-xs text-charcoal/70">Google Local Guide · 2 years ago</p>
+            <div class="mt-5 text-gold-600 tracking-widest" aria-label="5 stars">★★★★★</div>
+            <p lang="fr" class="mt-4 text-sm leading-7 text-charcoal">
+                “Super studio de tatouage, très clean et Stevin a été très professionnel. Je suis ravi de son travail et je le recommande fortement.”
+            </p>
+            <p class="mt-3 text-xs leading-6 text-charcoal/70">
+                English: Great tattoo studio, very clean, and Stevin was very professional. I'm delighted with his work and highly recommend him.
+            </p>
+            <span class="mt-auto pt-6 text-xs uppercase tracking-widest text-emerald-900 group-hover:text-gold-600">Read on Google ↗</span>
+        </a>
+
+        <!-- Preethy Achu -->
+        <a href="https://www.google.com/maps/place/Zamurai+Tattoo+and+Piercing/@9.9446321,76.253699,17z/data=!4m8!3m7!1s0x3b086d02359d7407:0x8aa919757cf0ec78!8m2!3d9.9446321!4d76.2562739!9m1!1b1!16s%2Fg%2F11lg2xh4cl?hl=en&amp;entry=ttu"
+           target="_blank" rel="noopener noreferrer"
+           class="review-card group flex-none w-full md:w-[calc((100%-3rem)/3)] snap-start p-7 md:p-8 bg-white border border-sand-200 hover:border-gold-600 transition-colors rounded-sm flex flex-col">
+            <div class="flex items-center justify-between gap-3">
+                <div class="w-11 h-11 rounded-full bg-emerald-900 text-white flex items-center justify-center font-serif text-xl">P</div>
+                <span class="text-lg font-bold text-[#4285F4]" aria-label="Google">G</span>
+            </div>
+            <p class="mt-3 font-semibold text-emerald-900">Preethy Achu</p>
+            <p class="text-xs text-charcoal/70">Google reviewer · 3 years ago</p>
+            <div class="mt-5 text-gold-600 tracking-widest" aria-label="5 stars">★★★★★</div>
+            <p class="mt-4 text-sm leading-7 text-charcoal">
+                “This is a very good tatoo Studio. I am so happy. Good friendly nature. Moreover, I am 100% satisfied with the work. In my opinion its one of the best tatoo center in Kochi and I recommend it to others.”
+            </p>
+            <p class="mt-3 text-xs uppercase tracking-wider text-charcoal/80">
+                Reasonable price · Hygienic · Highly professional
+            </p>
+            <span class="mt-auto pt-6 text-xs uppercase tracking-widest text-emerald-900 group-hover:text-gold-600">Read on Google ↗</span>
+        </a>
+
     </div>
-</div>
 
-<div class="text-center mt-10">
-    <a href="https://maps.app.goo.gl/GLYcYDdsnD4nvxsD6"
-       target="_blank"
-       rel="noopener noreferrer"
-       class="inline-block px-8 py-4 bg-emerald-900 text-white text-xs uppercase tracking-[0.2em] font-semibold hover:bg-gold-600 transition-colors rounded-sm">
-        Read &amp; Write Google Reviews ↗
-    </a>
-</div>
+    <div class="flex justify-center gap-2 mt-5" aria-label="Carousel navigation">
+        <span class="w-8 h-1 bg-gold-600 rounded-full"></span>
+        <span class="w-2 h-1 bg-sand-200 rounded-full"></span>
+        <span class="w-2 h-1 bg-sand-200 rounded-full"></span>
+    </div>
 
-    </section>
+    <div class="text-center mt-10">
+        <a href="https://www.google.com/maps/place/Zamurai+Tattoo+and+Piercing/@9.9446321,76.253699,17z/data=!4m8!3m7!1s0x3b086d02359d7407:0x8aa919757cf0ec78!8m2!3d9.9446321!4d76.2562739!9m1!1b1!16s%2Fg%2F11lg2xh4cl?hl=en&amp;entry=ttu"
+           target="_blank" rel="noopener noreferrer"
+           class="inline-block px-8 py-4 bg-emerald-900 text-white text-xs uppercase tracking-[0.2em] font-semibold hover:bg-gold-600 transition-colors rounded-sm">
+            Read More Google Reviews ↗
+        </a>
+    </div>
 
-    <!-- CONSULTATION & BOOKING SECTION -->
-    <section id="booking" class="py-24 px-6 md:px-12 max-w-7xl mx-auto border-t border-sand-200 bg-sand-50/90 backdrop-blur-sm my-12 rounded-sm">
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
+</section>
+
+<style>
+    #reviews-carousel {
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+        scroll-behavior: smooth;
+    }
+
+    #reviews-carousel::-webkit-scrollbar {
+        display: none;
+    }
+
+    .review-card {
+        min-height: 390px;
+        text-decoration: none;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        #reviews-carousel {
+            scroll-behavior: auto;
+        }
+    }
+</style>
+
+<script>
+(function () {
+    const carousel = document.getElementById('reviews-carousel');
+    const next = document.getElementById('reviews-next');
+    const prev = document.getElementById('reviews-prev');
+
+    if (!carousel || !next || !prev) return;
+
+    const cards = Array.from(carousel.querySelectorAll('.review-card'));
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let timer = null;
+    let paused = false;
+
+    function cardStep() {
+        if (!cards.length) return 0;
+        const gap = parseFloat(getComputedStyle(carousel).columnGap) || 0;
+        return cards[0].getBoundingClientRect().width + gap;
+    }
+
+    function moveNext() {
+        const atEnd =
+            carousel.scrollLeft + carousel.clientWidth >= carousel.scrollWidth - 5;
+
+        if (atEnd) {
+            carousel.scrollTo({ left: 0, behavior: 'smooth' });
+        } else {
+            carousel.scrollBy({ left: cardStep(), behavior: 'smooth' });
+        }
+    }
+
+    function movePrev() {
+        if (carousel.scrollLeft <= 5) {
+            carousel.scrollTo({
+                left: carousel.scrollWidth,
+                behavior: 'smooth'
+            });
+        } else {
+            carousel.scrollBy({ left: -cardStep(), behavior: 'smooth' });
+        }
+    }
+
+    function stopTimer() {
+        if (timer) clearInterval(timer);
+        timer = null;
+    }
+
+    function startTimer() {
+        stopTimer();
+        if (!reduceMotion && !paused) {
+            timer = setInterval(moveNext, 5000);
+        }
+    }
+
+    next.addEventListener('click', function () {
+        moveNext();
+        startTimer();
+    });
+
+    prev.addEventListener('click', function () {
+        movePrev();
+        startTimer();
+    });
+
+    carousel.addEventListener('mouseenter', function () {
+        paused = true;
+        stopTimer();
+    });
+
+    carousel.addEventListener('mouseleave', function () {
+        paused = false;
+        startTimer();
+    });
+
+    carousel.addEventListener('focusin', function () {
+        paused = true;
+        stopTimer();
+    });
+
+    carousel.addEventListener('focusout', function (event) {
+        if (!carousel.contains(event.relatedTarget)) {
+            paused = false;
+            startTimer();
+        }
+    });
+
+    document.addEventListener('visibilitychange', function () {
+        if (document.hidden) {
+            stopTimer();
+        } else {
+            startTimer();
+        }
+    });
+
+    startTimer();
+})();
+</script>
+
             
             <!-- Left Contact Info -->
             <div>
