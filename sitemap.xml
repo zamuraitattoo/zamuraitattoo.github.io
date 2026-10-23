@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://zamuraitattoo.com/</loc>
-    <lastmod>2026-10-08</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>1.0</priority>
-  </url>
+  <url><loc>https://zamuraitattoo.com/</loc></url>
+  <url><loc>https://zamuraitattoo.com/services.html</loc></url>
+  <url><loc>https://zamuraitattoo.com/artist.html</loc></url>
+  <url><loc>https://zamuraitattoo.com/gallery.html</loc></url>
+  <url><loc>https://zamuraitattoo.com/booking.html</loc></url>
+  <url><loc>https://zamuraitattoo.com/contact.html</loc></url>
+  <url><loc>https://zamuraitattoo.com/aftercare.html</loc></url>
+  <url><loc>https://zamuraitattoo.com/piercing.html</loc></url>
+  <url><loc>https://zamuraitattoo.com/realism.html</loc></url>
+  <url><loc>https://zamuraitattoo.com/portrait-tattoos.html</loc></url>
+  <url><loc>https://zamuraitattoo.com/fine-line.html</loc></url>
+  <url><loc>https://zamuraitattoo.com/dotwork.html</loc></url>
 </urlset>
