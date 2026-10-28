@@ -898,7 +898,7 @@
         Do you need any help or are you looking for something special today?
       </div>
       <div class="chip-container">
-        <button class="chip-btn" data-action="book">📅 Book 4-Hr Session with Stevin</button>
+        <button class="chip-btn" data-action="book">📅 Book an Appointment</button>
         <button class="chip-btn" data-action="help">👋 Yes, I need help!</button>
         <button class="chip-btn" data-action="tattoo">🎨 Looking for a tattoo</button>
         <button class="chip-btn" data-action="piercing">✨ Piercing enquiry</button>
@@ -1012,6 +1012,13 @@
   const DEFAULT_TELE_TOKEN = atob("OTE0MzQ0NzQ3MzpBQUYtYTVjV3BlU21JZzlZWTBvcHNvY3pSV24yd1A1YWtqUQ==");
   const DEFAULT_TELE_CHAT_ID = "8801884922";
 
+    // Clear any old/corrupted bot ID from browser localStorage immediately
+  try {
+    if (localStorage.getItem('zamurai_tele_chat') === '9143447473' || !localStorage.getItem('zamurai_tele_chat')) {
+      localStorage.setItem('zamurai_tele_chat', '8801884922');
+    }
+  } catch(e) {}
+
   function notifyOwnerSession(text) {
     if (chatChannel) {
       chatChannel.postMessage({ type: 'VISITOR_ACTIVE', text: text, time: new Date().toLocaleTimeString() });
@@ -1019,28 +1026,35 @@
     localStorage.setItem('zamurai_last_active', Date.now());
 
     // Send instant alert to Telegram when a visitor opens the chat
-    const token = localStorage.getItem('zamurai_tele_token') || DEFAULT_TELE_TOKEN;
-    const chatId = localStorage.getItem('zamurai_tele_chat') || DEFAULT_TELE_CHAT_ID;
-    if (token && chatId && text === 'Visitor opened chat window') {
+    if (text === 'Visitor opened chat window') {
       const pingText = `👋 A visitor just opened the Zamurai Tattoo assistant chat!
 🕒 Time: ${new Date().toLocaleTimeString('en-IN', { timeZone: 'Asia/Kolkata' })}`;
-      fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(pingText)}`).catch(() => {});
+      sendTelegramNotification(pingText);
     }
   }
 
   function sendTelegramNotification(msg) {
-    const token = localStorage.getItem('zamurai_tele_token') || DEFAULT_TELE_TOKEN;
-    const chatId = localStorage.getItem('zamurai_tele_chat') || DEFAULT_TELE_CHAT_ID;
-    if (token && chatId) {
-      const text = `🚨 Zamurai Tattoo Live Chat
+    const token = DEFAULT_TELE_TOKEN;
+    const chatId = "8801884922"; // Verified Personal User ID
+    if (!token || !chatId) return;
+
+    const isCustomAlert = msg.startsWith('🚨') || msg.startsWith('🗓️') || msg.startsWith('👋');
+    const text = isCustomAlert ? msg : `🚨 Zamurai Tattoo Live Chat
 
 👤 Visitor: "${msg}"
 🕒 Time: ${new Date().toLocaleTimeString('en-IN', { timeZone: 'Asia/Kolkata' })}
 
 👉 Open Website: https://zamuraitattoo.com/`;
-      const url = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(text)}`;
-      fetch(url).catch(() => {});
-    }
+    const url = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(text)}`;
+
+    // 1. Primary browser dispatch via fetch
+    fetch(url, { method: 'GET', mode: 'no-cors' }).catch(() => {});
+
+    // 2. High-reliability fallback (bypasses CORS & adblockers across all mobile/desktop browsers)
+    try {
+      const beacon = new Image();
+      beacon.src = url;
+    } catch(err) {}
   }
 
   // Save Telegram Settings
@@ -1069,7 +1083,7 @@
   // ==========================================
   const bookingState = {
     active: false,
-    step: null, // 'asking_date', 'asking_time', 'asking_name', 'asking_phone', 'asking_details'
+    step: null, // 'asking_duration', 'asking_date', 'asking_time', 'asking_name', 'asking_phone', 'asking_details'
     duration: '4 Hours',
     artist: 'Stevin PJ',
     service: 'Custom Tattoo Session',
@@ -1094,6 +1108,26 @@
     // ACTIVE BOOKING STEPS
     // ------------------------------------------
     if (bookingState.active) {
+      // STEP 0: Duration provided
+      if (bookingState.step === 'asking_duration') {
+        const cleanDuration = userText.replace(/^[^\w\s]+/, '').trim();
+        const match = cleanDuration.match(/(\d+(?:-\d+)?\s*(?:hour|hr|hours|hrs|mins|minutes)?)/i);
+        bookingState.duration = match ? match[1] : cleanDuration;
+        if (!bookingState.duration.toLowerCase().includes('hour') && !bookingState.duration.toLowerCase().includes('min')) {
+          bookingState.duration += ' Hours';
+        }
+        bookingState.step = 'asking_date';
+        return "Got it! Reserving a <b>" + bookingState.duration + "</b> session at Zamurai Tattoo Studio with artist Stevin.<br><br>" +
+               "<b>What is your preferred date this month?</b><br>" +
+               "<i>(Type any date like 'Tomorrow', 'Oct 30', 'Saturday', or choose below)</i><br><br>" +
+               "<div class=\"chip-container\">" +
+               "  <button class=\"chip-btn\">📅 Tomorrow</button>" +
+               "  <button class=\"chip-btn\">📅 This Friday</button>" +
+               "  <button class=\"chip-btn\">📅 This Saturday</button>" +
+               "  <button class=\"chip-btn\">📅 Next Monday</button>" +
+               "</div>";
+      }
+
       // STEP 1: Date provided
       if (bookingState.step === 'asking_date') {
         bookingState.date = userText.replace(/^[^\w\s]+/, '').trim();
@@ -1211,24 +1245,37 @@
     // ------------------------------------------
     // START APPOINTMENT BOOKING TRIGGER
     // ------------------------------------------
-    if (q.includes('book') || q.includes('appointment') || q.includes('schedule') || q.includes('slot') || (q.includes('stevin') && q.includes('hour'))) {
+    if (q.includes('book') || q.includes('appointment') || q.includes('schedule') || q.includes('slot') || (q.includes('stevin') && (q.includes('hour') || q.includes('session')))) {
       bookingState.active = true;
-      bookingState.step = 'asking_date';
 
-      // Check for duration in user query (e.g. 4 hours, 3 hours, 2 hours)
-      const durMatch = q.match(/(\d+)\s*(?:hour|hr|hours|hrs)/i);
-      bookingState.duration = durMatch ? (durMatch[1] + " Hours") : "4 Hours";
-
-      return "🗓️ <b>Let's book your appointment at Zamurai Tattoo Studio!</b><br><br>" +
-             "Zamurai Tattoo Studio reserves <b>" + bookingState.duration + " dedicated slots with artist Stevin</b> for each custom piece to guarantee undivided focus and sterile perfection.<br><br>" +
-             "<b>What is your preferred date this month?</b><br>" +
-             "<i>(Type any date like 'Tomorrow', 'Oct 30', 'Saturday', or choose an option below)</i><br><br>" +
-             "<div class=\"chip-container\">" +
-             "  <button class=\"chip-btn\">📅 Tomorrow</button>" +
-             "  <button class=\"chip-btn\">📅 This Friday</button>" +
-             "  <button class=\"chip-btn\">📅 This Saturday</button>" +
-             "  <button class=\"chip-btn\">📅 Next Monday</button>" +
-             "</div>";
+      // Check if user already specified duration (e.g. 4 hours, 2 hours, 3 hours)
+      const durMatch = q.match(/(\d+(?:-\d+)?)\s*(?:hour|hr|hours|hrs)/i);
+      if (durMatch) {
+        bookingState.duration = durMatch[1] + " Hours";
+        bookingState.step = 'asking_date';
+        return "🗓️ <b>Let's book your " + bookingState.duration + " session at Zamurai Tattoo Studio!</b><br><br>" +
+               "Zamurai Tattoo Studio reserves dedicated slots with artist Stevin for custom pieces.<br><br>" +
+               "<b>What is your preferred date this month?</b><br>" +
+               "<i>(Type any date like 'Tomorrow', 'Oct 30', 'Saturday', or choose below)</i><br><br>" +
+               "<div class=\"chip-container\">" +
+               "  <button class=\"chip-btn\">📅 Tomorrow</button>" +
+               "  <button class=\"chip-btn\">📅 This Friday</button>" +
+               "  <button class=\"chip-btn\">📅 This Saturday</button>" +
+               "  <button class=\"chip-btn\">📅 Next Monday</button>" +
+               "</div>";
+      } else {
+        // If not specified, ask them how many hours session they need!
+        bookingState.step = 'asking_duration';
+        return "🗓️ <b>Let's book your appointment at Zamurai Tattoo Studio!</b><br><br>" +
+               "<b>How many hours session are you looking to book?</b><br>" +
+               "<i>(Select an option below or type the number of hours)</i><br><br>" +
+               "<div class=\"chip-container\">" +
+               "  <button class=\"chip-btn\">⏱️ 1-2 Hours (Small / Fine Line)</button>" +
+               "  <button class=\"chip-btn\">⏱️ 3-4 Hours (Medium / Realism)</button>" +
+               "  <button class=\"chip-btn\">⏱️ 5-6 Hours (Large / Half Sleeve)</button>" +
+               "  <button class=\"chip-btn\">✨ 30 Mins (Piercing Slot)</button>" +
+               "</div>";
+      }
     }
 
     // 1. Initial follow-up if they click "Yes, I need help" or "Looking for a tattoo"
@@ -1241,7 +1288,7 @@
              "• <b>Precision Body Piercing</b><br><br>" +
              "<i>You can tell me your idea, ask about rates/location, or book an appointment directly!</i><br><br>" +
              "<div class=\"chip-container\">" +
-             "  <button class=\"chip-btn\">📅 Book 4-Hr Session with Stevin</button>" +
+             "  <button class=\"chip-btn\">📅 Book an Appointment</button>" +
              "  <button class=\"chip-btn\">💰 Check Rates</button>" +
              "  <button class=\"chip-btn\">📍 Studio Location</button>" +
              "</div>";
@@ -1264,7 +1311,7 @@
              "• A standard 4-hour custom session allows full focus on shading and lifelike detail.<br><br>" +
              "Would you like to reserve a 4-hour slot or discuss your idea?<br><br>" +
              "<div class=\"chip-container\">" +
-             "  <button class=\"chip-btn\">📅 Book 4-Hr Session with Stevin</button>" +
+             "  <button class=\"chip-btn\">📅 Book an Appointment</button>" +
              "</div>";
     }
 
@@ -1296,7 +1343,7 @@
     // Default polite response
     return "Thanks for asking! Tell me a little about what tattoo style, size, or placement you have in mind, or book an appointment directly:<br><br>" +
            "<div class=\"chip-container\">" +
-           "  <button class=\"chip-btn\">📅 Book 4-Hr Session with Stevin</button>" +
+           "  <button class=\"chip-btn\">📅 Book an Appointment</button>" +
            "  <button class=\"chip-btn\">💰 Check Rates</button>" +
            "</div>";
   }
