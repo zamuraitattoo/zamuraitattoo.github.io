@@ -530,15 +530,15 @@
     0%, 100% { transform: translateY(0); }
     50% { transform: translateY(-4px); }
   }
-
- .character-cutout,
+.character-cutout,
 .bot-profile img {
   width: 145px;
   height: auto;
   display: block;
   pointer-events: auto;
-  filter: drop-shadow(0 10px 25px rgba(0, 0, 0, 0.6)) !important;
+  filter: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg'><filter id='rgb'><feColorMatrix type='matrix' values='0 0 1 0 0 0 1 0 0 0 1 0 0 0 0 0 0 0 1 0'/></filter></svg>#rgb") drop-shadow(0 10px 25px rgba(0, 0, 0, 0.6)) !important;
 }
+
 
 
 
