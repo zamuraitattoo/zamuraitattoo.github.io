@@ -422,87 +422,158 @@
 </script>
 </body>
 </html>
-<!-- ================= ZAMURAI TATTOO ROBOT WIDGET ================= -->
+<!-- ================= ZAMURAI TATTOO ASSISTANT (MASCOT CUTOUT) ================= -->
 <style>
-  /* 1. Floating Launcher Button */
-  .bot-launcher {
+  /* 1. Transparent Cutout Character Trigger */
+  .character-launcher {
+    position: fixed;
+    bottom: 0;
+    right: 24px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 9999;
+    transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    user-select: none;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  }
+  .character-launcher:hover {
+    transform: translateY(-8px) scale(1.03);
+  }
+
+  .speech-bubble {
+    background: linear-gradient(135deg, #e11d48, #be123c);
+    color: #ffffff;
+    padding: 7px 14px;
+    border-radius: 18px;
+    font-size: 13px;
+    font-weight: 700;
+    white-space: nowrap;
+    box-shadow: 0 4px 16px rgba(225, 29, 72, 0.45);
+    margin-bottom: -4px;
+    position: relative;
+    z-index: 2;
+    animation: gentleBounce 2.5s infinite ease-in-out;
+  }
+  .speech-bubble::after {
+    content: "";
+    position: absolute;
+    bottom: -6px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 6px 6px 0;
+    border-style: solid;
+    border-color: #be123c transparent transparent;
+  }
+
+  @keyframes gentleBounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-4px); }
+  }
+
+  .character-cutout {
+    width: 145px;
+    height: auto;
+    display: block;
+    filter: drop-shadow(0 10px 25px rgba(0, 0, 0, 0.65));
+    pointer-events: auto;
+  }
+
+  /* 2. Chat Window */
+  .bot-window {
     position: fixed;
     bottom: 24px;
     right: 24px;
-    background: linear-gradient(135deg, #e11d48, #be123c);
-    color: #ffffff;
-    border: none;
-    border-radius: 50px;
-    padding: 12px 20px;
-    font-size: 14px;
-    font-weight: 700;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    box-shadow: 0 8px 24px rgba(225, 29, 72, 0.45);
-    transition: all 0.25s ease;
-    z-index: 9999;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  }
-  .bot-launcher:hover {
-    transform: scale(1.05);
-  }
-
-  /* 2. Robot Chat Window */
-  .bot-window {
-    position: fixed;
-    bottom: 84px;
-    right: 24px;
-    width: 360px;
+    width: 380px;
     max-width: calc(100vw - 32px);
-    height: 500px;
-    max-height: calc(100vh - 100px);
+    height: 530px;
+    max-height: calc(100vh - 48px);
     background-color: #161b22;
     border: 1px solid #30363d;
     border-radius: 16px;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7);
     display: none;
     flex-direction: column;
     overflow: hidden;
-    z-index: 9999;
+    z-index: 10000;
+    animation: popIn 0.25s ease-out forwards;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  }
+
+  @keyframes popIn {
+    from { opacity: 0; transform: translateY(16px) scale(0.96); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
   }
 
   .bot-header {
     background-color: #21262d;
-    padding: 14px 16px;
+    padding: 10px 16px;
     border-bottom: 1px solid #30363d;
     display: flex;
     justify-content: space-between;
     align-items: center;
+  }
+  .bot-profile {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .bot-header-avatar {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: top center;
+    border: 2px solid #e11d48;
+    background-color: #0d1117;
+  }
+  .bot-title h4 {
+    margin: 0;
+    font-size: 14.5px;
+    font-weight: 700;
     color: #ffffff;
   }
-  .bot-header h4 { margin: 0; font-size: 14px; }
-  .bot-header span { font-size: 11px; color: #3fb950; }
-
+  .bot-status {
+    font-size: 11px;
+    color: #3fb950;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  .bot-status::before {
+    content: "";
+    width: 6px;
+    height: 6px;
+    background-color: #3fb950;
+    border-radius: 50%;
+    display: inline-block;
+  }
   .bot-close-btn {
     background: none;
     border: none;
     color: #8b949e;
     font-size: 20px;
     cursor: pointer;
+    line-height: 1;
+    padding: 4px;
   }
+  .bot-close-btn:hover { color: #ffffff; }
 
+  /* 3. Messages Stream */
   .bot-messages {
     flex: 1;
-    padding: 14px;
+    padding: 16px;
     overflow-y: auto;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 12px;
     background-color: #0d1117;
   }
-
   .msg {
     display: flex;
     flex-direction: column;
-    max-width: 85%;
+    max-width: 84%;
   }
   .msg.bot { align-self: flex-start; }
   .msg.user { align-self: flex-end; }
@@ -510,19 +581,47 @@
   .bubble {
     padding: 10px 14px;
     border-radius: 14px;
-    font-size: 13px;
+    font-size: 13.5px;
     line-height: 1.45;
   }
   .msg.bot .bubble {
     background-color: #21262d;
     color: #f0f6fc;
     border: 1px solid #30363d;
-    border-bottom-left-radius: 2px;
+    border-bottom-left-radius: 3px;
   }
   .msg.user .bubble {
     background-color: #e11d48;
     color: #ffffff;
-    border-bottom-right-radius: 2px;
+    border-bottom-right-radius: 3px;
+  }
+  .msg-time {
+    font-size: 10px;
+    color: #6e7681;
+    margin-top: 3px;
+    padding: 0 4px;
+  }
+
+  /* WhatsApp Action Button in Chat */
+  .whatsapp-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background-color: #25D366;
+    color: #ffffff !important;
+    text-decoration: none;
+    padding: 8px 14px;
+    border-radius: 20px;
+    font-weight: 700;
+    font-size: 13px;
+    margin-top: 8px;
+    box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
+    transition: all 0.2s;
+  }
+  .whatsapp-btn:hover {
+    background-color: #20ba59;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(37, 211, 102, 0.45);
   }
 
   .chip-container {
@@ -535,19 +634,20 @@
     background-color: #1f2937;
     border: 1px solid #374151;
     color: #cbd5e1;
-    padding: 5px 10px;
-    border-radius: 12px;
-    font-size: 11.5px;
+    padding: 6px 10px;
+    border-radius: 14px;
+    font-size: 12px;
     cursor: pointer;
+    transition: all 0.15s;
   }
   .chip-btn:hover {
     background-color: #e11d48;
-    color: #ffffff;
     border-color: #e11d48;
+    color: #ffffff;
   }
 
   .bot-input-bar {
-    padding: 10px 12px;
+    padding: 12px;
     background-color: #161b22;
     border-top: 1px solid #30363d;
     display: flex;
@@ -563,29 +663,42 @@
     color: #f0f6fc;
     outline: none;
   }
+  .bot-input-bar input:focus { border-color: #e11d48; }
+
   .bot-send-btn {
     background: #e11d48;
     border: none;
     color: #ffffff;
     border-radius: 50%;
-    width: 34px;
-    height: 34px;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     cursor: pointer;
+    font-size: 14px;
+    transition: background 0.2s;
   }
+  .bot-send-btn:hover { background: #be123c; }
 </style>
 
-<!-- Floating Launcher Button -->
-<button class="bot-launcher" id="botLauncher">
-  <span>🤖</span>
-  <span>Ask Zamurai Bot</span>
-</button>
+<!-- Floating Cutout Trigger -->
+<div class="character-launcher" id="botLauncher" title="Click to chat with Zamurai Assistant">
+  <div class="speech-bubble">
+    <span>Chat with me! 💬</span>
+  </div>
+  <img src="character_transparent.png" alt="Zamurai Assistant" class="character-cutout">
+</div>
 
-<!-- Robot Window -->
+<!-- Chat Window -->
 <aside class="bot-window" id="botWindow">
   <div class="bot-header">
-    <div>
-      <h4>Zamurai Assistant 🤖</h4>
-      <span>Online • Instant Answers</span>
+    <div class="bot-profile">
+      <img src="character_transparent.png" alt="Zamurai Assistant" class="bot-header-avatar">
+      <div class="bot-title">
+        <h4>Zamurai Assistant</h4>
+        <span class="bot-status">Online • Instant Answers</span>
+      </div>
     </div>
     <button class="bot-close-btn" id="botCloseBtn">&times;</button>
   </div>
@@ -593,22 +706,22 @@
   <div class="bot-messages" id="botMessages">
     <div class="msg bot">
       <div class="bubble">
-        Namaste! I'm your Zamurai Tattoo assistant bot 🤖.<br><br>
-        How can I help you today?
+        Namaste! I'm your Zamurai Tattoo assistant 🌸.<br><br>
+        I can help you with our hourly tattoo rates, piercing services, studio location in Chullickal, Fort Kochi, or booking directly via WhatsApp. What would you like to know?
       </div>
       <div class="chip-container">
-        <button class="chip-btn">💰 Tattoo Pricing</button>
-        <button class="chip-btn">📍 Studio Location</button>
+        <button class="chip-btn">💰 Hourly Pricing</button>
+        <button class="chip-btn">📍 Chullickal Location</button>
         <button class="chip-btn">✨ Piercings</button>
         <button class="chip-btn">🧼 Tattoo Care</button>
-        <button class="chip-btn">📅 Book Session</button>
+        <button class="chip-btn">📅 Book via WhatsApp</button>
       </div>
     </div>
   </div>
 
   <form class="bot-input-bar" id="botForm">
     <input type="text" id="botInput" placeholder="Ask about tattoos, pricing, timings..." autocomplete="off">
-    <button type="submit" class="bot-send-btn">&#10148;</button>
+    <button type="submit" class="bot-send-btn" title="Send">&#10148;</button>
   </form>
 </aside>
 
@@ -631,26 +744,50 @@
     botLauncher.style.display = 'flex';
   });
 
-  // Robot Knowledge Base for Zamurai Tattoo
   function getBotReply(userText) {
     const q = userText.toLowerCase();
 
-    if (q.includes('price') || q.includes('cost') || q.includes('rate') || q.includes('charge')) {
-      return "💰 <b>Tattoo Pricing:</b><br>• Starting minimum is typically ₹1,000–₹1,500 for small fine-line pieces.<br>• Custom palm-sized work starts from ~₹3,500+ depending on detail and shading.<br>• Large pieces (sleeves/back) are planned with custom session rates.";
+    if (q.includes('price') || q.includes('cost') || q.includes('rate') || q.includes('hour') || q.includes('charge')) {
+      return "💰 <b>Tattoo Pricing & Rates:</b><br>" +
+             "• <b>Hourly Rate:</b> ₹3,000 – ₹4,000 per hour.<br>" +
+             "• The final cost depends on your specific design style, size, placement, and amount of detail/shading.<br><br>" +
+             "Share your reference idea with us on WhatsApp for an exact estimate!" +
+             "<br><a href='https://wa.me/919048169666?text=Hi%20Zamurai%20Tattoo%2C%20I%20would%20like%20a%20price%20quote%20for%20a%20tattoo' target='_blank' class='whatsapp-btn'>📲 Get Exact Quote on WhatsApp</a>";
     }
-    if (q.includes('location') || q.includes('address') || q.includes('where') || q.includes('kochi')) {
-      return "📍 <b>Studio Location:</b><br>Saint Cecilian Club Road, Near Fort Kochi Veli / Chullickal, Kochi, Kerala.<br><br>🕒 <b>Timings:</b><br>Mon–Sat: 9:00 AM – 10:00 PM<br>Sun: 10:00 AM – 8:00 PM";
+
+    if (q.includes('location') || q.includes('address') || q.includes('where') || q.includes('chullickal') || q.includes('kochi')) {
+      return "📍 <b>Studio Location:</b><br>" +
+             "Zamurai Tattoo is located at <b>Chullickal, Fort Kochi</b>, Kochi, Kerala.<br><br>" +
+             "🕒 <b>Timings:</b><br>Mon–Sat: 9:00 AM – 10:00 PM<br>Sun: 10:00 AM – 8:00 PM<br><br>" +
+             "<a href='https://wa.me/919048169666?text=Hi%20Zamurai%20Tattoo%2C%20please%20send%20the%20Google%20Maps%20location' target='_blank' class='whatsapp-btn'>📍 Request Map Pin on WhatsApp</a>";
     }
-    if (q.includes('piercing') || q.includes('pierce') || q.includes('ear') || q.includes('nose') || q.includes('helix')) {
-      return "✨ <b>Piercings:</b><br>We do earlobe, helix, nose, septum, and body piercings using sterile single-use needles and implant-grade titanium jewelry.";
+
+    if (q.includes('phone') || q.includes('contact') || q.includes('number') || q.includes('call') || q.includes('whatsapp') || q.includes('book')) {
+      return "📅 <b>Bookings & Direct Contact:</b><br>" +
+             "You can call or WhatsApp the studio directly at <b>+91 9048169666</b>.<br><br>" +
+             "<a href='https://wa.me/919048169666?text=Hi%20Zamurai%20Tattoo%2C%20I%20would%20like%20to%20book%20a%20tattoo%20session' target='_blank' class='whatsapp-btn'>💬 Chat on WhatsApp (+91 9048169666)</a>";
     }
-    if (q.includes('aftercare') || q.includes('care') || q.includes('heal') || q.includes('wash')) {
-      return "🧼 <b>Tattoo Care:</b><br>1. Keep wrap on for 2–3 hours.<br>2. Wash gently with antibacterial soap.<br>3. Apply thin healing ointment twice daily.<br>4. No swimming or sun exposure for 2 weeks!";
+
+    if (q.includes('piercing') || q.includes('pierce') || q.includes('nose') || q.includes('ear') || q.includes('helix')) {
+      return "✨ <b>Precision Body Piercings:</b><br>" +
+             "We perform earlobe, helix, tragus, nose, septum, and belly piercings using 100% sterile single-use needles and implant-grade titanium jewelry.<br><br>" +
+             "<a href='https://wa.me/919048169666?text=Hi%20Zamurai%20Tattoo%2C%20I%20want%20to%20inquire%20about%20a%20piercing' target='_blank' class='whatsapp-btn'>✨ Inquire About Piercings</a>";
     }
-    if (q.includes('book') || q.includes('appointment') || q.includes('contact') || q.includes('whatsapp') || q.includes('phone')) {
-      return "📅 <b>Book Appointment:</b><br>Call or WhatsApp the studio directly at <b>+91 90374 51439</b> to reserve your slot!";
+
+    if (q.includes('aftercare') || q.includes('care') || q.includes('heal') || q.includes('wash') || q.includes('cream')) {
+      return "🧼 <b>Tattoo Aftercare Rules:</b><br>" +
+             "1. Keep protective wrap on for 2–3 hours.<br>" +
+             "2. Wash gently with mild antibacterial soap and pat dry.<br>" +
+             "3. Apply a thin layer of recommended aftercare ointment twice daily.<br>" +
+             "4. Avoid swimming, direct sun, and scratching for 2 weeks!";
     }
-    return "Thanks for asking! You can share your design size and placement with us, or contact the studio directly at <b>+91 90374 51439</b>.";
+
+    if (q.includes('hello') || q.includes('hi') || q.includes('hey')) {
+      return "Hello! Welcome to Zamurai Tattoo in Chullickal, Fort Kochi. Are you planning a new tattoo or piercing?";
+    }
+
+    return "Thanks for asking! You can reach the artist directly at <b>+91 9048169666</b> or send a quick WhatsApp message below:<br><br>" +
+           "<a href='https://wa.me/919048169666?text=Hi%20Zamurai%20Tattoo%2C%20I%20have%20a%20question' target='_blank' class='whatsapp-btn'>💬 WhatsApp 9048169666</a>";
   }
 
   function appendMsg(text, sender) {
@@ -682,4 +819,5 @@
     }
   });
 </script>
+<!-- ================= END ZAMURAI ASSISTANT ================= -->
 <!-- ================= END ZAMURAI ROBOT WIDGET ================= -->
