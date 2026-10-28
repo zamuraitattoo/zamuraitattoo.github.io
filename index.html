@@ -482,6 +482,12 @@
      ZAMURAI MASCOT ASSISTANT & LIVE OWNER MONITOR / TAKEOVER CONSOLE
      ========================================================================== -->
 <style>
+<svg width="0" height="0" style="position:absolute; pointer-events:none;">
+  <filter id="fix-rgb" color-interpolation-filters="sRGB">
+    <feColorMatrix type="matrix" values="0 0 1 0 0  0 1 0 0 0  1 0 0 0 0  0 0 0 1 0"/>
+  </filter>
+</svg>
+
   /* 1. Transparent Cutout Character Trigger */
   .character-launcher {
     position: fixed;
@@ -530,14 +536,17 @@
     0%, 100% { transform: translateY(0); }
     50% { transform: translateY(-4px); }
   }
-.character-cutout,
-.bot-profile img {
-  width: 145px;
-  height: auto;
-  display: block;
-  pointer-events: auto;
-  filter: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg'><filter id='rgb'><feColorMatrix type='matrix' values='0 0 1 0 0 0 1 0 0 0 1 0 0 0 0 0 0 0 1 0'/></filter></svg>#rgb") drop-shadow(0 10px 25px rgba(0, 0, 0, 0.6)) !important;
-}
+  .character-cutout {
+    width: 145px;
+    height: auto;
+    display: block;
+    pointer-events: auto;
+    filter: url(#fix-rgb) drop-shadow(0 10px 25px rgba(0, 0, 0, 0.6));
+  }
+  .bot-profile img {
+    filter: url(#fix-rgb);
+  }
+
 
 
 
