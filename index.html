@@ -1387,6 +1387,36 @@
       }
     };
   }
+
+  // Safeguard: if any cached avatar has Blue > Red channel, swap back to warm gold automatically
+  document.querySelectorAll('.character-cutout, .bot-header-avatar').forEach(img => {
+    const ensureGold = () => {
+      if (img.dataset.goldChecked) return;
+      img.dataset.goldChecked = "1";
+      try {
+        const c = document.createElement('canvas');
+        c.width = img.naturalWidth; c.height = img.naturalHeight;
+        if (!c.width || !c.height) return;
+        const ctx = c.getContext('2d');
+        ctx.drawImage(img, 0, 0);
+        const imgData = ctx.getImageData(0, 0, c.width, c.height);
+        const d = imgData.data;
+        let rSum = 0, bSum = 0;
+        for (let i = 0; i < d.length; i += 16) {
+          if (d[i+3] > 128) { rSum += d[i]; bSum += d[i+2]; }
+        }
+        if (bSum > rSum) {
+          for (let i = 0; i < d.length; i += 4) {
+            const tmp = d[i]; d[i] = d[i+2]; d[i+2] = tmp;
+          }
+          ctx.putImageData(imgData, 0, 0);
+          img.src = c.toDataURL();
+        }
+      } catch(e) {}
+    };
+    if (img.complete && img.naturalWidth) ensureGold();
+    else img.addEventListener('load', ensureGold, { once: true });
+  });
 </script>
 <!-- ================= END ZAMURAI MASCOT ASSISTANT ================= -->
 </body>
