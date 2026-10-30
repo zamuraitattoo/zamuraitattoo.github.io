@@ -9,4 +9,807 @@
 <article class="page-card"><span class="eyebrow">03 / Tattoo</span><h2>Fine Line &amp; Minimal</h2><p>Elegant linework, small symbols and understated designs with placement and longevity in mind.</p><a class="text-link" href="fine-line.html">Explore fine line ↗</a></article>
 <article class="page-card"><span class="eyebrow">04 / Tattoo</span><h2>Dotwork &amp; Stippling</h2><p>Dot-based textures and pepper shading for tonal depth, patterns and distinctive custom artwork.</p><a class="text-link" href="dotwork.html">Explore dotwork ↗</a></article>
 <article class="page-card"><span class="eyebrow">05 / Piercing</span><h2>Professional Piercing</h2><p>Placement guidance, jewellery discussion and clear aftercare information.</p><a class="text-link" href="piercing.html">Piercing details ↗</a></article>
-<article class="page-card"><span class="eyebrow">06 / Support</span><h2>Aftercare</h2><p>Helpful general care guidance and a reminder to follow the instructions provided for your procedure.</p><a class="text-link" href="aftercare.html">Read aftercare ↗</a></article></div><div class="page-cta"><div><h2>Have an idea in mind?</h2><p>Tell us the style, placement and approximate size.</p></div><a class="btn" href="booking.html">Start a consultation ↗</a></div></section></main><footer><div class="footer-brand">ZAMURAI <span style="font-family:var(--sans);font-size:9px;letter-spacing:.16em">TATTOO &amp; PIERCING</span></div><div>St Cecilian Club Road, Chullikkal · Fort Kochi</div><div><a href="services.html">Services</a> · <a href="gallery.html">Gallery</a> · <a href="artist.html">Artist</a> · <a href="aftercare.html">Aftercare</a> · <a href="contact.html">Contact</a></div><div>© <span data-year></span> Zamurai Tattoo</div></footer><script src="script.js" defer></script></body></html>
+<article class="page-card"><span class="eyebrow">06 / Support</span><h2>Aftercare</h2><p>Helpful general care guidance and a reminder to follow the instructions provided for your procedure.</p><a class="text-link" href="aftercare.html">Read aftercare ↗</a></article></div><div class="page-cta"><div><h2>Have an idea in mind?</h2><p>Tell us the style, placement and approximate size.</p></div><a class="btn" href="booking.html">Start a consultation ↗</a></div></section></main><footer><div class="footer-brand">ZAMURAI <span style="font-family:var(--sans);font-size:9px;letter-spacing:.16em">TATTOO &amp; PIERCING</span></div><div>St Cecilian Club Road, Chullikkal · Fort Kochi</div><div><a href="services.html">Services</a> · <a href="gallery.html">Gallery</a> · <a href="artist.html">Artist</a> · <a href="aftercare.html">Aftercare</a> · <a href="contact.html">Contact</a></div><div>© <span data-year></span> Zamurai Tattoo</div></footer><script src="script.js" defer></script><!-- ==========================================================================
+     ZAMURAI MASCOT ASSISTANT (SIDE-PEEKING AVATAR + FULL-PAGE CHAT + 3 BOOKING OPTIONS)
+     ========================================================================== -->
+<style>
+  /* 1. Original Character Cutout Peeking from the Right Edge (No Round Icon) */
+  .character-launcher {
+    position: fixed;
+    bottom: 12px;
+    right: 0;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    z-index: 9999;
+    user-select: none;
+    font-family: 'Montserrat', -apple-system, sans-serif;
+    padding-right: 4px;
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+  .character-launcher:hover {
+    transform: translateX(-6px) translateY(-4px);
+  }
+
+  .speech-bubble {
+    background: linear-gradient(135deg, #18251F, #0B1711);
+    color: #FAF8F5;
+    padding: 6px 12px;
+    border-radius: 14px 14px 4px 14px;
+    font-size: 11.5px;
+    font-weight: 600;
+    white-space: nowrap;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.45);
+    margin-bottom: 2px;
+    margin-right: 10px;
+    border: 1px solid rgba(210, 173, 104, 0.55);
+    animation: gentleFloat 2.8s infinite ease-in-out;
+  }
+  @keyframes gentleFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-4px); }
+  }
+
+  .character-cutout {
+    width: 82px;
+    height: auto;
+    display: block;
+    border: none !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    filter: drop-shadow(-4px 6px 14px rgba(0, 0, 0, 0.6));
+    transform: translateX(8px);
+    transition: transform 0.25s ease;
+  }
+  .character-launcher:hover .character-cutout {
+    transform: translateX(0);
+  }
+
+  @media (max-width: 600px) {
+    .character-launcher {
+      bottom: 8px;
+      right: 0;
+    }
+    .character-cutout {
+      width: 66px;
+      transform: translateX(6px);
+    }
+    .speech-bubble {
+      font-size: 10.5px;
+      padding: 5px 10px;
+      margin-right: 6px;
+    }
+  }
+
+  /* 2. Full-Page Dedicated Chat View (No Cramped Mobile Popup Interference) */
+  .bot-window {
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    height: 100dvh;
+    background-color: #0B130E;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    z-index: 100000;
+    font-family: 'Montserrat', sans-serif;
+    color: #FAF8F5;
+  }
+
+  .bot-page-container {
+    width: 100%;
+    max-width: 680px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    background-color: #141C17;
+    border-left: 1px solid rgba(210, 173, 104, 0.2);
+    border-right: 1px solid rgba(210, 173, 104, 0.2);
+  }
+
+  .bot-header {
+    background-color: #1C2B22;
+    padding: 14px 18px;
+    border-bottom: 1px solid rgba(210, 173, 104, 0.25);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-shrink: 0;
+  }
+  .bot-profile {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .bot-header-avatar {
+    width: 44px;
+    height: 44px;
+    object-fit: contain;
+    object-position: top center;
+    filter: drop-shadow(0 2px 6px rgba(0,0,0,0.5));
+  }
+  .bot-title h4 {
+    margin: 0;
+    font-size: 15px;
+    font-weight: 600;
+    color: #FAF8F5;
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    letter-spacing: 0.05em;
+  }
+  .bot-status {
+    font-size: 11px;
+    color: #4ade80;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  .bot-status::before {
+    content: "";
+    width: 7px;
+    height: 7px;
+    background-color: #4ade80;
+    border-radius: 50%;
+    display: inline-block;
+  }
+  .bot-close-btn {
+    background: rgba(210, 173, 104, 0.15);
+    border: 1px solid rgba(210, 173, 104, 0.45);
+    color: #FAF8F5;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    padding: 8px 14px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: background 0.2s;
+  }
+  .bot-close-btn:hover {
+    background: #D2AD68;
+    color: #080D0A;
+  }
+
+  .bot-messages {
+    flex: 1;
+    padding: 18px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    background: radial-gradient(circle at top right, rgba(49, 95, 75, 0.15), transparent 65%);
+  }
+
+  .msg {
+    display: flex;
+    flex-direction: column;
+    max-width: 88%;
+    animation: fadeIn 0.2s ease-out;
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .msg.bot { align-self: flex-start; }
+  .msg.user { align-self: flex-end; }
+  .msg.owner { align-self: flex-start; }
+
+  .msg .bubble {
+    padding: 13px 16px;
+    border-radius: 14px;
+    font-size: 14px;
+    line-height: 1.55;
+    word-wrap: break-word;
+  }
+  .msg.bot .bubble {
+    background-color: #1F2E25;
+    color: #FAF8F5;
+    border-bottom-left-radius: 4px;
+    border: 1px solid rgba(210, 173, 104, 0.2);
+  }
+  .msg.owner .bubble {
+    background-color: #26382E;
+    color: #FAF8F5;
+    border-bottom-left-radius: 4px;
+    border: 1px solid #D2AD68;
+  }
+  .msg.user .bubble {
+    background: linear-gradient(135deg, #D2AD68, #B58E49);
+    color: #080D0A;
+    font-weight: 500;
+    border-bottom-right-radius: 4px;
+  }
+  .msg-time {
+    font-size: 10px;
+    color: #A7B39B;
+    margin-top: 4px;
+    padding: 0 4px;
+  }
+  .msg.user .msg-time { text-align: right; }
+
+  .booking-options-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 10px;
+    width: 100%;
+  }
+  .booking-opt-btn {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    text-decoration: none;
+    padding: 11px 14px;
+    border-radius: 10px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #fff;
+    transition: transform 0.15s ease, opacity 0.15s ease;
+  }
+  .booking-opt-btn:hover {
+    transform: translateY(-1px);
+    opacity: 0.95;
+  }
+  .booking-opt-btn span {
+    font-size: 11px;
+    font-weight: 500;
+    opacity: 0.9;
+  }
+  .booking-opt-btn.call-opt {
+    background: linear-gradient(135deg, #D2AD68, #9E7B3B);
+    color: #080D0A;
+  }
+  .booking-opt-btn.wa-opt {
+    background: #1fa855;
+    color: #fff;
+  }
+  .booking-opt-btn.cal-opt {
+    background: #1a73e8;
+    color: #fff;
+  }
+
+  .chip-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+    margin-top: 10px;
+  }
+  .chip-btn {
+    background-color: rgba(49, 95, 75, 0.35);
+    color: #D2AD68;
+    border: 1px solid rgba(210, 173, 104, 0.45);
+    padding: 7px 13px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: inherit;
+  }
+  .chip-btn:hover {
+    background-color: #D2AD68;
+    color: #080D0A;
+  }
+
+  .bot-input-bar {
+    padding: 12px 16px;
+    background-color: #18241D;
+    border-top: 1px solid rgba(210, 173, 104, 0.2);
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    flex-shrink: 0;
+  }
+  .bot-input-bar input {
+    flex: 1;
+    background-color: #0E1712;
+    border: 1px solid rgba(210, 173, 104, 0.3);
+    color: #FAF8F5;
+    padding: 12px 16px;
+    border-radius: 24px;
+    font-size: 14px;
+    outline: none;
+    font-family: inherit;
+  }
+  .bot-input-bar input:focus {
+    border-color: #D2AD68;
+  }
+  .bot-send-btn {
+    background-color: #D2AD68;
+    color: #080D0A;
+    border: none;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    flex-shrink: 0;
+  }
+
+  /* 3. Hidden Owner Monitor (Unlocked ONLY via secret code stevin187 or /admin) */
+  .owner-dock-btn {
+    display: none !important;
+  }
+  .owner-panel {
+    position: fixed;
+    bottom: 40px;
+    left: 12px;
+    width: 340px;
+    max-width: calc(100vw - 24px);
+    background: #0F1914;
+    border: 1px solid #D2AD68;
+    border-radius: 12px;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.85);
+    z-index: 100001;
+    display: none;
+    flex-direction: column;
+    font-family: 'Montserrat', sans-serif;
+    color: #FAF8F5;
+    overflow: hidden;
+  }
+  .owner-header {
+    background: #1C2B22;
+    padding: 10px 14px;
+    border-bottom: 1px solid rgba(210, 173, 104, 0.3);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 12px;
+    font-weight: 600;
+    color: #D2AD68;
+  }
+  .owner-badge {
+    background: rgba(74, 222, 128, 0.15);
+    color: #4ade80;
+    padding: 2px 7px;
+    border-radius: 10px;
+    font-size: 10px;
+  }
+  .owner-body {
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    font-size: 12px;
+  }
+  .owner-stats {
+    display: flex;
+    justify-content: space-between;
+    background: #16221B;
+    padding: 8px 10px;
+    border-radius: 8px;
+    border: 1px solid rgba(255,255,255,0.06);
+  }
+  .owner-stream {
+    height: 140px;
+    overflow-y: auto;
+    background: #080D0A;
+    padding: 8px;
+    border-radius: 8px;
+    border: 1px solid rgba(210, 173, 104, 0.2);
+    font-size: 11px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .stream-msg {
+    padding: 4px 6px;
+    border-radius: 4px;
+    line-height: 1.35;
+  }
+  .stream-msg.v { background: rgba(210, 173, 104, 0.15); color: #FAF8F5; }
+  .stream-msg.b { background: rgba(49, 95, 75, 0.25); color: #A7B39B; }
+  .stream-msg.o { background: rgba(74, 222, 128, 0.2); color: #4ade80; font-weight: 600; }
+  .owner-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .owner-toggle-label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    cursor: pointer;
+    color: #FAF8F5;
+  }
+  .owner-input-row {
+    display: flex;
+    gap: 6px;
+  }
+  .owner-input-row input {
+    flex: 1;
+    background: #080D0A;
+    border: 1px solid rgba(210, 173, 104, 0.4);
+    color: #fff;
+    padding: 6px 10px;
+    border-radius: 6px;
+    font-size: 11px;
+  }
+  .owner-send-btn {
+    background: #D2AD68;
+    color: #080D0A;
+    border: none;
+    padding: 6px 10px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+</style>
+
+<!-- Original Character Avatar Peeking from the Side -->
+<div class="character-launcher" id="botLauncher" title="Chat &amp; Book with Zamurai Assistant">
+  <div class="speech-bubble" id="launcherBubble">
+    <span>Need help? 👋</span>
+  </div>
+  <img src="images/character_transparent.png" alt="Zamurai Assistant" class="character-cutout">
+</div>
+
+<!-- Full-Page Dedicated Chat Screen -->
+<aside class="bot-window" id="botWindow">
+  <div class="bot-page-container">
+    <div class="bot-header">
+      <div class="bot-profile">
+        <img src="images/character_transparent.png" alt="Zamurai Assistant" class="bot-header-avatar">
+        <div class="bot-title">
+          <h4>Zamurai Tattoo Assistant</h4>
+          <span class="bot-status">Online • Instant Help &amp; Direct Booking</span>
+        </div>
+      </div>
+      <button class="bot-close-btn" id="botCloseBtn">&#8592; Back to Website</button>
+    </div>
+
+    <div class="bot-messages" id="botMessages">
+      <div class="msg bot">
+        <div class="bubble">
+          Hi there! 👋 Welcome to <b>Zamurai Tattoo &amp; Piercing Studio</b>.<br><br>
+          To book your session with <b>Stevin</b> without any hassle, choose one of our 3 direct booking options below, or ask me any question!
+          <div class="booking-options-grid">
+            <a href="tel:+919048169666" class="booking-opt-btn call-opt" data-track="Clicked Option 1: Call Zamurai Tattoo Directly">
+              <div>📞 1. Call Zamurai Tattoo Directly</div>
+              <span>+91 90481 69666</span>
+            </a>
+            <a href="https://wa.me/919048169666?text=Hi%20Zamurai%20Tattoo%20Studio!%20I%20would%20like%20to%20book%20an%20appointment." target="_blank" rel="noopener" class="booking-opt-btn wa-opt" data-track="Clicked Option 2: Book via WhatsApp Message">
+              <div>💬 2. Book Through WhatsApp</div>
+              <span>Chat on WhatsApp</span>
+            </a>
+            <a href="https://calendar.app.google/edy3ETdKmtwYLNxr6" target="_blank" rel="noopener" class="booking-opt-btn cal-opt" data-track="Clicked Option 3: Book on Google Calendar">
+              <div>📅 3. Book on Google Calendar</div>
+              <span>Pick Date &amp; Time</span>
+            </a>
+          </div>
+        </div>
+        <div class="chip-container">
+          <button class="chip-btn">🎨 Tattoo Styles</button>
+          <button class="chip-btn">💰 Check Rates</button>
+          <button class="chip-btn">✨ Piercing Info</button>
+          <button class="chip-btn">📍 Studio Location</button>
+          <button class="chip-btn">🧼 Aftercare Tips</button>
+        </div>
+        <span class="msg-time">Just now</span>
+      </div>
+    </div>
+
+    <form class="bot-input-bar" id="botForm">
+      <input type="text" id="botInput" placeholder="Ask a question about tattoos, piercing, or pricing..." autocomplete="off">
+      <button type="submit" class="bot-send-btn" title="Send">&#10148;</button>
+    </form>
+  </div>
+</aside>
+
+<button class="owner-dock-btn" id="ownerDockBtn" title="Owner Live Chat &amp; Takeover">⚙️ Owner Chat Monitor</button>
+
+<div class="owner-panel" id="ownerPanel">
+  <div class="owner-header">
+    <span>🛡️ Zamurai Live Chat Monitor</span>
+    <span class="owner-badge" id="ownerActiveCount">1 Active Visitor</span>
+    <button style="background:none; border:none; color:#D2AD68; cursor:pointer;" id="ownerCloseBtn">&times;</button>
+  </div>
+  <div class="owner-body">
+    <div class="owner-stats">
+      <span><b>Status:</b> Stealth Mode (Visitor cannot see you)</span>
+      <span id="ownerLiveIndicator" style="color:#4ade80;">● Live Sync</span>
+    </div>
+    <div><b>Live Visitor Transcript:</b></div>
+    <div class="owner-stream" id="ownerStream">
+      <div class="stream-msg b">🤖 Robot: "Welcome! Choose from 3 direct booking options or ask a question."</div>
+    </div>
+    <div class="owner-controls">
+      <label class="owner-toggle-label">
+        <input type="checkbox" id="autoReplyToggle" checked>
+        <span>Keep Robot Auto-Reply Active</span>
+      </label>
+      <div style="font-size:10px; color:#A7B39B;">Tip: Uncheck above to silence the robot and chat directly as yourself, or type below to send on the robot's behalf!</div>
+      <div class="owner-input-row">
+        <input type="text" id="ownerMsgInput" placeholder="Type message to send as robot...">
+        <button class="owner-send-btn" id="ownerSendBtn">Send as Robot</button>
+      </div>
+    </div>
+    <details style="margin-top:6px; font-size:11px; color:#A7B39B;">
+      <summary style="cursor:pointer; color:#D2AD68;">📲 Push Notifications to your Phone (Telegram)</summary>
+      <div style="padding-top:6px; display:flex; flex-direction:column; gap:4px;">
+        <input type="text" id="teleToken" placeholder="Telegram Bot Token" style="background:#080D0A; border:1px solid #315F4B; color:#fff; padding:4px 6px; font-size:10px; border-radius:4px;">
+        <input type="text" id="teleChatId" placeholder="Telegram Chat ID" style="background:#080D0A; border:1px solid #315F4B; color:#fff; padding:4px 6px; font-size:10px; border-radius:4px;">
+        <button id="saveTeleBtn" style="background:#315F4B; color:#fff; border:none; padding:4px; font-size:10px; border-radius:4px; cursor:pointer;">Save Telegram Settings</button>
+      </div>
+    </details>
+  </div>
+</div>
+
+<script>
+  const botLauncher = document.getElementById('botLauncher');
+  const botWindow = document.getElementById('botWindow');
+  const botCloseBtn = document.getElementById('botCloseBtn');
+  const botMessages = document.getElementById('botMessages');
+  const botForm = document.getElementById('botForm');
+  const botInput = document.getElementById('botInput');
+
+  const ownerDockBtn = document.getElementById('ownerDockBtn');
+  const ownerPanel = document.getElementById('ownerPanel');
+  const ownerCloseBtn = document.getElementById('ownerCloseBtn');
+  const ownerStream = document.getElementById('ownerStream');
+  const ownerMsgInput = document.getElementById('ownerMsgInput');
+  const ownerSendBtn = document.getElementById('ownerSendBtn');
+  const autoReplyToggle = document.getElementById('autoReplyToggle');
+
+  const chatChannel = ('BroadcastChannel' in window) ? new BroadcastChannel('zamurai_live_chat_channel') : null;
+
+  function openChatPage() {
+    botWindow.style.display = 'flex';
+    botLauncher.style.display = 'none';
+    document.body.style.overflow = 'hidden';
+    if (location.hash !== '#chat') {
+      try { history.pushState({ zamuraiChat: true }, '', '#chat'); } catch (e) {}
+    }
+    notifyOwnerSession('Visitor opened chat page');
+  }
+
+  function closeChatPage() {
+    botWindow.style.display = 'none';
+    botLauncher.style.display = 'flex';
+    document.body.style.overflow = '';
+    if (location.hash === '#chat') {
+      try { history.back(); } catch (e) {}
+    }
+  }
+
+  botLauncher.addEventListener('click', openChatPage);
+  botCloseBtn.addEventListener('click', closeChatPage);
+
+  window.addEventListener('popstate', () => {
+    if (location.hash !== '#chat' && botWindow.style.display === 'flex') {
+      botWindow.style.display = 'none';
+      botLauncher.style.display = 'flex';
+      document.body.style.overflow = '';
+    }
+  });
+
+  function toggleOwnerPanel() {
+    const isVisible = ownerPanel.style.display === 'flex';
+    ownerPanel.style.display = isVisible ? 'none' : 'flex';
+  }
+  ownerDockBtn.addEventListener('click', toggleOwnerPanel);
+  ownerCloseBtn.addEventListener('click', () => ownerPanel.style.display = 'none');
+
+  window.addEventListener('keydown', (e) => {
+    if (e.ctrlKey && e.shiftKey && (e.key === 'A' || e.key === 'a')) {
+      e.preventDefault();
+      toggleOwnerPanel();
+    }
+  });
+
+  const DEFAULT_TELE_TOKEN = atob("OTE0MzQ0NzQ3MzpBQUYtYTVjV3BlU21JZzlZWTBvcHNvY3pSV24yd1A1YWtqUQ==");
+  const DEFAULT_TELE_CHAT_ID = "8801884922";
+
+  try {
+    if (localStorage.getItem('zamurai_tele_chat') === '9143447473' || !localStorage.getItem('zamurai_tele_chat')) {
+      localStorage.setItem('zamurai_tele_chat', '8801884922');
+    }
+  } catch(e) {}
+
+  function notifyOwnerSession(text) {
+    if (chatChannel) {
+      chatChannel.postMessage({ type: 'VISITOR_ACTIVE', text: text, time: new Date().toLocaleTimeString() });
+    }
+    localStorage.setItem('zamurai_last_active', Date.now());
+    if (text === 'Visitor opened chat page') {
+      const pingText = `👋 A visitor just opened the Zamurai Tattoo chat page!\n🕒 Time: ${new Date().toLocaleTimeString('en-IN', { timeZone: 'Asia/Kolkata' })}`;
+      sendTelegramNotification(pingText);
+    }
+  }
+
+  function sendTelegramNotification(msg) {
+    const token = DEFAULT_TELE_TOKEN;
+    const chatId = "8801884922";
+    if (!token || !chatId) return;
+    const isCustomAlert = msg.startsWith('🚨') || msg.startsWith('🗓️') || msg.startsWith('👋') || msg.startsWith('📲');
+    const text = isCustomAlert ? msg : `🚨 Zamurai Tattoo Live Chat\n\n👤 Visitor: "${msg}"\n🕒 Time: ${new Date().toLocaleTimeString('en-IN', { timeZone: 'Asia/Kolkata' })}\n\n👉 Open Website: https://zamuraitattoo.com/`;
+    const url = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(text)}`;
+    fetch(url, { method: 'GET', mode: 'no-cors' }).catch(() => {});
+    try {
+      const beacon = new Image();
+      beacon.src = url;
+    } catch(err) {}
+  }
+
+  document.getElementById('saveTeleBtn').addEventListener('click', () => {
+    const token = document.getElementById('teleToken').value.trim();
+    const chat = document.getElementById('teleChatId').value.trim();
+    if (token && chat) {
+      localStorage.setItem('zamurai_tele_token', token);
+      localStorage.setItem('zamurai_tele_chat', chat);
+      const t = document.createElement('div');
+      t.textContent = 'Telegram settings saved!';
+      t.style.cssText = 'position:fixed;top:20px;right:20px;background:#25D366;color:#000;padding:8px 14px;border-radius:8px;z-index:999999;font-weight:700;';
+      document.body.appendChild(t);
+      setTimeout(() => t.remove(), 2500);
+    }
+  });
+  if (localStorage.getItem('zamurai_tele_token')) {
+    document.getElementById('teleToken').value = localStorage.getItem('zamurai_tele_token');
+  }
+  if (localStorage.getItem('zamurai_tele_chat')) {
+    document.getElementById('teleChatId').value = localStorage.getItem('zamurai_tele_chat');
+  }
+
+  const THREE_BOOKING_OPTIONS_HTML = `
+    <div class="booking-options-grid">
+      <a href="tel:+919048169666" class="booking-opt-btn call-opt" data-track="Clicked Option 1: Call Zamurai Tattoo Directly">
+        <div>📞 1. Call Zamurai Tattoo Directly</div>
+        <span>+91 90481 69666</span>
+      </a>
+      <a href="https://wa.me/919048169666?text=Hi%20Zamurai%20Tattoo%20Studio!%20I%20would%20like%20to%20book%20an%20appointment." target="_blank" rel="noopener" class="booking-opt-btn wa-opt" data-track="Clicked Option 2: Book via WhatsApp Message">
+        <div>💬 2. Book Through WhatsApp</div>
+        <span>Chat on WhatsApp</span>
+      </a>
+      <a href="https://calendar.app.google/edy3ETdKmtwYLNxr6" target="_blank" rel="noopener" class="booking-opt-btn cal-opt" data-track="Clicked Option 3: Book on Google Calendar">
+        <div>📅 3. Book on Google Calendar</div>
+        <span>Pick Date &amp; Time</span>
+      </a>
+    </div>`;
+
+  function getBotReply(userText) {
+    const q = userText.toLowerCase().trim();
+
+    if (q.includes('book') || q.includes('appointment') || q.includes('schedule') || q.includes('slot') || q.includes('contact') || q.includes('call') || q.includes('whatsapp') || q.includes('calendar')) {
+      return "🗓️ <b>Book Your Appointment at Zamurai Tattoo Studio:</b><br>" +
+             "Choose any of our 3 direct booking options below to connect with artist <b>Stevin</b> immediately:" +
+             THREE_BOOKING_OPTIONS_HTML;
+    }
+
+    if (q.includes('style') || q.includes('tattoo') || q.includes('design')) {
+      return "🎨 <b>Our Signature Tattoo Styles:</b><br>" +
+             "• <b>Black &amp; Grey Realism &amp; Portraits</b><br>" +
+             "• <b>Fine Line &amp; Minimalist Tattoos</b><br>" +
+             "• <b>Custom Story &amp; Cover-Up Concepts</b><br><br>" +
+             "Ready to discuss your design or book a session? Pick an option below:" +
+             THREE_BOOKING_OPTIONS_HTML;
+    }
+
+    if (q.includes('pierce') || q.includes('piercing') || q.includes('nose') || q.includes('ear') || q.includes('helix') || q.includes('septum')) {
+      return "✨ <b>Hygienic Body Piercing:</b><br>" +
+             "We perform earlobe, helix, tragus, nose, septum, and navel piercings using 100% sterile single-use needles and implant-grade titanium jewelry.<br><br>" +
+             "Book your piercing slot using any of the 3 options below:" +
+             THREE_BOOKING_OPTIONS_HTML;
+    }
+
+    if (q.includes('price') || q.includes('cost') || q.includes('rate') || q.includes('hour') || q.includes('charge') || q.includes('how much')) {
+      return "💰 <b>Tattoo Pricing &amp; Rates:</b><br>" +
+             "• Our studio rate is <b>₹3,000 – ₹4,000 per hour</b> depending on complexity and detail.<br>" +
+             "• You can share your reference image on WhatsApp or call us directly for an exact quote:" +
+             THREE_BOOKING_OPTIONS_HTML;
+    }
+
+    if (q.includes('location') || q.includes('address') || q.includes('where') || q.includes('chullickal') || q.includes('kochi') || q.includes('map')) {
+      return "📍 <b>Studio Location &amp; Hours:</b><br>" +
+             "Zamurai Tattoo &amp; Piercing Studio, <b>St Cecilian Club Road, Chullickal, Fort Kochi</b>, Kerala 682005.<br><br>" +
+             "🕒 <b>Timings:</b> Mon–Sat: 9:00 AM – 10:00 PM | Sun: 10:00 AM – 8:00 PM<br><br>" +
+             "<a href=\"https://maps.app.goo.gl/ewaMQxjLH9EzS3gF6\" target=\"_blank\" rel=\"noopener\" class=\"booking-opt-btn\" style=\"background:#315F4B; margin-bottom:8px;\">📍 Open Studio Location on Google Maps <span>Directions ↗</span></a>" +
+             THREE_BOOKING_OPTIONS_HTML;
+    }
+
+    if (q.includes('aftercare') || q.includes('care') || q.includes('heal') || q.includes('wash')) {
+      return "🧼 <b>Tattoo Aftercare Guide:</b><br>" +
+             "1. Keep the protective wrap on for 2–3 hours.<br>" +
+             "2. Wash gently with mild antibacterial soap and pat dry.<br>" +
+             "3. Apply a thin layer of recommended aftercare ointment twice daily.<br>" +
+             "4. Avoid swimming, direct sun, and scratching for 2 weeks!";
+    }
+
+    return "Thanks for reaching out! You can connect with us or book your session directly using any of the 3 options below:" +
+           THREE_BOOKING_OPTIONS_HTML;
+  }
+
+  function appendMsg(text, sender) {
+    const div = document.createElement('div');
+    div.className = `msg ${sender}`;
+    div.innerHTML = `<div class="bubble">${text}</div><span class="msg-time">${new Date().toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'})}</span>`;
+    botMessages.appendChild(div);
+    botMessages.scrollTop = botMessages.scrollHeight;
+
+    const cleanLog = text.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
+    logToOwnerStream(sender === 'user' ? `👤 Visitor: "${cleanLog}"` : (sender === 'owner' ? `🛡️ Owner: "${cleanLog}"` : `🤖 Robot: "${cleanLog.slice(0, 90)}..."`), sender);
+
+    if (chatChannel) {
+      chatChannel.postMessage({ type: 'NEW_MSG', sender: sender, text: cleanLog, time: new Date().toLocaleTimeString() });
+    }
+  }
+
+  function logToOwnerStream(str, sender) {
+    const p = document.createElement('div');
+    p.className = `stream-msg ${sender === 'user' ? 'v' : (sender === 'owner' ? 'o' : 'b')}`;
+    p.textContent = str;
+    ownerStream.appendChild(p);
+    ownerStream.scrollTop = ownerStream.scrollHeight;
+  }
+
+  function handleVisitorQuery(text) {
+    const raw = text.trim();
+    if (!raw) return;
+
+    if (raw.toLowerCase() === '/admin' || raw.toLowerCase() === '#stevin' || raw.toLowerCase() === 'stevin187') {
+      botInput.value = '';
+      ownerPanel.style.display = 'flex';
+      return;
+    }
+
+    appendMsg(raw, 'user');
+    botInput.value = '';
+
+    sendTelegramNotification(raw);
+
+    if (autoReplyToggle.checked) {
+      setTimeout(() => {
+        const reply = getBotReply(raw);
+        appendMsg(reply, 'bot');
+      }, 350);
+    }
+  }
+
+  botForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    handleVisitorQuery(botInput.value);
+  });
+
+  document.addEventListener('click', (e) => {
+    if (e.target.classList.contains('chip-btn')) {
+      handleVisitorQuery(e.target.textContent);
+    }
+    const trackBtn = e.target.closest('[data-track]');
+    if (trackBtn) {
+      const actionName = trackBtn.getAttribute('data-track');
+      sendTelegramNotification(`📲 Visitor Action: ${actionName}\n🕒 Time: ${new Date().toLocaleTimeString('en-IN', { timeZone: 'Asia/Kolkata' })}`);
+    }
+  });
+
+  ownerSendBtn.addEventListener('click', () => {
+    const msg = ownerMsgInput.value.trim();
+    if (!msg) return;
+    appendMsg(msg, 'owner');
+    ownerMsgInput.value = '';
+  });
+
+  ownerMsgInput.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+      ownerSendBtn.click();
+    }
+  });
+
+  if (chatChannel) {
+    chatChannel.onmessage = (event) => {
+      const data = event.data;
+      if (data.type === 'NEW_MSG') {
+        logToOwnerStream(`${data.sender === 'user' ? '👤 Visitor' : '🤖 Robot'}: "${data.text}"`, data.sender);
+      }
+    };
+  }
+</script>
+<!-- ================= END ZAMURAI MASCOT ASSISTANT ================= -->
+</body></html>

@@ -4,41 +4,1168 @@
 <!-- End Google Tag Manager --><link rel="stylesheet" href="styles.css"></head><body><noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5GJKTCF7" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript><div class="announcement">Canadian experience · Thoughtful design · Hygiene-first practice</div>
 <header class="nav"><a class="brand" href="index.html" aria-label="Zamurai Tattoo home"><img src="images/logo.png" alt="Zamurai Tattoo Logo" class="brand-logo-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='grid';"><span class="brand-mark" style="display:none;">Z</span><span><span class="brand-name">ZAMURAI</span><span class="brand-sub">Tattoo &amp; Piercing Studio</span></span></a>
 <nav class="nav-links" id="navLinks" aria-label="Main navigation"><a href="index.html">Home</a><a href="services.html">Services</a><a href="artist.html">The Artist</a><a href="gallery.html">Gallery</a><a href="aftercare.html">Aftercare</a><a href="contact.html">Contact</a></nav><a class="nav-cta" href="booking.html">Book a consultation ↗</a><button class="mobile-menu" id="menuButton" aria-expanded="false" aria-controls="navLinks">Menu ☰</button></header><main>
+<style>
+  .artist-roster-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 24px;
+    margin: 20px 0 50px;
+  }
+  .artist-roster-card {
+    background: var(--paper, #f4efe5);
+    border: 1px solid rgba(32, 39, 32, 0.16);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    position: relative;
+  }
+  .artist-roster-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 40px rgba(20, 28, 23, 0.14);
+    border-color: #1C2B22;
+  }
+  .artist-card-media {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 4/5;
+    background: #141C17;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .artist-card-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+  }
+  .artist-roster-card:hover .artist-card-media img {
+    transform: scale(1.04);
+  }
+  .artist-card-badge {
+    position: absolute;
+    top: 14px;
+    left: 14px;
+    background: rgba(20, 28, 23, 0.88);
+    color: #D2AD68;
+    padding: 6px 12px;
+    font-size: 10.5px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-weight: 600;
+    border: 1px solid rgba(210, 173, 104, 0.4);
+  }
+  .coming-soon-avatar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 30px;
+    color: #D2AD68;
+    background: radial-gradient(circle at center, rgba(49, 95, 75, 0.35), #0E1712 75%);
+    width: 100%;
+    height: 100%;
+  }
+  .coming-soon-qmark {
+    width: 96px;
+    height: 96px;
+    border-radius: 50%;
+    border: 2px dashed rgba(210, 173, 104, 0.55);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--serif, 'Cormorant Garamond', serif);
+    font-size: 54px;
+    font-weight: 600;
+    color: #D2AD68;
+    margin-bottom: 14px;
+    background: rgba(210, 173, 104, 0.07);
+  }
+  .artist-card-body {
+    padding: 22px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    justify-content: space-between;
+  }
+  .artist-card-body h2 {
+    font-family: var(--serif, 'Cormorant Garamond', serif);
+    font-size: 28px;
+    margin: 4px 0 8px;
+  }
+  .artist-specialty-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin: 10px 0 18px;
+  }
+  .artist-specialty-tags span {
+    font-size: 11px;
+    padding: 4px 10px;
+    background: rgba(28, 43, 34, 0.08);
+    border: 1px solid rgba(28, 43, 34, 0.15);
+    border-radius: 999px;
+  }
+  .artist-card-cta {
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #1C2B22;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding-top: 12px;
+    border-top: 1px solid rgba(32, 39, 32, 0.12);
+  }
+
+  /* Full Artist Profile & Portfolio Modal / Drawer */
+  .artist-modal-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(8, 13, 10, 0.86);
+    backdrop-filter: blur(6px);
+    z-index: 99990;
+    display: none;
+    overflow-y: auto;
+    padding: 30px 16px;
+  }
+  .artist-modal-box {
+    max-width: 1020px;
+    margin: 0 auto;
+    background: var(--paper, #f4efe5);
+    color: var(--ink, #1c241e);
+    border: 1px solid rgba(210, 173, 104, 0.45);
+    box-shadow: 0 25px 65px rgba(0, 0, 0, 0.65);
+    overflow: hidden;
+    animation: modalSlideUp 0.28s ease-out;
+  }
+  @keyframes modalSlideUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .artist-modal-topbar {
+    background: #141C17;
+    color: #FAF8F5;
+    padding: 16px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(210, 173, 104, 0.3);
+  }
+  .artist-modal-close {
+    background: rgba(210, 173, 104, 0.18);
+    border: 1px solid #D2AD68;
+    color: #FAF8F5;
+    padding: 8px 16px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  .artist-modal-close:hover {
+    background: #D2AD68;
+    color: #080D0A;
+  }
+  .artist-modal-content {
+    padding: 32px;
+  }
+
+  @media (max-width: 900px) {
+    .artist-roster-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .artist-modal-content { padding: 20px; }
+  }
+  @media (max-width: 600px) {
+    .artist-roster-grid { grid-template-columns: 1fr; }
+  }
+</style>
+
 <section class="page-hero">
-  <div class="breadcrumb"><a href="index.html">Home</a> / The Artist</div>
-  <div class="eyebrow">Stevin Pollayil Jestin · Lead Artist</div>
-  <h1>Experience from Canada.<br><em>A home in Fort Kochi.</em></h1>
-  <p class="page-intro">With over 7 years of professional tattoo and piercing experience across Kerala and Calgary, Alberta (Canada), Stevin specializes in black-and-grey realism, portraiture, stippling/dotwork, fine line, and custom concepts.</p>
-  <div class="hero-actions">
-    <a class="btn" href="https://drive.google.com/file/d/1DjpmOaEuxpjYUEp5NF2N_wvMqkHR-RMy/view?usp=drivesdk" target="_blank" rel="noopener">📘 View 2026 Portfolio PDF ↗</a>
-    <a class="btn btn-outline" href="booking.html">Book with Stevin ↗</a>
-  </div>
+  <div class="breadcrumb"><a href="index.html">Home</a> / The Artists</div>
+  <div class="eyebrow">The Artists · Zamurai Studio Collective</div>
+  <h1>Meet the artists behind<br><em>the craft.</em></h1>
+  <p class="page-intro">Click on an artist below to explore their personal story, international credentials, studio equipment, and full portfolio book.</p>
 </section>
+
 <section class="page-content">
-  <div class="about" style="padding:25px 0 45px;grid-template-columns:.85fr 1.15fr">
-    <div class="about-image">
-      <img src="https://drive.google.com/thumbnail?id=1Kw-_wcASkiwlY_EDDixFdZ3kgRFP2TJq&sz=w1200" onerror="this.onerror=null;this.src='images/artistp2.jpg';" alt="Stevin Pollayil Jestin at Zamurai Tattoo" loading="lazy">
-      <div class="stamp">Zamurai<br>Artist<br>✳</div>
-    </div>
-    <div class="about-copy">
-      <h2>Journey &amp; International Experience</h2>
-      <p>Born on April 22, 1997, in Fort Kochi, Kerala, Stevin earned his Bachelor’s degree in Commerce (Taxation) from Mahatma Gandhi University while pursuing his lifelong passion for drawing and tattoo artistry. After completing professional tattoo training in 2019, he worked as a tattoo and piercing artist at <strong>Instyle Tattoo &amp; Training Institute</strong> in Kerala (2020–2024).</p>
-      <p>He completed <strong>Skillgap Training in Tattooing conducted by NSIM (2021)</strong>, earned a <strong>Professional Piercing Certificate from Alienz Tattoo School (2023)</strong>, and completed <strong>Bloodborne Pathogen (BBP) &amp; Safety Training</strong>. From 2024 to 2026, Stevin expanded his career internationally at <strong>Legacy Tattoo Inc. in Calgary, Alberta, Canada</strong>, honing advanced black realism and stippling techniques under strict Canadian studio sterilization protocols.</p>
-      <div class="credentials">
-        <div class="credential"><strong>Legacy Tattoo Inc. (Calgary, Canada)</strong><span>Tattoo &amp; Piercing Artist (2024–2026) · International standards.</span></div>
-        <div class="credential"><strong>Instyle Tattoo &amp; Training (Kerala)</strong><span>Tattoo &amp; Piercing Artist (2020–2024) · Hospital-level hygiene.</span></div>
-        <div class="credential"><strong>Bishop x Critical &amp; Ava GT Setup</strong><span>Magic Wand Packer &amp; Ava GT Smart Pen with Kwadron, Mast Pro &amp; Poseidon cartridges.</span></div>
-        <div class="credential"><strong>Certified Needle Piercing &amp; BBP</strong><span>Alienz Tattoo School (2023), NSIM Skillgap (2021) &amp; Bloodborne Pathogen certified.</span></div>
+  <div class="artist-roster-grid">
+    <!-- ARTIST 01: STEVIN PJ -->
+    <article class="artist-roster-card" id="openStevinProfile" tabindex="0" role="button" aria-label="Open Stevin PJ full profile and portfolio">
+      <div class="artist-card-media">
+        <span class="artist-card-badge">Founder &amp; Lead Artist</span>
+        <img src="https://drive.google.com/thumbnail?id=1Kw-_wcASkiwlY_EDDixFdZ3kgRFP2TJq&sz=w1000" onerror="this.onerror=null;this.src='images/artistp2.jpg';" alt="Stevin Pollayil Jestin - Founder & Lead Artist" loading="lazy">
+      </div>
+      <div class="artist-card-body">
+        <div>
+          <span class="eyebrow">7+ Years Experience · Canada &amp; India</span>
+          <h2>Stevin PJ</h2>
+          <p style="font-size:13.5px;color:var(--muted,#5c645d);">Specializing in black-and-grey realism, custom portraiture, stippling/dotwork, fine line, and certified aseptic needle piercing.</p>
+          <div class="artist-specialty-tags">
+            <span>Black &amp; Grey Realism</span>
+            <span>Portraits</span>
+            <span>Stippling / Dotwork</span>
+            <span>Needle Piercing</span>
+          </div>
+        </div>
+        <div class="artist-card-cta">Click to View Full Bio &amp; Portfolio &#8599;</div>
+      </div>
+    </article>
+
+    <!-- ARTIST 02: COMING SOON SLOT (Replace image, name & bio when new artist joins) -->
+    <article class="artist-roster-card" onclick="openComingSoonModal('Resident Tattoo Artist — Slot 02')">
+      <div class="artist-card-media">
+        <span class="artist-card-badge">Artist Slot 02</span>
+        <div class="coming-soon-avatar">
+          <div class="coming-soon-qmark">?</div>
+          <strong style="font-size:14px;letter-spacing:0.12em;text-transform:uppercase;">Coming Soon</strong>
+          <span style="font-size:12px;color:#A7B39B;margin-top:4px;">Future Resident Artist</span>
+        </div>
+      </div>
+      <div class="artist-card-body">
+        <div>
+          <span class="eyebrow">Zamurai Studio Roster</span>
+          <h2>Resident Artist</h2>
+          <p style="font-size:13.5px;color:var(--muted,#5c645d);">We are expanding our Fort Kochi collective. This spot is reserved for our upcoming resident tattoo artist—photo and portfolio coming soon.</p>
+          <div class="artist-specialty-tags">
+            <span>Fine Line</span>
+            <span>Geometric</span>
+            <span>Custom Blackwork</span>
+          </div>
+        </div>
+        <div class="artist-card-cta">Portfolio Coming Soon &#8599;</div>
+      </div>
+    </article>
+
+    <!-- ARTIST 03: COMING SOON SLOT (Replace image, name & bio when guest/new artist joins) -->
+    <article class="artist-roster-card" onclick="openComingSoonModal('Guest / Senior Artist — Slot 03')">
+      <div class="artist-card-media">
+        <span class="artist-card-badge">Artist Slot 03</span>
+        <div class="coming-soon-avatar">
+          <div class="coming-soon-qmark">?</div>
+          <strong style="font-size:14px;letter-spacing:0.12em;text-transform:uppercase;">Coming Soon</strong>
+          <span style="font-size:12px;color:#A7B39B;margin-top:4px;">Guest &amp; Specialist Spot</span>
+        </div>
+      </div>
+      <div class="artist-card-body">
+        <div>
+          <span class="eyebrow">Zamurai Studio Roster</span>
+          <h2>Guest / Senior Artist</h2>
+          <p style="font-size:13.5px;color:var(--muted,#5c645d);">Reserved for visiting guest artists and specialist collaborations at Zamurai Tattoo Studio. Artist profile and portfolio coming soon.</p>
+          <div class="artist-specialty-tags">
+            <span>Micro-Realism</span>
+            <span>Neo-Traditional</span>
+            <span>Custom Concepts</span>
+          </div>
+        </div>
+        <div class="artist-card-cta">Portfolio Coming Soon &#8599;</div>
+      </div>
+    </article>
+  </div>
+
+  <!-- STEVIN PJ FULL PROFILE & PORTFOLIO MODAL -->
+  <div class="artist-modal-backdrop" id="stevinModal" aria-hidden="true">
+    <div class="artist-modal-box">
+      <div class="artist-modal-topbar">
+        <div>
+          <span style="font-size:11px;color:#D2AD68;text-transform:uppercase;letter-spacing:0.14em;">Artist Profile &amp; Official Portfolio</span>
+          <h3 style="margin:2px 0 0;font-family:var(--serif,'Cormorant Garamond',serif);font-size:24px;">Stevin Pollayil Jestin</h3>
+        </div>
+        <button type="button" class="artist-modal-close" id="closeStevinModal">&times; Close Profile</button>
+      </div>
+      <div class="artist-modal-content">
+        <div class="about" style="padding:0 0 36px;grid-template-columns:.85fr 1.15fr;">
+          <div class="about-image" style="display:flex;flex-direction:column;gap:16px;">
+            <img src="https://drive.google.com/thumbnail?id=1Kw-_wcASkiwlY_EDDixFdZ3kgRFP2TJq&sz=w1200" onerror="this.onerror=null;this.src='images/artistp2.jpg';" alt="Stevin Pollayil Jestin Portrait" loading="lazy">
+            <img src="https://drive.google.com/thumbnail?id=1UUwWf-5OtfZBPmk9l_ER0spUZjRb7HIE&sz=w1200" onerror="this.onerror=null;this.src='images/artistl2.jpg';" alt="Stevin Pollayil Jestin Tattooing in Studio" loading="lazy">
+          </div>
+          <div class="about-copy">
+            <div class="eyebrow">Founder · Tattoo &amp; Piercing Artist</div>
+            <h2>Born in Fort Kochi.<br>Honed in Calgary, Canada.</h2>
+            <p><strong>Stevin Pollayil Jestin</strong> is a creative and detail-oriented tattoo and piercing artist with over seven years of experience in custom tattoo artistry. Born on April 22, 1997, in Fort Kochi, Kerala, he earned a Bachelor’s degree in Commerce (Taxation) from Mahatma Gandhi University while developing his lifelong passion for drawing and realism.</p>
+            <p>After completing professional tattoo training in 2019, Stevin worked at <strong>Instyle Tattoo &amp; Training Institute</strong> in Kerala (2020–2024). He completed <strong>Skillgap Training in Tattooing conducted by NSIM (2021)</strong>, earned a <strong>Professional Piercing Certificate from Alienz Tattoo School (2023)</strong>, and completed <strong>Bloodborne Pathogen (BBP) &amp; Safety Training</strong>.</p>
+            <p>From 2024 to 2026, Stevin expanded his career internationally at <strong>Legacy Tattoo Inc. in Calgary, Alberta, Canada</strong>, refining his signature style in black realism, portraiture, stippling/dotwork, pepper shading, and freehand/Procreate digital design while maintaining strict Canadian hospital-grade sterilization standards.</p>
+
+            <div class="credentials" style="margin-top:20px;">
+              <div class="credential"><strong>Legacy Tattoo Inc. (Calgary, Canada)</strong><span>Tattoo &amp; Piercing Artist (2024–2026) · International Canadian studio practices.</span></div>
+              <div class="credential"><strong>Instyle Tattoo &amp; Training (Kerala)</strong><span>Tattoo &amp; Piercing Artist (2020–2024) · Hospital-level cleanliness &amp; client care.</span></div>
+              <div class="credential"><strong>Bishop x Critical &amp; Ava GT Machines</strong><span>Magic Wand Packer (wireless rotary) &amp; Ava GT Smart Pen (Japanese DC motor).</span></div>
+              <div class="credential"><strong>Kwadron, Mast Pro &amp; Poseidon Needles</strong><span>Single-use sterile cartridges (5RL, 7RL, 9RL, 7RS &amp; 9CM–21CM Magnums).</span></div>
+            </div>
+
+            <div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:24px;">
+              <a class="btn" href="https://drive.google.com/file/d/1DjpmOaEuxpjYUEp5NF2N_wvMqkHR-RMy/view?usp=drivesdk" target="_blank" rel="noopener">📘 Open Stevin’s 2026 Portfolio Book (PDF) ↗</a>
+              <a class="btn btn-outline" href="gallery.html">Browse Full Work Gallery ↗</a>
+              <a class="btn btn-outline" href="booking.html">Book with Stevin ↗</a>
+            </div>
+          </div>
+        </div>
+
+        <h3 style="font-family:var(--serif,'Cormorant Garamond',serif);font-size:28px;margin:20px 0 16px;">Stevin in Action · Studio Video Reels</h3>
+        <div class="gallery-grid" style="grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;">
+          <figure class="gallery-tile"><div style="position:relative;width:100%;aspect-ratio:4/5;background:#0E1712;"><iframe src="https://drive.google.com/file/d/1uzQqhRUrzvr6akR7bt8Agq9lgX9HzTAf/preview" allow="autoplay; fullscreen" loading="lazy" style="width:100%;height:100%;border:0;display:block;" title="Studio Reel 01"></iframe></div><figcaption class="gallery-label">🎬 Session Reel 01</figcaption></figure>
+          <figure class="gallery-tile"><div style="position:relative;width:100%;aspect-ratio:4/5;background:#0E1712;"><iframe src="https://drive.google.com/file/d/1nk6K0Gk_9cJ0cBq6IVMk7hl9yGvnF-H9/preview" allow="autoplay; fullscreen" loading="lazy" style="width:100%;height:100%;border:0;display:block;" title="Studio Reel 02"></iframe></div><figcaption class="gallery-label">🎬 Realism Reel 02</figcaption></figure>
+          <figure class="gallery-tile"><div style="position:relative;width:100%;aspect-ratio:4/5;background:#0E1712;"><iframe src="https://drive.google.com/file/d/1K-UwE-uAq83siiuoiCqSaaboIaRj5YFe/preview" allow="autoplay; fullscreen" loading="lazy" style="width:100%;height:100%;border:0;display:block;" title="Studio Reel 03"></iframe></div><figcaption class="gallery-label">🎬 Detail Reel 03</figcaption></figure>
+          <figure class="gallery-tile"><div style="position:relative;width:100%;aspect-ratio:4/5;background:#0E1712;"><iframe src="https://drive.google.com/file/d/1D53uBnTedNZzn1EuOP0nLYZerFTunF3k/preview" allow="autoplay; fullscreen" loading="lazy" style="width:100%;height:100%;border:0;display:block;" title="Studio Reel 04"></iframe></div><figcaption class="gallery-label">🎬 Studio Reel 04</figcaption></figure>
+        </div>
       </div>
     </div>
   </div>
-  <h2 style="margin:30px 0 20px;">Artist in Action · Studio Video Reels (4 Videos)</h2>
-  <div class="gallery-grid">
-    <figure class="gallery-tile"><div style="position:relative;width:100%;aspect-ratio:4/5;background:#0E1712;"><iframe src="https://drive.google.com/file/d/1uzQqhRUrzvr6akR7bt8Agq9lgX9HzTAf/preview" allow="autoplay; fullscreen" loading="lazy" style="width:100%;height:100%;border:0;display:block;" title="Studio Tattoo Session Reel 01 (IMG_7320)"></iframe></div><figcaption class="gallery-label">🎬 Studio Tattoo Session Reel 01 (IMG_7320)</figcaption></figure>
-<figure class="gallery-tile"><div style="position:relative;width:100%;aspect-ratio:4/5;background:#0E1712;"><iframe src="https://drive.google.com/file/d/1nk6K0Gk_9cJ0cBq6IVMk7hl9yGvnF-H9/preview" allow="autoplay; fullscreen" loading="lazy" style="width:100%;height:100%;border:0;display:block;" title="Realism & Shading Reel 02 (IMG_8952)"></iframe></div><figcaption class="gallery-label">🎬 Realism & Shading Reel 02 (IMG_8952)</figcaption></figure>
-<figure class="gallery-tile"><div style="position:relative;width:100%;aspect-ratio:4/5;background:#0E1712;"><iframe src="https://drive.google.com/file/d/1K-UwE-uAq83siiuoiCqSaaboIaRj5YFe/preview" allow="autoplay; fullscreen" loading="lazy" style="width:100%;height:100%;border:0;display:block;" title="Close-Up Craftsmanship Reel 03 (IMG_5780)"></iframe></div><figcaption class="gallery-label">🎬 Close-Up Craftsmanship Reel 03 (IMG_5780)</figcaption></figure>
-<figure class="gallery-tile"><div style="position:relative;width:100%;aspect-ratio:4/5;background:#0E1712;"><iframe src="https://drive.google.com/file/d/1D53uBnTedNZzn1EuOP0nLYZerFTunF3k/preview" allow="autoplay; fullscreen" loading="lazy" style="width:100%;height:100%;border:0;display:block;" title="Precision Studio Work Reel 04 (IMG_7205)"></iframe></div><figcaption class="gallery-label">🎬 Precision Studio Work Reel 04 (IMG_7205)</figcaption></figure>
+
+  <!-- COMING SOON ARTIST MODAL -->
+  <div class="artist-modal-backdrop" id="comingSoonModal" aria-hidden="true">
+    <div class="artist-modal-box" style="max-width:520px;margin-top:80px;">
+      <div class="artist-modal-topbar">
+        <h3 id="comingSoonTitle" style="margin:0;font-family:var(--serif,'Cormorant Garamond',serif);font-size:22px;">Artist Profile · Coming Soon</h3>
+        <button type="button" class="artist-modal-close" onclick="document.getElementById('comingSoonModal').style.display='none';document.body.style.overflow='';">&times; Close</button>
+      </div>
+      <div class="artist-modal-content" style="text-align:center;">
+        <div class="coming-soon-qmark" style="margin:0 auto 18px;">?</div>
+        <h2 style="font-family:var(--serif,'Cormorant Garamond',serif);font-size:30px;margin:0 0 10px;">New Artist Joining Soon</h2>
+        <p style="color:var(--muted,#5c645d);font-size:14px;line-height:1.6;margin-bottom:22px;">We are curating our next resident and guest artists to join Zamurai Tattoo Studio in Fort Kochi. Their biography, specialty styles, and portfolio book will be published here soon. Meanwhile, you can book directly with our founder and lead artist, <strong>Stevin PJ</strong>.</p>
+        <div style="display:flex;justify-content:center;gap:12px;flex-wrap:wrap;">
+          <button type="button" class="btn" onclick="document.getElementById('comingSoonModal').style.display='none';document.getElementById('openStevinProfile').click();">View Stevin’s Portfolio</button>
+          <a class="btn btn-outline" href="booking.html">Book a Consultation ↗</a>
+        </div>
+      </div>
+    </div>
   </div>
-  <div class="page-cta" style="margin-top:40px;"><div><h2>Want to discuss a custom piece with Stevin?</h2><p>Send your reference image, placement, and approximate size on WhatsApp or book directly on Google Calendar.</p></div><a class="btn" href="booking.html">Start a consultation ↗</a></div>
+
+  <div class="page-cta">
+    <div><h2>Ready to start your custom piece?</h2><p>Share your reference, placement, and approximate size with our studio.</p></div>
+    <a class="btn" href="booking.html">Start a consultation ↗</a>
+  </div>
 </section>
-</main><footer><div class="footer-brand">ZAMURAI <span style="font-family:var(--sans);font-size:9px;letter-spacing:.16em">TATTOO &amp; PIERCING</span></div><div>St Cecilian Club Road, Chullikkal · Fort Kochi</div><div><a href="services.html">Services</a> · <a href="gallery.html">Gallery</a> · <a href="artist.html">Artist</a> · <a href="aftercare.html">Aftercare</a> · <a href="contact.html">Contact</a></div><div>© <span data-year></span> Zamurai Tattoo</div></footer><script src="script.js" defer></script></body></html>
+
+<script>
+  const stevinCard = document.getElementById('openStevinProfile');
+  const stevinModal = document.getElementById('stevinModal');
+  const closeStevinBtn = document.getElementById('closeStevinModal');
+
+  function openStevin() {
+    stevinModal.style.display = 'block';
+    document.body.style.overflow = 'hidden';
+  }
+  function closeStevin() {
+    stevinModal.style.display = 'none';
+    document.body.style.overflow = '';
+  }
+  stevinCard.addEventListener('click', openStevin);
+  closeStevinBtn.addEventListener('click', closeStevin);
+  stevinModal.addEventListener('click', (e) => {
+    if (e.target === stevinModal) closeStevin();
+  });
+
+  function openComingSoonModal(title) {
+    document.getElementById('comingSoonTitle').textContent = title;
+    document.getElementById('comingSoonModal').style.display = 'block';
+    document.body.style.overflow = 'hidden';
+  }
+</script>
+</main><footer><div class="footer-brand">ZAMURAI <span style="font-family:var(--sans);font-size:9px;letter-spacing:.16em">TATTOO &amp; PIERCING</span></div><div>St Cecilian Club Road, Chullikkal · Fort Kochi</div><div><a href="services.html">Services</a> · <a href="gallery.html">Gallery</a> · <a href="artist.html">Artist</a> · <a href="aftercare.html">Aftercare</a> · <a href="contact.html">Contact</a></div><div>© <span data-year></span> Zamurai Tattoo</div></footer><script src="script.js" defer></script><!-- ==========================================================================
+     ZAMURAI MASCOT ASSISTANT (SIDE-PEEKING AVATAR + FULL-PAGE CHAT + 3 BOOKING OPTIONS)
+     ========================================================================== -->
+<style>
+  /* 1. Original Character Cutout Peeking from the Right Edge (No Round Icon) */
+  .character-launcher {
+    position: fixed;
+    bottom: 12px;
+    right: 0;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    z-index: 9999;
+    user-select: none;
+    font-family: 'Montserrat', -apple-system, sans-serif;
+    padding-right: 4px;
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+  .character-launcher:hover {
+    transform: translateX(-6px) translateY(-4px);
+  }
+
+  .speech-bubble {
+    background: linear-gradient(135deg, #18251F, #0B1711);
+    color: #FAF8F5;
+    padding: 6px 12px;
+    border-radius: 14px 14px 4px 14px;
+    font-size: 11.5px;
+    font-weight: 600;
+    white-space: nowrap;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.45);
+    margin-bottom: 2px;
+    margin-right: 10px;
+    border: 1px solid rgba(210, 173, 104, 0.55);
+    animation: gentleFloat 2.8s infinite ease-in-out;
+  }
+  @keyframes gentleFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-4px); }
+  }
+
+  .character-cutout {
+    width: 82px;
+    height: auto;
+    display: block;
+    border: none !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    filter: drop-shadow(-4px 6px 14px rgba(0, 0, 0, 0.6));
+    transform: translateX(8px);
+    transition: transform 0.25s ease;
+  }
+  .character-launcher:hover .character-cutout {
+    transform: translateX(0);
+  }
+
+  @media (max-width: 600px) {
+    .character-launcher {
+      bottom: 8px;
+      right: 0;
+    }
+    .character-cutout {
+      width: 66px;
+      transform: translateX(6px);
+    }
+    .speech-bubble {
+      font-size: 10.5px;
+      padding: 5px 10px;
+      margin-right: 6px;
+    }
+  }
+
+  /* 2. Full-Page Dedicated Chat View (No Cramped Mobile Popup Interference) */
+  .bot-window {
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    height: 100dvh;
+    background-color: #0B130E;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    z-index: 100000;
+    font-family: 'Montserrat', sans-serif;
+    color: #FAF8F5;
+  }
+
+  .bot-page-container {
+    width: 100%;
+    max-width: 680px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    background-color: #141C17;
+    border-left: 1px solid rgba(210, 173, 104, 0.2);
+    border-right: 1px solid rgba(210, 173, 104, 0.2);
+  }
+
+  .bot-header {
+    background-color: #1C2B22;
+    padding: 14px 18px;
+    border-bottom: 1px solid rgba(210, 173, 104, 0.25);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-shrink: 0;
+  }
+  .bot-profile {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .bot-header-avatar {
+    width: 44px;
+    height: 44px;
+    object-fit: contain;
+    object-position: top center;
+    filter: drop-shadow(0 2px 6px rgba(0,0,0,0.5));
+  }
+  .bot-title h4 {
+    margin: 0;
+    font-size: 15px;
+    font-weight: 600;
+    color: #FAF8F5;
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    letter-spacing: 0.05em;
+  }
+  .bot-status {
+    font-size: 11px;
+    color: #4ade80;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  .bot-status::before {
+    content: "";
+    width: 7px;
+    height: 7px;
+    background-color: #4ade80;
+    border-radius: 50%;
+    display: inline-block;
+  }
+  .bot-close-btn {
+    background: rgba(210, 173, 104, 0.15);
+    border: 1px solid rgba(210, 173, 104, 0.45);
+    color: #FAF8F5;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    padding: 8px 14px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: background 0.2s;
+  }
+  .bot-close-btn:hover {
+    background: #D2AD68;
+    color: #080D0A;
+  }
+
+  .bot-messages {
+    flex: 1;
+    padding: 18px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    background: radial-gradient(circle at top right, rgba(49, 95, 75, 0.15), transparent 65%);
+  }
+
+  .msg {
+    display: flex;
+    flex-direction: column;
+    max-width: 88%;
+    animation: fadeIn 0.2s ease-out;
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .msg.bot { align-self: flex-start; }
+  .msg.user { align-self: flex-end; }
+  .msg.owner { align-self: flex-start; }
+
+  .msg .bubble {
+    padding: 13px 16px;
+    border-radius: 14px;
+    font-size: 14px;
+    line-height: 1.55;
+    word-wrap: break-word;
+  }
+  .msg.bot .bubble {
+    background-color: #1F2E25;
+    color: #FAF8F5;
+    border-bottom-left-radius: 4px;
+    border: 1px solid rgba(210, 173, 104, 0.2);
+  }
+  .msg.owner .bubble {
+    background-color: #26382E;
+    color: #FAF8F5;
+    border-bottom-left-radius: 4px;
+    border: 1px solid #D2AD68;
+  }
+  .msg.user .bubble {
+    background: linear-gradient(135deg, #D2AD68, #B58E49);
+    color: #080D0A;
+    font-weight: 500;
+    border-bottom-right-radius: 4px;
+  }
+  .msg-time {
+    font-size: 10px;
+    color: #A7B39B;
+    margin-top: 4px;
+    padding: 0 4px;
+  }
+  .msg.user .msg-time { text-align: right; }
+
+  .booking-options-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 10px;
+    width: 100%;
+  }
+  .booking-opt-btn {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    text-decoration: none;
+    padding: 11px 14px;
+    border-radius: 10px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #fff;
+    transition: transform 0.15s ease, opacity 0.15s ease;
+  }
+  .booking-opt-btn:hover {
+    transform: translateY(-1px);
+    opacity: 0.95;
+  }
+  .booking-opt-btn span {
+    font-size: 11px;
+    font-weight: 500;
+    opacity: 0.9;
+  }
+  .booking-opt-btn.call-opt {
+    background: linear-gradient(135deg, #D2AD68, #9E7B3B);
+    color: #080D0A;
+  }
+  .booking-opt-btn.wa-opt {
+    background: #1fa855;
+    color: #fff;
+  }
+  .booking-opt-btn.cal-opt {
+    background: #1a73e8;
+    color: #fff;
+  }
+
+  .chip-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+    margin-top: 10px;
+  }
+  .chip-btn {
+    background-color: rgba(49, 95, 75, 0.35);
+    color: #D2AD68;
+    border: 1px solid rgba(210, 173, 104, 0.45);
+    padding: 7px 13px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: inherit;
+  }
+  .chip-btn:hover {
+    background-color: #D2AD68;
+    color: #080D0A;
+  }
+
+  .bot-input-bar {
+    padding: 12px 16px;
+    background-color: #18241D;
+    border-top: 1px solid rgba(210, 173, 104, 0.2);
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    flex-shrink: 0;
+  }
+  .bot-input-bar input {
+    flex: 1;
+    background-color: #0E1712;
+    border: 1px solid rgba(210, 173, 104, 0.3);
+    color: #FAF8F5;
+    padding: 12px 16px;
+    border-radius: 24px;
+    font-size: 14px;
+    outline: none;
+    font-family: inherit;
+  }
+  .bot-input-bar input:focus {
+    border-color: #D2AD68;
+  }
+  .bot-send-btn {
+    background-color: #D2AD68;
+    color: #080D0A;
+    border: none;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    flex-shrink: 0;
+  }
+
+  /* 3. Hidden Owner Monitor (Unlocked ONLY via secret code stevin187 or /admin) */
+  .owner-dock-btn {
+    display: none !important;
+  }
+  .owner-panel {
+    position: fixed;
+    bottom: 40px;
+    left: 12px;
+    width: 340px;
+    max-width: calc(100vw - 24px);
+    background: #0F1914;
+    border: 1px solid #D2AD68;
+    border-radius: 12px;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.85);
+    z-index: 100001;
+    display: none;
+    flex-direction: column;
+    font-family: 'Montserrat', sans-serif;
+    color: #FAF8F5;
+    overflow: hidden;
+  }
+  .owner-header {
+    background: #1C2B22;
+    padding: 10px 14px;
+    border-bottom: 1px solid rgba(210, 173, 104, 0.3);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 12px;
+    font-weight: 600;
+    color: #D2AD68;
+  }
+  .owner-badge {
+    background: rgba(74, 222, 128, 0.15);
+    color: #4ade80;
+    padding: 2px 7px;
+    border-radius: 10px;
+    font-size: 10px;
+  }
+  .owner-body {
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    font-size: 12px;
+  }
+  .owner-stats {
+    display: flex;
+    justify-content: space-between;
+    background: #16221B;
+    padding: 8px 10px;
+    border-radius: 8px;
+    border: 1px solid rgba(255,255,255,0.06);
+  }
+  .owner-stream {
+    height: 140px;
+    overflow-y: auto;
+    background: #080D0A;
+    padding: 8px;
+    border-radius: 8px;
+    border: 1px solid rgba(210, 173, 104, 0.2);
+    font-size: 11px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .stream-msg {
+    padding: 4px 6px;
+    border-radius: 4px;
+    line-height: 1.35;
+  }
+  .stream-msg.v { background: rgba(210, 173, 104, 0.15); color: #FAF8F5; }
+  .stream-msg.b { background: rgba(49, 95, 75, 0.25); color: #A7B39B; }
+  .stream-msg.o { background: rgba(74, 222, 128, 0.2); color: #4ade80; font-weight: 600; }
+  .owner-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .owner-toggle-label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    cursor: pointer;
+    color: #FAF8F5;
+  }
+  .owner-input-row {
+    display: flex;
+    gap: 6px;
+  }
+  .owner-input-row input {
+    flex: 1;
+    background: #080D0A;
+    border: 1px solid rgba(210, 173, 104, 0.4);
+    color: #fff;
+    padding: 6px 10px;
+    border-radius: 6px;
+    font-size: 11px;
+  }
+  .owner-send-btn {
+    background: #D2AD68;
+    color: #080D0A;
+    border: none;
+    padding: 6px 10px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+</style>
+
+<!-- Original Character Avatar Peeking from the Side -->
+<div class="character-launcher" id="botLauncher" title="Chat &amp; Book with Zamurai Assistant">
+  <div class="speech-bubble" id="launcherBubble">
+    <span>Need help? 👋</span>
+  </div>
+  <img src="images/character_transparent.png" alt="Zamurai Assistant" class="character-cutout">
+</div>
+
+<!-- Full-Page Dedicated Chat Screen -->
+<aside class="bot-window" id="botWindow">
+  <div class="bot-page-container">
+    <div class="bot-header">
+      <div class="bot-profile">
+        <img src="images/character_transparent.png" alt="Zamurai Assistant" class="bot-header-avatar">
+        <div class="bot-title">
+          <h4>Zamurai Tattoo Assistant</h4>
+          <span class="bot-status">Online • Instant Help &amp; Direct Booking</span>
+        </div>
+      </div>
+      <button class="bot-close-btn" id="botCloseBtn">&#8592; Back to Website</button>
+    </div>
+
+    <div class="bot-messages" id="botMessages">
+      <div class="msg bot">
+        <div class="bubble">
+          Hi there! 👋 Welcome to <b>Zamurai Tattoo &amp; Piercing Studio</b>.<br><br>
+          To book your session with <b>Stevin</b> without any hassle, choose one of our 3 direct booking options below, or ask me any question!
+          <div class="booking-options-grid">
+            <a href="tel:+919048169666" class="booking-opt-btn call-opt" data-track="Clicked Option 1: Call Zamurai Tattoo Directly">
+              <div>📞 1. Call Zamurai Tattoo Directly</div>
+              <span>+91 90481 69666</span>
+            </a>
+            <a href="https://wa.me/919048169666?text=Hi%20Zamurai%20Tattoo%20Studio!%20I%20would%20like%20to%20book%20an%20appointment." target="_blank" rel="noopener" class="booking-opt-btn wa-opt" data-track="Clicked Option 2: Book via WhatsApp Message">
+              <div>💬 2. Book Through WhatsApp</div>
+              <span>Chat on WhatsApp</span>
+            </a>
+            <a href="https://calendar.app.google/edy3ETdKmtwYLNxr6" target="_blank" rel="noopener" class="booking-opt-btn cal-opt" data-track="Clicked Option 3: Book on Google Calendar">
+              <div>📅 3. Book on Google Calendar</div>
+              <span>Pick Date &amp; Time</span>
+            </a>
+          </div>
+        </div>
+        <div class="chip-container">
+          <button class="chip-btn">🎨 Tattoo Styles</button>
+          <button class="chip-btn">💰 Check Rates</button>
+          <button class="chip-btn">✨ Piercing Info</button>
+          <button class="chip-btn">📍 Studio Location</button>
+          <button class="chip-btn">🧼 Aftercare Tips</button>
+        </div>
+        <span class="msg-time">Just now</span>
+      </div>
+    </div>
+
+    <form class="bot-input-bar" id="botForm">
+      <input type="text" id="botInput" placeholder="Ask a question about tattoos, piercing, or pricing..." autocomplete="off">
+      <button type="submit" class="bot-send-btn" title="Send">&#10148;</button>
+    </form>
+  </div>
+</aside>
+
+<button class="owner-dock-btn" id="ownerDockBtn" title="Owner Live Chat &amp; Takeover">⚙️ Owner Chat Monitor</button>
+
+<div class="owner-panel" id="ownerPanel">
+  <div class="owner-header">
+    <span>🛡️ Zamurai Live Chat Monitor</span>
+    <span class="owner-badge" id="ownerActiveCount">1 Active Visitor</span>
+    <button style="background:none; border:none; color:#D2AD68; cursor:pointer;" id="ownerCloseBtn">&times;</button>
+  </div>
+  <div class="owner-body">
+    <div class="owner-stats">
+      <span><b>Status:</b> Stealth Mode (Visitor cannot see you)</span>
+      <span id="ownerLiveIndicator" style="color:#4ade80;">● Live Sync</span>
+    </div>
+    <div><b>Live Visitor Transcript:</b></div>
+    <div class="owner-stream" id="ownerStream">
+      <div class="stream-msg b">🤖 Robot: "Welcome! Choose from 3 direct booking options or ask a question."</div>
+    </div>
+    <div class="owner-controls">
+      <label class="owner-toggle-label">
+        <input type="checkbox" id="autoReplyToggle" checked>
+        <span>Keep Robot Auto-Reply Active</span>
+      </label>
+      <div style="font-size:10px; color:#A7B39B;">Tip: Uncheck above to silence the robot and chat directly as yourself, or type below to send on the robot's behalf!</div>
+      <div class="owner-input-row">
+        <input type="text" id="ownerMsgInput" placeholder="Type message to send as robot...">
+        <button class="owner-send-btn" id="ownerSendBtn">Send as Robot</button>
+      </div>
+    </div>
+    <details style="margin-top:6px; font-size:11px; color:#A7B39B;">
+      <summary style="cursor:pointer; color:#D2AD68;">📲 Push Notifications to your Phone (Telegram)</summary>
+      <div style="padding-top:6px; display:flex; flex-direction:column; gap:4px;">
+        <input type="text" id="teleToken" placeholder="Telegram Bot Token" style="background:#080D0A; border:1px solid #315F4B; color:#fff; padding:4px 6px; font-size:10px; border-radius:4px;">
+        <input type="text" id="teleChatId" placeholder="Telegram Chat ID" style="background:#080D0A; border:1px solid #315F4B; color:#fff; padding:4px 6px; font-size:10px; border-radius:4px;">
+        <button id="saveTeleBtn" style="background:#315F4B; color:#fff; border:none; padding:4px; font-size:10px; border-radius:4px; cursor:pointer;">Save Telegram Settings</button>
+      </div>
+    </details>
+  </div>
+</div>
+
+<script>
+  const botLauncher = document.getElementById('botLauncher');
+  const botWindow = document.getElementById('botWindow');
+  const botCloseBtn = document.getElementById('botCloseBtn');
+  const botMessages = document.getElementById('botMessages');
+  const botForm = document.getElementById('botForm');
+  const botInput = document.getElementById('botInput');
+
+  const ownerDockBtn = document.getElementById('ownerDockBtn');
+  const ownerPanel = document.getElementById('ownerPanel');
+  const ownerCloseBtn = document.getElementById('ownerCloseBtn');
+  const ownerStream = document.getElementById('ownerStream');
+  const ownerMsgInput = document.getElementById('ownerMsgInput');
+  const ownerSendBtn = document.getElementById('ownerSendBtn');
+  const autoReplyToggle = document.getElementById('autoReplyToggle');
+
+  const chatChannel = ('BroadcastChannel' in window) ? new BroadcastChannel('zamurai_live_chat_channel') : null;
+
+  function openChatPage() {
+    botWindow.style.display = 'flex';
+    botLauncher.style.display = 'none';
+    document.body.style.overflow = 'hidden';
+    if (location.hash !== '#chat') {
+      try { history.pushState({ zamuraiChat: true }, '', '#chat'); } catch (e) {}
+    }
+    notifyOwnerSession('Visitor opened chat page');
+  }
+
+  function closeChatPage() {
+    botWindow.style.display = 'none';
+    botLauncher.style.display = 'flex';
+    document.body.style.overflow = '';
+    if (location.hash === '#chat') {
+      try { history.back(); } catch (e) {}
+    }
+  }
+
+  botLauncher.addEventListener('click', openChatPage);
+  botCloseBtn.addEventListener('click', closeChatPage);
+
+  window.addEventListener('popstate', () => {
+    if (location.hash !== '#chat' && botWindow.style.display === 'flex') {
+      botWindow.style.display = 'none';
+      botLauncher.style.display = 'flex';
+      document.body.style.overflow = '';
+    }
+  });
+
+  function toggleOwnerPanel() {
+    const isVisible = ownerPanel.style.display === 'flex';
+    ownerPanel.style.display = isVisible ? 'none' : 'flex';
+  }
+  ownerDockBtn.addEventListener('click', toggleOwnerPanel);
+  ownerCloseBtn.addEventListener('click', () => ownerPanel.style.display = 'none');
+
+  window.addEventListener('keydown', (e) => {
+    if (e.ctrlKey && e.shiftKey && (e.key === 'A' || e.key === 'a')) {
+      e.preventDefault();
+      toggleOwnerPanel();
+    }
+  });
+
+  const DEFAULT_TELE_TOKEN = atob("OTE0MzQ0NzQ3MzpBQUYtYTVjV3BlU21JZzlZWTBvcHNvY3pSV24yd1A1YWtqUQ==");
+  const DEFAULT_TELE_CHAT_ID = "8801884922";
+
+  try {
+    if (localStorage.getItem('zamurai_tele_chat') === '9143447473' || !localStorage.getItem('zamurai_tele_chat')) {
+      localStorage.setItem('zamurai_tele_chat', '8801884922');
+    }
+  } catch(e) {}
+
+  function notifyOwnerSession(text) {
+    if (chatChannel) {
+      chatChannel.postMessage({ type: 'VISITOR_ACTIVE', text: text, time: new Date().toLocaleTimeString() });
+    }
+    localStorage.setItem('zamurai_last_active', Date.now());
+    if (text === 'Visitor opened chat page') {
+      const pingText = `👋 A visitor just opened the Zamurai Tattoo chat page!\n🕒 Time: ${new Date().toLocaleTimeString('en-IN', { timeZone: 'Asia/Kolkata' })}`;
+      sendTelegramNotification(pingText);
+    }
+  }
+
+  function sendTelegramNotification(msg) {
+    const token = DEFAULT_TELE_TOKEN;
+    const chatId = "8801884922";
+    if (!token || !chatId) return;
+    const isCustomAlert = msg.startsWith('🚨') || msg.startsWith('🗓️') || msg.startsWith('👋') || msg.startsWith('📲');
+    const text = isCustomAlert ? msg : `🚨 Zamurai Tattoo Live Chat\n\n👤 Visitor: "${msg}"\n🕒 Time: ${new Date().toLocaleTimeString('en-IN', { timeZone: 'Asia/Kolkata' })}\n\n👉 Open Website: https://zamuraitattoo.com/`;
+    const url = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(text)}`;
+    fetch(url, { method: 'GET', mode: 'no-cors' }).catch(() => {});
+    try {
+      const beacon = new Image();
+      beacon.src = url;
+    } catch(err) {}
+  }
+
+  document.getElementById('saveTeleBtn').addEventListener('click', () => {
+    const token = document.getElementById('teleToken').value.trim();
+    const chat = document.getElementById('teleChatId').value.trim();
+    if (token && chat) {
+      localStorage.setItem('zamurai_tele_token', token);
+      localStorage.setItem('zamurai_tele_chat', chat);
+      const t = document.createElement('div');
+      t.textContent = 'Telegram settings saved!';
+      t.style.cssText = 'position:fixed;top:20px;right:20px;background:#25D366;color:#000;padding:8px 14px;border-radius:8px;z-index:999999;font-weight:700;';
+      document.body.appendChild(t);
+      setTimeout(() => t.remove(), 2500);
+    }
+  });
+  if (localStorage.getItem('zamurai_tele_token')) {
+    document.getElementById('teleToken').value = localStorage.getItem('zamurai_tele_token');
+  }
+  if (localStorage.getItem('zamurai_tele_chat')) {
+    document.getElementById('teleChatId').value = localStorage.getItem('zamurai_tele_chat');
+  }
+
+  const THREE_BOOKING_OPTIONS_HTML = `
+    <div class="booking-options-grid">
+      <a href="tel:+919048169666" class="booking-opt-btn call-opt" data-track="Clicked Option 1: Call Zamurai Tattoo Directly">
+        <div>📞 1. Call Zamurai Tattoo Directly</div>
+        <span>+91 90481 69666</span>
+      </a>
+      <a href="https://wa.me/919048169666?text=Hi%20Zamurai%20Tattoo%20Studio!%20I%20would%20like%20to%20book%20an%20appointment." target="_blank" rel="noopener" class="booking-opt-btn wa-opt" data-track="Clicked Option 2: Book via WhatsApp Message">
+        <div>💬 2. Book Through WhatsApp</div>
+        <span>Chat on WhatsApp</span>
+      </a>
+      <a href="https://calendar.app.google/edy3ETdKmtwYLNxr6" target="_blank" rel="noopener" class="booking-opt-btn cal-opt" data-track="Clicked Option 3: Book on Google Calendar">
+        <div>📅 3. Book on Google Calendar</div>
+        <span>Pick Date &amp; Time</span>
+      </a>
+    </div>`;
+
+  function getBotReply(userText) {
+    const q = userText.toLowerCase().trim();
+
+    if (q.includes('book') || q.includes('appointment') || q.includes('schedule') || q.includes('slot') || q.includes('contact') || q.includes('call') || q.includes('whatsapp') || q.includes('calendar')) {
+      return "🗓️ <b>Book Your Appointment at Zamurai Tattoo Studio:</b><br>" +
+             "Choose any of our 3 direct booking options below to connect with artist <b>Stevin</b> immediately:" +
+             THREE_BOOKING_OPTIONS_HTML;
+    }
+
+    if (q.includes('style') || q.includes('tattoo') || q.includes('design')) {
+      return "🎨 <b>Our Signature Tattoo Styles:</b><br>" +
+             "• <b>Black &amp; Grey Realism &amp; Portraits</b><br>" +
+             "• <b>Fine Line &amp; Minimalist Tattoos</b><br>" +
+             "• <b>Custom Story &amp; Cover-Up Concepts</b><br><br>" +
+             "Ready to discuss your design or book a session? Pick an option below:" +
+             THREE_BOOKING_OPTIONS_HTML;
+    }
+
+    if (q.includes('pierce') || q.includes('piercing') || q.includes('nose') || q.includes('ear') || q.includes('helix') || q.includes('septum')) {
+      return "✨ <b>Hygienic Body Piercing:</b><br>" +
+             "We perform earlobe, helix, tragus, nose, septum, and navel piercings using 100% sterile single-use needles and implant-grade titanium jewelry.<br><br>" +
+             "Book your piercing slot using any of the 3 options below:" +
+             THREE_BOOKING_OPTIONS_HTML;
+    }
+
+    if (q.includes('price') || q.includes('cost') || q.includes('rate') || q.includes('hour') || q.includes('charge') || q.includes('how much')) {
+      return "💰 <b>Tattoo Pricing &amp; Rates:</b><br>" +
+             "• Our studio rate is <b>₹3,000 – ₹4,000 per hour</b> depending on complexity and detail.<br>" +
+             "• You can share your reference image on WhatsApp or call us directly for an exact quote:" +
+             THREE_BOOKING_OPTIONS_HTML;
+    }
+
+    if (q.includes('location') || q.includes('address') || q.includes('where') || q.includes('chullickal') || q.includes('kochi') || q.includes('map')) {
+      return "📍 <b>Studio Location &amp; Hours:</b><br>" +
+             "Zamurai Tattoo &amp; Piercing Studio, <b>St Cecilian Club Road, Chullickal, Fort Kochi</b>, Kerala 682005.<br><br>" +
+             "🕒 <b>Timings:</b> Mon–Sat: 9:00 AM – 10:00 PM | Sun: 10:00 AM – 8:00 PM<br><br>" +
+             "<a href=\"https://maps.app.goo.gl/ewaMQxjLH9EzS3gF6\" target=\"_blank\" rel=\"noopener\" class=\"booking-opt-btn\" style=\"background:#315F4B; margin-bottom:8px;\">📍 Open Studio Location on Google Maps <span>Directions ↗</span></a>" +
+             THREE_BOOKING_OPTIONS_HTML;
+    }
+
+    if (q.includes('aftercare') || q.includes('care') || q.includes('heal') || q.includes('wash')) {
+      return "🧼 <b>Tattoo Aftercare Guide:</b><br>" +
+             "1. Keep the protective wrap on for 2–3 hours.<br>" +
+             "2. Wash gently with mild antibacterial soap and pat dry.<br>" +
+             "3. Apply a thin layer of recommended aftercare ointment twice daily.<br>" +
+             "4. Avoid swimming, direct sun, and scratching for 2 weeks!";
+    }
+
+    return "Thanks for reaching out! You can connect with us or book your session directly using any of the 3 options below:" +
+           THREE_BOOKING_OPTIONS_HTML;
+  }
+
+  function appendMsg(text, sender) {
+    const div = document.createElement('div');
+    div.className = `msg ${sender}`;
+    div.innerHTML = `<div class="bubble">${text}</div><span class="msg-time">${new Date().toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'})}</span>`;
+    botMessages.appendChild(div);
+    botMessages.scrollTop = botMessages.scrollHeight;
+
+    const cleanLog = text.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
+    logToOwnerStream(sender === 'user' ? `👤 Visitor: "${cleanLog}"` : (sender === 'owner' ? `🛡️ Owner: "${cleanLog}"` : `🤖 Robot: "${cleanLog.slice(0, 90)}..."`), sender);
+
+    if (chatChannel) {
+      chatChannel.postMessage({ type: 'NEW_MSG', sender: sender, text: cleanLog, time: new Date().toLocaleTimeString() });
+    }
+  }
+
+  function logToOwnerStream(str, sender) {
+    const p = document.createElement('div');
+    p.className = `stream-msg ${sender === 'user' ? 'v' : (sender === 'owner' ? 'o' : 'b')}`;
+    p.textContent = str;
+    ownerStream.appendChild(p);
+    ownerStream.scrollTop = ownerStream.scrollHeight;
+  }
+
+  function handleVisitorQuery(text) {
+    const raw = text.trim();
+    if (!raw) return;
+
+    if (raw.toLowerCase() === '/admin' || raw.toLowerCase() === '#stevin' || raw.toLowerCase() === 'stevin187') {
+      botInput.value = '';
+      ownerPanel.style.display = 'flex';
+      return;
+    }
+
+    appendMsg(raw, 'user');
+    botInput.value = '';
+
+    sendTelegramNotification(raw);
+
+    if (autoReplyToggle.checked) {
+      setTimeout(() => {
+        const reply = getBotReply(raw);
+        appendMsg(reply, 'bot');
+      }, 350);
+    }
+  }
+
+  botForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    handleVisitorQuery(botInput.value);
+  });
+
+  document.addEventListener('click', (e) => {
+    if (e.target.classList.contains('chip-btn')) {
+      handleVisitorQuery(e.target.textContent);
+    }
+    const trackBtn = e.target.closest('[data-track]');
+    if (trackBtn) {
+      const actionName = trackBtn.getAttribute('data-track');
+      sendTelegramNotification(`📲 Visitor Action: ${actionName}\n🕒 Time: ${new Date().toLocaleTimeString('en-IN', { timeZone: 'Asia/Kolkata' })}`);
+    }
+  });
+
+  ownerSendBtn.addEventListener('click', () => {
+    const msg = ownerMsgInput.value.trim();
+    if (!msg) return;
+    appendMsg(msg, 'owner');
+    ownerMsgInput.value = '';
+  });
+
+  ownerMsgInput.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+      ownerSendBtn.click();
+    }
+  });
+
+  if (chatChannel) {
+    chatChannel.onmessage = (event) => {
+      const data = event.data;
+      if (data.type === 'NEW_MSG') {
+        logToOwnerStream(`${data.sender === 'user' ? '👤 Visitor' : '🤖 Robot'}: "${data.text}"`, data.sender);
+      }
+    };
+  }
+</script>
+<!-- ================= END ZAMURAI MASCOT ASSISTANT ================= -->
+</body></html>
