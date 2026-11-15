@@ -1,1 +1,1 @@
-
+backend: name: github, repo: 'your-username/your-repo-name', branch: 'main'
