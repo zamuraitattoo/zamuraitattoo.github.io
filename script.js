@@ -27,6 +27,47 @@ document.addEventListener('DOMContentLoaded', () => {
       mobileDrawer.classList.toggle('hidden');
     });
   }
+
+  // Dynamic Decap CMS Portfolio Gallery Loader
+  const grid = document.getElementById("portfolioGrid");
+  if (grid) {
+    fetch('/data/gallery.json?v=' + Date.now())
+      .then(response => {
+        if (!response.ok) return null;
+        return response.json();
+      })
+      .then(data => {
+        if (data && data.items && data.items.length > 0) {
+          grid.innerHTML = ""; // Clear static placeholder items when CMS data loads
+          data.items.forEach(item => {
+            let catClass = "realism";
+            if (item.style === "Fine Line" || item.style?.includes("Custom")) catClass = "custom";
+            if (item.style === "Piercing") catClass = "piercing";
+
+            const card = document.createElement("div");
+            card.className = "portfolio-item group rounded-2xl overflow-hidden bg-charcoal border border-white/10";
+            card.setAttribute("data-category", catClass);
+            
+            card.innerHTML = `
+              <div class="relative h-80 overflow-hidden">
+                <img src="${item.image}" alt="${item.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
+                <div class="absolute bottom-3 left-3 right-3 p-3 rounded-xl glass-panel text-xs">
+                  <div class="flex justify-between font-mono text-[10px] text-gold">
+                    <span>${item.style ? item.style.toUpperCase() : 'MASTERWORK'}</span>
+                    <span>${item.category ? item.category.toUpperCase() : 'FORT KOCHI'}</span>
+                  </div>
+                  <p class="font-serif text-lg font-bold text-alabaster mt-0.5">${item.title}</p>
+                </div>
+              </div>
+            `;
+            grid.appendChild(card);
+          });
+        }
+      })
+      .catch(err => {
+        console.log("Using static fallback portfolio grid.");
+      });
+  }
 });
 
 // Direct WhatsApp Consultation Dispatch
