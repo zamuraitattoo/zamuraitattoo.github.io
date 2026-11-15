@@ -1,1 +1,17 @@
-backend: name: github, repo: 'zamuraitattoo/zamuraitattoo.github.io', branch: 'main'
+backend:
+  name: github
+  repo: zamuraitattoo/zamuraitattoo.github.io
+  branch: main
+
+media_folder: "images"
+public_folder: "/images"
+
+collections:
+  - name: "posts"
+    label: "Posts"
+    folder: "content/posts"
+    create: true
+    fields:
+      - {label: "Title", name: "title", widget: "string"}
+      - {label: "Publish Date", name: "date", widget: "datetime"}
+      - {label: "Body", name: "body", widget: "markdown"}
