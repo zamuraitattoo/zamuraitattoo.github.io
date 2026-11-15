@@ -8,11 +8,18 @@ media_folder: "images"
 public_folder: "/images"
 
 collections:
-  - name: "posts"
-    label: "Posts"
-    folder: "content/posts"
-    create: true
-    fields:
-      - {label: "Title", name: "title", widget: "string"}
-      - {label: "Publish Date", name: "date", widget: "datetime"}
-      - {label: "Body", name: "body", widget: "markdown"}
+  - name: "portfolio"
+    label: "Portfolio & Studio"
+    files:
+      - name: "gallery"
+        label: "Selected Masterworks Gallery"
+        file: "data/gallery.json"
+        fields:
+          - label: "Gallery Items"
+            name: "items"
+            widget: "list"
+            fields:
+              - {label: "Tattoo Title", name: "title", widget: "string", hint: "e.g., Goddess Parvathi Realism"}
+              - {label: "Category / Placement Label", name: "category", widget: "string", hint: "e.g., REALISTIC BLACK & GREY · FOREARM REALISM"}
+              - {label: "Style Filter", name: "style", widget: "select", options: ["Black & Grey Realism", "Stipple Realism", "Fine Line", "Piercing"]}
+              - {label: "Photo", name: "image", widget: "image"}
