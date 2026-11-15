@@ -2,6 +2,7 @@ backend:
   name: github
   repo: zamuraitattoo/zamuraitattoo.github.io
   branch: main
+  site_domain: zamuraitattoo.netlify.app
 
 media_folder: "images"
 public_folder: "/images"
