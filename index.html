@@ -498,10 +498,10 @@
           </div>
           <!-- Filter Buttons -->
           <div class="flex flex-wrap gap-2" id="portfolioFilters">
-            <button onclick="filterPortfolio('all')" data-filter="all" class="filter-btn px-4 py-2 rounded-full bg-gold text-obsidian font-mono text-xs uppercase font-semibold transition-all">All Works (25)</button>
-            <button onclick="filterPortfolio('realism')" data-filter="realism" class="filter-btn px-4 py-2 rounded-full bg-charcoal border border-white/15 text-alabaster font-mono text-xs uppercase hover:border-gold transition-all">Black &amp; Grey / Stipple</button>
-            <button onclick="filterPortfolio('custom')" data-filter="custom" class="filter-btn px-4 py-2 rounded-full bg-charcoal border border-white/15 text-alabaster font-mono text-xs uppercase hover:border-gold transition-all">Custom &amp; Fine Line</button>
-            <button onclick="filterPortfolio('piercing')" data-filter="piercing" class="filter-btn px-4 py-2 rounded-full bg-charcoal border border-white/15 text-alabaster font-mono text-xs uppercase hover:border-gold transition-all">Body Piercings</button>
+            <button type="button" onclick="filterPortfolio('all')" data-filter="all" class="filter-btn px-4 py-2 rounded-full bg-gold text-obsidian font-mono text-xs uppercase font-semibold transition-all">All Works (25)</button>
+            <button type="button" onclick="filterPortfolio('realism')" data-filter="realism" class="filter-btn px-4 py-2 rounded-full bg-charcoal border border-white/15 text-alabaster font-mono text-xs uppercase hover:border-gold transition-all">Black &amp; Grey / Stipple</button>
+            <button type="button" onclick="filterPortfolio('custom')" data-filter="custom" class="filter-btn px-4 py-2 rounded-full bg-charcoal border border-white/15 text-alabaster font-mono text-xs uppercase hover:border-gold transition-all">Custom &amp; Fine Line</button>
+            <button type="button" onclick="filterPortfolio('piercing')" data-filter="piercing" class="filter-btn px-4 py-2 rounded-full bg-charcoal border border-white/15 text-alabaster font-mono text-xs uppercase hover:border-gold transition-all">Body Piercings</button>
           </div>
         </div>
 
@@ -817,7 +817,7 @@
           <div class="lg:col-span-7 rounded-2xl bg-obsidian border border-gold/40 p-6 sm:p-8 shadow-2xl space-y-6 reveal-up">
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
               <div>
-                <label class="block font-mono text-xs uppercase text-gold mb-2">1. Select Service / Style</label>
+                <label for="calcStyle" class="block font-mono text-xs uppercase text-gold mb-2">1. Select Service / Style</label>
                 <select id="calcStyle" onchange="updateEstimate()" class="w-full rounded-xl bg-charcoal border border-white/15 px-4 py-3 text-sm text-alabaster focus:border-gold focus:outline-none">
                   <option value="realism">Realistic Black &amp; Grey / Stipple Realism</option>
                   <option value="custom">Custom Tattoos / Mythology &amp; Portraits</option>
@@ -826,7 +826,7 @@
                 </select>
               </div>
               <div>
-                <label class="block font-mono text-xs uppercase text-gold mb-2">2. Placement &amp; Scale</label>
+                <label for="calcScale" class="block font-mono text-xs uppercase text-gold mb-2">2. Placement &amp; Scale</label>
                 <select id="calcScale" onchange="updateEstimate()" class="w-full rounded-xl bg-charcoal border border-white/15 px-4 py-3 text-sm text-alabaster focus:border-gold focus:outline-none">
                   <option value="small">Minimal / Small Piece (or Single Piercing)</option>
                   <option value="medium">Medium Piece (4–6 inches · Forearm / Calf)</option>
@@ -837,7 +837,7 @@
             </div>
 
             <div>
-              <label class="block font-mono text-xs uppercase text-gold mb-2">3. Describe Your Preferred Size, Placement &amp; Reference</label>
+              <label for="calcNotes" class="block font-mono text-xs uppercase text-gold mb-2">3. Describe Your Preferred Size, Placement &amp; Reference</label>
               <textarea id="calcNotes" rows="2" placeholder="e.g., Realistic black and grey or stipple realism on forearm/thigh. I will share my reference photo on WhatsApp..." class="w-full rounded-xl bg-charcoal border border-white/15 px-4 py-3 text-sm text-alabaster focus:border-gold focus:outline-none"></textarea>
             </div>
 
@@ -940,9 +940,12 @@
   </main>
 
   <script>
-    // Scroll Reveal Observer
     document.addEventListener('DOMContentLoaded', () => {
       const reveals = document.querySelectorAll('.reveal-up');
+      if (!('IntersectionObserver' in window)) {
+        reveals.forEach((el) => el.classList.add('is-visible'));
+        return;
+      }
       const observer = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
@@ -954,68 +957,78 @@
       reveals.forEach((el) => observer.observe(el));
     });
 
-    function filterPortfolio(cat) {
-      const items = document.querySelectorAll('.portfolio-item');
-      const btns = document.querySelectorAll('.filter-btn');
-      btns.forEach(btn => {
-        if (btn.dataset.filter === cat) {
-          btn.className = 'filter-btn px-4 py-2 rounded-full bg-gold text-obsidian font-mono text-xs uppercase font-semibold transition-all';
-        } else {
-          btn.className = 'filter-btn px-4 py-2 rounded-full bg-charcoal border border-white/15 text-alabaster font-mono text-xs uppercase hover:border-gold transition-all';
-        }
-      });
-      items.forEach(item => {
-        if (cat === 'all' || item.dataset.category === cat) {
-          item.style.display = 'block';
-        } else {
-          item.style.display = 'none';
-        }
-      });
+    if (typeof window.filterPortfolio !== 'function') {
+      window.filterPortfolio = function(cat) {
+        const items = document.querySelectorAll('.portfolio-item');
+        const btns = document.querySelectorAll('.filter-btn');
+        btns.forEach((btn) => {
+          if (btn.dataset.filter === cat) {
+            btn.className = 'filter-btn px-4 py-2 rounded-full bg-gold text-obsidian font-mono text-xs uppercase font-semibold transition-all';
+          } else {
+            btn.className = 'filter-btn px-4 py-2 rounded-full bg-charcoal border border-white/15 text-alabaster font-mono text-xs uppercase hover:border-gold transition-all';
+          }
+        });
+        items.forEach((item) => {
+          item.style.display = (cat === 'all' || item.dataset.category === cat) ? '' : 'none';
+        });
+      };
     }
 
-    function updateEstimate() {
-      const style = document.getElementById('calcStyle').value;
-      const scale = document.getElementById('calcScale').value;
-      const outDur = document.getElementById('outDuration');
-      const outEst = document.getElementById('outEstimate');
-      const outNote = document.getElementById('outNote');
+    if (typeof window.updateEstimate !== 'function') {
+      window.updateEstimate = function() {
+        const styleEl = document.getElementById('calcStyle');
+        const scaleEl = document.getElementById('calcScale');
+        const outDur = document.getElementById('outDuration');
+        const outEst = document.getElementById('outEstimate');
+        const outNote = document.getElementById('outNote');
+        if (!styleEl || !scaleEl || !outDur || !outEst || !outNote) return;
 
-      if (style === 'piercing') {
-        outDur.textContent = '20 – 30 Mins';
-        outEst.textContent = 'Titanium & 316L Steel';
-        outNote.textContent = 'Message on WhatsApp for jewelry quote';
-        return;
-      }
+        const style = styleEl.value;
+        const scale = scaleEl.value;
 
-      if (scale === 'small') {
-        outDur.textContent = '1 – 2 Hours';
-        outEst.textContent = 'Custom Quote';
-        outNote.textContent = 'Send size & reference on WhatsApp';
-      } else if (scale === 'medium') {
-        outDur.textContent = 'Half-Day Session';
-        outEst.textContent = 'Custom Quote';
-        outNote.textContent = 'Based on placement & detail';
-      } else if (scale === 'large') {
-        outDur.textContent = 'Full-Day Session';
-        outEst.textContent = '₹25,000 – ₹35,000';
-        outNote.textContent = 'Depends on size & detail';
-      } else {
-        outDur.textContent = 'Multi-Session Project';
-        outEst.textContent = '₹25,000 – ₹35,000 / day';
-        outNote.textContent = 'Custom session plan via WhatsApp';
-      }
+        if (style === 'piercing') {
+          outDur.textContent = '20 – 30 Mins';
+          outEst.textContent = 'Titanium & 316L Steel';
+          outNote.textContent = 'Message on WhatsApp for jewelry quote';
+          return;
+        }
+
+        if (scale === 'small') {
+          outDur.textContent = '1 – 2 Hours';
+          outEst.textContent = 'Custom Quote';
+          outNote.textContent = 'Send size & reference on WhatsApp';
+        } else if (scale === 'medium') {
+          outDur.textContent = 'Half-Day Session';
+          outEst.textContent = 'Custom Quote';
+          outNote.textContent = 'Based on placement & detail';
+        } else if (scale === 'large') {
+          outDur.textContent = 'Full-Day Session';
+          outEst.textContent = '₹25,000 – ₹35,000';
+          outNote.textContent = 'Depends on size & detail';
+        } else {
+          outDur.textContent = 'Multi-Session Project';
+          outEst.textContent = '₹25,000 – ₹35,000 / day';
+          outNote.textContent = 'Custom session plan via WhatsApp';
+        }
+      };
     }
 
-    function sendEstimatorWhatsApp() {
-      const styleSel = document.getElementById('calcStyle');
-      const scaleSel = document.getElementById('calcScale');
-      const notes = document.getElementById('calcNotes').value.trim();
-      const styleText = styleSel.options[styleSel.selectedIndex].text;
-      const scaleText = scaleSel.options[scaleSel.selectedIndex].text;
-      const estText = document.getElementById('outEstimate').textContent;
+    if (typeof window.sendEstimatorWhatsApp !== 'function') {
+      window.sendEstimatorWhatsApp = function() {
+        const styleSel = document.getElementById('calcStyle');
+        const scaleSel = document.getElementById('calcScale');
+        const notesEl = document.getElementById('calcNotes');
+        const estEl = document.getElementById('outEstimate');
+        if (!styleSel || !scaleSel) return;
 
-      const msg = `Hi Stevin! I would like to get an estimate at Zamurai Tattoo Fort Kochi:\n• Service/Style: ${styleText}\n• Scale: ${scaleText}\n• Estimate Shown: ${estText}\n• Details & Reference: ${notes || 'I will share my reference photo and preferred size here.'}`;
-      window.open(`https://wa.me/919048169666?text=${encodeURIComponent(msg)}`, '_blank', 'noopener');
+        const notes = notesEl ? notesEl.value.trim() : '';
+        const styleText = styleSel.options[styleSel.selectedIndex].text;
+        const scaleText = scaleSel.options[scaleSel.selectedIndex].text;
+        const estText = estEl ? estEl.textContent : '₹25,000 – ₹35,000';
+
+        const msg = `Hi Stevin! I would like to get an estimate at Zamurai Tattoo Fort Kochi:\n• Service/Style: ${styleText}\n• Scale: ${scaleText}\n• Estimate Shown: ${estText}\n• Details & Reference: ${notes || 'I will share my reference photo and preferred size here.'}`;
+        window.open(`https://wa.me/919048169666?text=${encodeURIComponent(msg)}`, '_blank', 'noopener');
+      };
     }
   </script>
 
